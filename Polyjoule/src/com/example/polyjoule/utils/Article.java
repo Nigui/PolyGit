@@ -5,7 +5,7 @@ public class Article {
 
 	private int idArticle;
 	private int idRubrique;
-	private String autheur;
+	private String auteur;
 	private String titreFr;
 	private String titreEn;
 	private String contenuFr;
@@ -18,7 +18,7 @@ public class Article {
 	private boolean mainArticle;
 	
 	
-	public Article(int idArticle, int idRubrique, String autheur,
+	public Article(int idArticle, int idRubrique, String auteur,
 			String titreFr, String titreEn, String contenuFr,
 			String contenuEng, boolean commentaireAutorise,
 			boolean statutArticle, Date dateCreation,
@@ -26,7 +26,7 @@ public class Article {
 		super();
 		this.idArticle = idArticle;
 		this.idRubrique = idRubrique;
-		this.autheur = autheur;
+		this.auteur = auteur;
 		this.titreFr = titreFr;
 		this.titreEn = titreEn;
 		this.contenuFr = contenuFr;
@@ -66,13 +66,13 @@ public class Article {
 	}
 
 
-	public String getAutheur() {
-		return autheur;
+	public String getAuteur() {
+		return auteur;
 	}
 
 
-	public void setAutheur(String autheur) {
-		this.autheur = autheur;
+	public void setAuteur(String auteur) {
+		this.auteur = auteur;
 	}
 
 
@@ -179,7 +179,7 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [idArticle=" + idArticle + ", idRubrique=" + idRubrique
-				+ ", autheur=" + autheur + ", titreFr=" + titreFr
+				+ ", auteur=" + auteur + ", titreFr=" + titreFr
 				+ ", titreEn=" + titreEn + ", contenuFr=" + contenuFr
 				+ ", contenuEng=" + contenuEng + ", commentaireAutorise="
 				+ commentaireAutorise + ", statutArticle=" + statutArticle
