@@ -33,7 +33,6 @@ public class NewsActivity extends ListActivity {
 				.getSlidingMenu();
 		slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		slidingMenu.setMenu(R.layout.sliding_menu);
-		Log.e(this.toString(),"test");
 	}
 
 	/**
