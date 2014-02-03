@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.polyjoule.DBObjects.Article;
+
 import android.util.Log;
 
 public class DataBaseConnector {
@@ -38,7 +40,6 @@ public class DataBaseConnector {
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Article tmpArticle = new Article();
 					tmpArticle.setIdArticle(json_data.getInt("id_article"));
-					tmpArticle.setIdRubrique(json_data.getInt("id_rubrique"));
 					tmpArticle.setAuteur(json_data.getString("auteur_article"));
 					tmpArticle.setTitreFr(json_data.getString("titreFR_article"));
 					tmpArticle.setTitreEn(json_data.getString("titreEN_article"));

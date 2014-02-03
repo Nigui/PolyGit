@@ -1,10 +1,9 @@
-package com.example.polyjoule.utils;
+package com.example.polyjoule.DBObjects;
 import java.util.Date;
 
 public class Article {
 
 	private int idArticle;
-	private int idRubrique;
 	private String auteur;
 	private String titreFr;
 	private String titreEn;
@@ -17,15 +16,14 @@ public class Article {
 	private boolean visibleHome;
 	private boolean mainArticle;
 	
-	
-	public Article(int idArticle, int idRubrique, String auteur,
+	//------ Constructeurs
+	public Article(int idArticle, String auteur,
 			String titreFr, String titreEn, String contenuFr,
 			String contenuEng, boolean commentaireAutorise,
 			boolean statutArticle, Date dateCreation,
 			String urlPhotoPrincipale, boolean visibleHome, boolean mainArticle) {
 		super();
 		this.idArticle = idArticle;
-		this.idRubrique = idRubrique;
 		this.auteur = auteur;
 		this.titreFr = titreFr;
 		this.titreEn = titreEn;
@@ -38,14 +36,13 @@ public class Article {
 		this.visibleHome = visibleHome;
 		this.mainArticle = mainArticle;
 	}
-	
 	public Article() {
 		super();
 	}
+	//################## Constructeurs
 
 
-
-
+	//------GETTERS & SETTERS
 	public int getIdArticle() {
 		return idArticle;
 	}
@@ -53,16 +50,6 @@ public class Article {
 
 	public void setIdArticle(int idArticle) {
 		this.idArticle = idArticle;
-	}
-
-
-	public int getIdRubrique() {
-		return idRubrique;
-	}
-
-
-	public void setIdRubrique(int idRubrique) {
-		this.idRubrique = idRubrique;
 	}
 
 
@@ -174,11 +161,11 @@ public class Article {
 	public void setMainArticle(boolean mainArticle) {
 		this.mainArticle = mainArticle;
 	}
-
+	//################## GETTERS & SETTERS
 
 	@Override
 	public String toString() {
-		return "Article [idArticle=" + idArticle + ", idRubrique=" + idRubrique
+		return "Article [idArticle=" + idArticle
 				+ ", auteur=" + auteur + ", titreFr=" + titreFr
 				+ ", titreEn=" + titreEn + ", contenuFr=" + contenuFr
 				+ ", contenuEng=" + contenuEng + ", commentaireAutorise="

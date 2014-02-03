@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import android.app.Application;
 
+import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.news.News;
-import com.example.polyjoule.utils.Article;
 import com.example.polyjoule.utils.DataBaseConnector;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
