@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.polyjoule.PolyjouleApplication;
 import com.example.polyjoule.R;
+import com.example.polyjoule.DBObjects.Article;
 
 public class NewsAdapter extends BaseAdapter {
 
@@ -17,29 +18,21 @@ public class NewsAdapter extends BaseAdapter {
 	/**
 	 * List of news to shows.
 	 */
-	private ArrayList<News> news;
+	private ArrayList<Article> articles;
 	
 	/**
 	 * Layout inflater of NewsActivity use to inflate News_item.
 	 */
 	private LayoutInflater layoutInflater;
 	
-	/**
-	 * Constructor of NewsAdapter. news member is retrieve with PolyjouleApplication.
-	 * @param newsActivity reference on newsActivity.
-	 */
-	public NewsAdapter(NewsActivity newsActivity){
-		this.news = new ArrayList<News>(((PolyjouleApplication)newsActivity.getApplication()).getNewsList());
-		layoutInflater=newsActivity.getLayoutInflater();
-	}
 	
 	/**
 	 * Constructor of NewsAdapter. news member is initialize with NewsList.
 	 * @param newsActivity reference on newsActivity.
 	 * @param NewsList list of item to show on listView.
 	 */
-	public NewsAdapter(NewsActivity newsActivity, ArrayList<News> newsList) {
-		this.news = new ArrayList<News>(newsList);
+	public NewsAdapter(NewsActivity newsActivity, ArrayList<Article> articleList) {
+		this.articles = new ArrayList<Article>(articleList);
 		layoutInflater=newsActivity.getLayoutInflater();
 	}
 
@@ -48,7 +41,7 @@ public class NewsAdapter extends BaseAdapter {
 	 * @return size of news.
 	 */
 	public int getCount() {
-		return news.size();
+		return articles.size();
 	}
 
 	/**
@@ -57,7 +50,7 @@ public class NewsAdapter extends BaseAdapter {
 	 * @return item corresponding to position.
 	 */
 	public Object getItem(int arg0) {
-		return news.get(arg0);
+		return articles.get(arg0);
 	}
 
 	/**
@@ -91,8 +84,8 @@ public class NewsAdapter extends BaseAdapter {
 		itemHolder.titleBuilder.setLength(0);
 		itemHolder.textBuilder.setLength(0);
 		
-		itemHolder.titleView.append(news.get(position).getTitle());
-		itemHolder.textBuilder.append(news.get(position).getText());
+		itemHolder.titleView.append(articles.get(position).getTitreFr());
+		itemHolder.textBuilder.append(articles.get(position).getAuteur());
 		
 		itemHolder.titleView.setText(itemHolder.titleBuilder);
 		itemHolder.textView.setText(itemHolder.textBuilder);
