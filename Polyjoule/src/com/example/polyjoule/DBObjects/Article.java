@@ -1,7 +1,8 @@
 package com.example.polyjoule.DBObjects;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Article {
+public class Article implements Serializable{
 
 	private int idArticle;
 	private String auteur;

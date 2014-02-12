@@ -36,16 +36,16 @@ public class NewsActivity extends ListActivity {
 		//ListView
 		
 		//Activer lorsqu'on est connecter au wifi de poly
-		listArticle = new ArrayList<Article>();
+		/*listArticle = new ArrayList<Article>();
 		Article art;
 		for (int i = 0; i < 50; i++) {	
 			art = new Article();
 			art.setAuteur("Tralala");
 			art.setTitreFr("Important Text");
 			listArticle.add(art);
-		}
+		}*/
 		
-		//listArticle = DataBaseConnector.getArticlesFromDB();
+		listArticle = DataBaseConnector.getArticlesFromDB();
 		
 		NewsListener articleListener = new NewsListener(this);
 		setListAdapter(new NewsAdapter(this,listArticle));
@@ -67,12 +67,13 @@ public class NewsActivity extends ListActivity {
 	 */
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		
-		Article newsSelect = (Article) getListAdapter().getItem(position);
+		//Article newsSelect = (Article) getListAdapter().getItem(position);
 		
-		this.currentArticle = newsSelect;
+		//this.currentArticle = newsSelect;
 		
 		Intent intent = new Intent(this, NewsDetailActivity.class);
-		//intent.putExtra("Article", listArticle.);
+		intent.putExtra("Article", listArticle.get(position));
+
 		this.startActivity(intent);
 	}
 
