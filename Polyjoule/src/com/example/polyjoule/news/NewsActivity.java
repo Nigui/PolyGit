@@ -14,6 +14,7 @@ import com.example.polyjoule.PolyjouleApplication;
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.utils.DataBaseGetters;
+//github.com/Nigui/PolyGit.git
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class NewsActivity extends ListActivity {
@@ -44,7 +45,7 @@ public class NewsActivity extends ListActivity {
 			art.setTitreFr("Important Text");
 			listArticle.add(art);
 		}*/
-		
+
 		listArticle = DataBaseGetters.getArticlesFromDB();
 		
 		NewsListener articleListener = new NewsListener(this);
