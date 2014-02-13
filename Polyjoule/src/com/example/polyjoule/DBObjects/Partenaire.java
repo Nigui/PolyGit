@@ -3,7 +3,6 @@ package com.example.polyjoule.DBObjects;
 public class Partenaire {
 
 	private int id;
-	private Article article;
 	private String nom;
 	private String logoURL;
 	private String websiteURL;
@@ -11,11 +10,10 @@ public class Partenaire {
 	private String descriptionEN;
 	
 	//------ Constructeurs
-	public Partenaire(int id, Article article, String nom, String logoURL,
+	public Partenaire(int id, String nom, String logoURL,
 			String websiteURL, String descriptionFR, String descriptionEN) {
 		super();
 		this.id = id;
-		this.article = article;
 		this.nom = nom;
 		this.logoURL = logoURL;
 		this.websiteURL = websiteURL;
@@ -33,12 +31,6 @@ public class Partenaire {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public Article getArticle() {
-		return article;
-	}
-	public void setarticle(Article article) {
-		this.article = article;
 	}
 	public String getNom() {
 		return nom;
@@ -74,7 +66,7 @@ public class Partenaire {
 	
 	@Override
 	public String toString() {
-		return "Partenaire [id=" + id + ", article=" + article + ", nom="
+		return "Partenaire [id=" + id + ", nom="
 				+ nom + ", logoURL=" + logoURL + ", websiteURL=" + websiteURL
 				+ ", descriptionFR=" + descriptionFR + ", descriptionEN="
 				+ descriptionEN + "]";
