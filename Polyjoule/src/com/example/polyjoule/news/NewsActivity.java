@@ -14,8 +14,9 @@ import com.example.polyjoule.PolyjouleApplication;
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.utils.DataBaseGetters;
-//github.com/Nigui/PolyGit.git
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
+//github.com/Nigui/PolyGit.git
 
 public class NewsActivity extends ListActivity {
 
@@ -32,23 +33,23 @@ public class NewsActivity extends ListActivity {
 		//Sliding menu
 		slidingMenu = ((PolyjouleApplication) getApplication()).getSlidingMenu();
 		slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-		slidingMenu.setMenu(R.layout.sliding_menu);
+		slidingMenu.setMenu(R.layout.slidingmenu);
 
 		//ListView
 		
 		//Activer lorsqu'on est connecter au wifi de poly
-		/*listArticle = new ArrayList<Article>();
+		listArticle = new ArrayList<Article>();
 		Article art;
 		for (int i = 0; i < 50; i++) {	
 			art = new Article();
 			art.setAuteur("Tralala");
 			art.setTitreFr("Important Text");
 			listArticle.add(art);
-		}*/
+		}
 
-		listArticle = DataBaseGetters.getArticlesFromDB();
-		
-		NewsListener articleListener = new NewsListener(this);
+//		listArticle = DataBaseGetters.getArticlesFromDB();
+//		
+//		NewsListener articleListener = new NewsListener(this);
 		setListAdapter(new NewsAdapter(this,listArticle));
 		
 	}
