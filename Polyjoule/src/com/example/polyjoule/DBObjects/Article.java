@@ -1,5 +1,6 @@
 package com.example.polyjoule.DBObjects;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Article implements Serializable{
@@ -16,13 +17,17 @@ public class Article implements Serializable{
 	private String urlPhotoPrincipale;
 	private boolean visibleHome;
 	private boolean mainArticle;
+	private ArrayList<Partenaire> partenaires;
+	private ArrayList<Commentaire> commentaires;
+	private Rubrique rubrique;
 	
 	//------ Constructeurs
-	public Article(int idArticle, String auteur,
-			String titreFr, String titreEn, String contenuFr,
-			String contenuEng, boolean commentaireAutorise,
-			boolean statutArticle, Date dateCreation,
-			String urlPhotoPrincipale, boolean visibleHome, boolean mainArticle) {
+	public Article(int idArticle, String auteur, String titreFr,
+			String titreEn, String contenuFr, String contenuEng,
+			boolean commentaireAutorise, boolean statutArticle,
+			Date dateCreation, String urlPhotoPrincipale, boolean visibleHome,
+			boolean mainArticle, ArrayList<Partenaire> partenaires,
+			ArrayList<Commentaire> commentaires, Rubrique rubrique) {
 		super();
 		this.idArticle = idArticle;
 		this.auteur = auteur;
@@ -36,6 +41,9 @@ public class Article implements Serializable{
 		this.urlPhotoPrincipale = urlPhotoPrincipale;
 		this.visibleHome = visibleHome;
 		this.mainArticle = mainArticle;
+		this.partenaires = partenaires;
+		this.commentaires = commentaires;
+		this.rubrique = rubrique;
 	}
 	public Article() {
 		super();
@@ -154,26 +162,45 @@ public class Article implements Serializable{
 	}
 
 
+	public ArrayList<Partenaire> getPartenaires() {
+		return partenaires;
+	}
+	public void setPartenaires(ArrayList<Partenaire> partenaires) {
+		this.partenaires = partenaires;
+	}
 	public boolean isMainArticle() {
 		return mainArticle;
 	}
-
-
 	public void setMainArticle(boolean mainArticle) {
 		this.mainArticle = mainArticle;
 	}
+	public ArrayList<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+	public void setCommentaires(ArrayList<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
+	public Rubrique getRubrique() {
+		return rubrique;
+	}
+	public void setRubrique(Rubrique rubrique) {
+		this.rubrique = rubrique;
+	}
 	//################## GETTERS & SETTERS
-
+	
+	
 	@Override
 	public String toString() {
-		return "Article [idArticle=" + idArticle
-				+ ", auteur=" + auteur + ", titreFr=" + titreFr
-				+ ", titreEn=" + titreEn + ", contenuFr=" + contenuFr
-				+ ", contenuEng=" + contenuEng + ", commentaireAutorise="
-				+ commentaireAutorise + ", statutArticle=" + statutArticle
-				+ ", dateCreation=" + dateCreation + ", urlPhotoPrincipale="
-				+ urlPhotoPrincipale + ", visibleHome=" + visibleHome
-				+ ", mainArticle=" + mainArticle + "]";
+		return "Article [idArticle=" + idArticle + ", auteur=" + auteur
+				+ ", titreFr=" + titreFr + ", titreEn=" + titreEn
+				+ ", contenuFr=" + contenuFr + ", contenuEng=" + contenuEng
+				+ ", commentaireAutorise=" + commentaireAutorise
+				+ ", statutArticle=" + statutArticle + ", dateCreation="
+				+ dateCreation + ", urlPhotoPrincipale=" + urlPhotoPrincipale
+				+ ", visibleHome=" + visibleHome + ", mainArticle="
+				+ mainArticle + ", partenaires=" + partenaires
+				+ ", commentaires=" + commentaires + ", rubrique=" + rubrique
+				+ "]";
 	}
 	
 	

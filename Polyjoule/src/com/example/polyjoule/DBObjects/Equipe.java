@@ -1,17 +1,20 @@
 package com.example.polyjoule.DBObjects;
 
+import java.util.ArrayList;
+
 public class Equipe {
 
 	private int id;
 	private int annee;
+	private ArrayList<Participation> participants;
 	
 	//------ Constructeurs
-	public Equipe(int id, int annee) {
+	public Equipe(int id, int annee, ArrayList<Participation> participants) {
 		super();
 		this.id = id;
 		this.annee = annee;
+		this.participants = participants;
 	}
-
 	public Equipe() {
 		super();
 	}
@@ -34,11 +37,18 @@ public class Equipe {
 	public void setAnnee(int annee) {
 		this.annee = annee;
 	}
+	public ArrayList<Participation> getParticipants() {
+		return participants;
+	}
+	public void setParticipants(ArrayList<Participation> participants) {
+		this.participants = participants;
+	}
 	//################## GETTERS & SETTERS
 	
 	@Override
 	public String toString() {
-		return "Equipe [id=" + id + ", annee=" + annee + "]";
+		return "Equipe [id=" + id + ", annee=" + annee + ", participants="
+				+ participants + "]";
 	}
 	
 	

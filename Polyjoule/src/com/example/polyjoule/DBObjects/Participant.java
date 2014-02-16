@@ -1,5 +1,7 @@
 package com.example.polyjoule.DBObjects;
 
+import java.util.ArrayList;
+
 public class Participant {
 
 	private int id;
@@ -10,10 +12,12 @@ public class Participant {
 	private String bioFR;
 	private String bioEN;
 	private boolean isProf;
-	
+	private ArrayList<Participation> participation;
+
 	//------ Constructeurs
 	public Participant(int id, String nom, String prenom, String photoURL,
-			String email, String bioFR, String bioEN, boolean isProf) {
+			String email, String bioFR, String bioEN, boolean isProf,
+			ArrayList<Participation> participation) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -23,6 +27,7 @@ public class Participant {
 		this.bioFR = bioFR;
 		this.bioEN = bioEN;
 		this.isProf = isProf;
+		this.participation = participation;
 	}
 	public Participant() {
 		super();
@@ -78,13 +83,19 @@ public class Participant {
 	public void setProf(boolean isProf) {
 		this.isProf = isProf;
 	}
+	public ArrayList<Participation> getParticipation() {
+		return participation;
+	}
+	public void setParticipation(ArrayList<Participation> participation) {
+		this.participation = participation;
+	}
 	//################## GETTERS & SETTERS
-	
 	
 	@Override
 	public String toString() {
 		return "Participant [id=" + id + ", nom=" + nom + ", prenom=" + prenom
 				+ ", photoURL=" + photoURL + ", email=" + email + ", bioFR="
-				+ bioFR + ", bioEN=" + bioEN + ", isProf=" + isProf + "]";
+				+ bioFR + ", bioEN=" + bioEN + ", isProf=" + isProf
+				+ ", participation=" + participation + "]";
 	}
 }

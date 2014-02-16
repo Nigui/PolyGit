@@ -1,5 +1,7 @@
 package com.example.polyjoule.DBObjects;
 
+import java.util.ArrayList;
+
 public class Partenaire {
 
 	private int id;
@@ -8,10 +10,12 @@ public class Partenaire {
 	private String websiteURL;
 	private String descriptionFR;
 	private String descriptionEN;
+	private ArrayList<Article> article;
 	
 	//------ Constructeurs
-	public Partenaire(int id, String nom, String logoURL,
-			String websiteURL, String descriptionFR, String descriptionEN) {
+	public Partenaire(int id, String nom, String logoURL, String websiteURL,
+			String descriptionFR, String descriptionEN,
+			ArrayList<Article> article) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -19,6 +23,7 @@ public class Partenaire {
 		this.websiteURL = websiteURL;
 		this.descriptionFR = descriptionFR;
 		this.descriptionEN = descriptionEN;
+		this.article = article;
 	}
 	public Partenaire() {
 		super();
@@ -62,14 +67,20 @@ public class Partenaire {
 	public void setDescriptionEN(String descriptionEN) {
 		this.descriptionEN = descriptionEN;
 	}
+	public ArrayList<Article> getArticle() {
+		return article;
+	}
+	public void setArticle(ArrayList<Article> article) {
+		this.article = article;
+	}
 	//################## GETTERS & SETTERS
 	
 	@Override
 	public String toString() {
-		return "Partenaire [id=" + id + ", nom="
-				+ nom + ", logoURL=" + logoURL + ", websiteURL=" + websiteURL
-				+ ", descriptionFR=" + descriptionFR + ", descriptionEN="
-				+ descriptionEN + "]";
+		return "Partenaire [id=" + id + ", nom=" + nom + ", logoURL=" + logoURL
+				+ ", websiteURL=" + websiteURL + ", descriptionFR="
+				+ descriptionFR + ", descriptionEN=" + descriptionEN
+				+ ", article=" + article + "]";
 	}
 	
 	
