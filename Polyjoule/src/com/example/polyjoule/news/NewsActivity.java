@@ -46,6 +46,7 @@ public class NewsActivity extends ListActivity {
 			art = new Article();
 			art.setAuteur("Tralala");
 			art.setTitreFr("Important Text");
+			art.setContenuFr("Corps de l'article");
 			listArticle.add(art);
 		}
 
