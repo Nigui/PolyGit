@@ -1,11 +1,7 @@
 package com.example.polyjoule;
 
-import java.util.ArrayList;
-
 import android.app.Application;
 
-import com.example.polyjoule.DBObjects.Article;
-import com.example.polyjoule.utils.DataBaseConnector;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class PolyjouleApplication extends Application {

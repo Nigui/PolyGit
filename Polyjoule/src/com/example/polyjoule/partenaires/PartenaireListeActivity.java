@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Partenaire;
-import com.example.polyjoule.utils.DataBaseGetters;
+import com.example.polyjoule.externeDataBase.DataBaseGetters;
 
 public class PartenaireListeActivity extends Activity implements OnItemClickListener{
 

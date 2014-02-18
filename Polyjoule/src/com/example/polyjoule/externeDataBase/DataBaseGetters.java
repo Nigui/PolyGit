@@ -1,4 +1,4 @@
-package com.example.polyjoule.utils;
+package com.example.polyjoule.externeDataBase;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.DBObjects.Partenaire;
+import com.example.polyjoule.utils.Tools;
 
 public class DataBaseGetters {
 

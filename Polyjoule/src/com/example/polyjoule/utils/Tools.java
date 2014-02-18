@@ -1,6 +1,8 @@
 package com.example.polyjoule.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Tools {
 
@@ -35,5 +37,18 @@ public class Tools {
 		
 		return ret;
 	}
+
 	
+	public static String parseDateToString(Date date){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return dateFormat.format(date);
+	}
+
+	public static int parseBooleanToInt(boolean b){
+		return Integer.parseInt(Boolean.toString(b));
+	}
+
+	public static boolean parseIntToBoolean(int i){
+		return i == 0 ? false : true;
+	}
 }

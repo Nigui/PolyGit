@@ -1,4 +1,4 @@
-package com.example.polyjoule.utils;
+package com.example.polyjoule.externeDataBase;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

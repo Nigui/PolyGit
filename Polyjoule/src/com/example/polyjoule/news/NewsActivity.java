@@ -13,7 +13,10 @@ import android.widget.ListView;
 import com.example.polyjoule.PolyjouleApplication;
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
-import com.example.polyjoule.utils.DataBaseGetters;
+import com.example.polyjoule.externeDataBase.DataBaseGetters;
+import com.example.polyjoule.interneDataBase.PolyjouleDBLoader;
+import com.example.polyjoule.interneDataBase.PolyjouleDBOpenHelper;
+import com.example.polyjoule.interneDataBase.PolyjouleDBRequetes;
 //github.com/Nigui/PolyGit.git
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -46,6 +49,17 @@ public class NewsActivity extends ListActivity {
 			listArticle.add(art);
 		}*/
 
+		PolyjouleDBOpenHelper oh = new PolyjouleDBOpenHelper(this);
+		boolean loading = new PolyjouleDBLoader(oh).loadDB();
+		if( loading ) System.out.println("Chargement ok"); 
+		else System.out.println("echec Chargement");
+		
+		for( Article art : new PolyjouleDBRequetes(oh).getArticleInternalFromDB() )
+			System.out.println(art.toString()+"\n");
+		
+		
+		
+		
 		listArticle = DataBaseGetters.getArticlesFromDB();
 		
 		NewsListener articleListener = new NewsListener(this);
