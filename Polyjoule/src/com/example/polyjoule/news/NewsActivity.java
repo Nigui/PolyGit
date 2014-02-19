@@ -49,17 +49,22 @@ public class NewsActivity extends ListActivity {
 			art.setContenuFr("Corps de l'article");
 			listArticle.add(art);
 		}
-
-		/*
+		
+		
 		PolyjouleDBOpenHelper oh = new PolyjouleDBOpenHelper(this);
 		boolean loading = new PolyjouleDBLoader(oh).loadDB();
+		/*
 		if( loading ) System.out.println("Chargement ok"); 
 		else System.out.println("echec Chargement");
+		
 		
 		for( Article article : new PolyjouleDBRequetes(oh).getArticleInternalFromDB() )
 			System.out.println(article.toString()+"\n");
 		
+		
+		listArticle = new PolyjouleDBRequetes(oh).getArticleInternalFromDB();
 		*/
+		
 		
 		
 //		listArticle = DataBaseGetters.getArticlesFromDB();
