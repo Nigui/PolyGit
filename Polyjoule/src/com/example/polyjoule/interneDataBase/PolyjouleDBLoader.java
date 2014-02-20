@@ -51,7 +51,7 @@ public class PolyjouleDBLoader {
 			
 			ContentValues newValue = new ContentValues();
 			newValue.put(Requetes.DATABASE_ARTICLE_ID,artcl.getIdArticle());
-			newValue.put(Requetes.DATABASE_ARTICLE_RUBRIQUE, artcl.getRubrique().getId());
+			//newValue.put(Requetes.DATABASE_ARTICLE_RUBRIQUE, artcl.getRubrique().getId());
 			newValue.put(Requetes.DATABASE_ARTICLE_AUTEUR,artcl.getAuteur());
 			newValue.put(Requetes.DATABASE_ARTICLE_TITREFR, artcl.getTitreFr());
 			newValue.put(Requetes.DATABASE_ARTICLE_TITREEN,artcl.getTitreEn());
@@ -63,7 +63,7 @@ public class PolyjouleDBLoader {
 			newValue.put(Requetes.DATABASE_ARTICLE_PHOTO,artcl.getUrlPhotoPrincipale());
 			newValue.put(Requetes.DATABASE_ARTICLE_VISIBLE,Tools.parseBooleanToInt(artcl.isVisibleHome()));
 
-			if( db.insert(Requetes.DATABASE_ARTICLE, null, newValue) == -1) throw new LoadingErrorException("chargement article");
+			if( db.insert(Requetes.DATABASE_ARTICLE, null, newValue) == -1) throw new LoadingErrorException("erreur chargement article");
 		}
 		
 	}

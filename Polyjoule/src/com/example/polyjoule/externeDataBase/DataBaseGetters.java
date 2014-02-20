@@ -28,6 +28,7 @@ public class DataBaseGetters {
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Article tmpArticle = new Article();
 					tmpArticle.setIdArticle(json_data.getInt("id_article"));
+					//TODO Récupérer toutes les rubriques avant de l'affecter 
 					tmpArticle.setAuteur(json_data.getString("auteur_article"));
 					tmpArticle.setTitreFr(json_data.getString("titreFR_article"));
 					tmpArticle.setTitreEn(json_data.getString("titreEN_article"));

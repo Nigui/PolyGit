@@ -36,20 +36,22 @@ public class PolyjouleDBRequetes {
 	
 	public ArrayList<Article> getArticleInternalFromDB(){
 		ArrayList<Article> ret = new ArrayList<Article>();
-		this.result.add(Requetes.DATABASE_ARTICLE_ID);
-		this.result.add(Requetes.DATABASE_ARTICLE_RUBRIQUE);
-		this.result.add(Requetes.DATABASE_ARTICLE_AUTEUR);
-		this.result.add(Requetes.DATABASE_ARTICLE_TITREFR);
-		this.result.add(Requetes.DATABASE_ARTICLE_TITREEN);
-		this.result.add(Requetes.DATABASE_ARTICLE_CONTENUFR);
-		this.result.add(Requetes.DATABASE_ARTICLE_CONTENUEN);
-		this.result.add(Requetes.DATABASE_ARTICLE_AUTORISATIONCOM);
-		this.result.add(Requetes.DATABASE_ARTICLE_STATUT);
-		this.result.add(Requetes.DATABASE_ARTICLE_DATE);
-		this.result.add(Requetes.DATABASE_ARTICLE_PHOTO);
-		this.result.add(Requetes.DATABASE_ARTICLE_VISIBLE);
+		String[] result_columns = new String[]{
+				Requetes.DATABASE_ARTICLE_ID,
+				Requetes.DATABASE_ARTICLE_RUBRIQUE,
+				Requetes.DATABASE_ARTICLE_AUTEUR,
+				Requetes.DATABASE_ARTICLE_TITREFR,
+				Requetes.DATABASE_ARTICLE_TITREEN,
+				Requetes.DATABASE_ARTICLE_CONTENUFR,
+				Requetes.DATABASE_ARTICLE_CONTENUEN,
+				Requetes.DATABASE_ARTICLE_AUTORISATIONCOM,
+				Requetes.DATABASE_ARTICLE_STATUT,
+				Requetes.DATABASE_ARTICLE_DATE,
+				Requetes.DATABASE_ARTICLE_PHOTO,
+				Requetes.DATABASE_ARTICLE_VISIBLE
+		};
 		
-		this.cursor = db.query(Requetes.DATABASE_ARTICLE, (String[]) this.result.toArray(), null, null, null, null, null);
+		this.cursor = db.query(Requetes.DATABASE_ARTICLE, result_columns, null, null, null, null, null);
 		if( this.cursor != null && this.cursor.getCount()>0 ){
 			int id = cursor.getColumnIndex(Requetes.DATABASE_ARTICLE_ID);
 			int rubrique = cursor.getColumnIndex(Requetes.DATABASE_ARTICLE_RUBRIQUE);
