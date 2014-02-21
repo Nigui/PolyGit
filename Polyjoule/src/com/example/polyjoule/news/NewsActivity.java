@@ -40,7 +40,7 @@ public class NewsActivity extends ListActivity {
 		//ListView
 		
 		//Activer lorsqu'on est connecter au wifi de poly
-		listArticle = new ArrayList<Article>();
+		/*listArticle = new ArrayList<Article>();
 		Article art;
 		for (int i = 0; i < 50; i++) {	
 			art = new Article();
@@ -48,29 +48,21 @@ public class NewsActivity extends ListActivity {
 			art.setTitreFr("Important Text");
 			art.setContenuFr("Corps de l'article");
 			listArticle.add(art);
-		}
-		
-		
+		*/
+			
 		PolyjouleDBOpenHelper oh = new PolyjouleDBOpenHelper(this);
 		boolean loading = new PolyjouleDBLoader(oh).loadDB();
-		/*
 		if( loading ) System.out.println("Chargement ok"); 
 		else System.out.println("echec Chargement");
 		
-		
+		//====>C'est ici que tu récupère la liste des articles
 		for( Article article : new PolyjouleDBRequetes(oh).getArticleInternalFromDB() )
 			System.out.println(article.toString()+"\n");
-		
-		
-		listArticle = new PolyjouleDBRequetes(oh).getArticleInternalFromDB();
-		*/
-		
-		
 		
 //		listArticle = DataBaseGetters.getArticlesFromDB();
 //		
 //		NewsListener articleListener = new NewsListener(this);
-		setListAdapter(new NewsAdapter(this,listArticle));
+		//setListAdapter(new NewsAdapter(this,listArticle));
 		
 	}
 

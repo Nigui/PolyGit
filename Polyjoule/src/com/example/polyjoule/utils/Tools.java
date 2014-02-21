@@ -45,7 +45,7 @@ public class Tools {
 	}
 
 	public static int parseBooleanToInt(boolean b){
-		return Integer.parseInt(Boolean.toString(b));
+		return b==true ? 1 : 0;
 	}
 
 	public static boolean parseIntToBoolean(int i){
