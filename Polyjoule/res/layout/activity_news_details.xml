@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-android:orientation="vertical" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/titre_article"
@@ -13,13 +13,12 @@ android:orientation="vertical" >
     <ImageView
         android:id="@+id/image_article"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sliding_menu_shadow" />
+        android:layout_height="wrap_content" />
 
-	<TextView
-	    android:id="@+id/corps_article"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:text="TextView" />
+    <TextView
+        android:id="@+id/corps_article"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="TextView" />
 
 </LinearLayout>

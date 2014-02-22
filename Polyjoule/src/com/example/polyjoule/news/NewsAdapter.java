@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.polyjoule.PolyjouleApplication;
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
 
