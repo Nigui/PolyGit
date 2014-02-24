@@ -8,11 +8,49 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.example.polyjoule.DBObjects.Album;
 import com.example.polyjoule.DBObjects.Article;
+import com.example.polyjoule.DBObjects.Commentaire;
+import com.example.polyjoule.DBObjects.Course;
+import com.example.polyjoule.DBObjects.Ecole;
+import com.example.polyjoule.DBObjects.Equipe;
+import com.example.polyjoule.DBObjects.Formation;
+import com.example.polyjoule.DBObjects.LivreOr;
 import com.example.polyjoule.DBObjects.Partenaire;
+import com.example.polyjoule.DBObjects.Participant;
+import com.example.polyjoule.DBObjects.Participation;
+import com.example.polyjoule.DBObjects.Photo;
+import com.example.polyjoule.DBObjects.Rubrique;
+import com.example.polyjoule.interneDataBase.Requetes;
 import com.example.polyjoule.utils.Tools;
 
 public class DataBaseGetters {
+	
+	 /* Recupere tout les articles de la BDD et les renvois sous forme de liste*/
+	public static ArrayList<Album> getAlbumsFromDB()
+	{
+		ArrayList<Album> ret = new ArrayList<Album>();
+		String querry = "SELECT * FROM ALBUM";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Album tmpAlbum = new Album();
+					
+					tmpAlbum.setId(json_data.getInt(Requetes.DATABASE_ALBUM_ID));
+					tmpAlbum.setNom(json_data.getString(Requetes.DATABASE_ALBUM_NOM));
+					tmpAlbum.setDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_ALBUM_DATE)));
+					tmpAlbum.setDescriptionFR(json_data.getString(Requetes.DATABASE_ALBUM_DESCFR));
+					tmpAlbum.setDescriptionEN(json_data.getString(Requetes.DATABASE_ALBUM_DESCEN));
+					
+					ret.add(tmpAlbum);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
 
 	/**
 	 * Recupere tout les articles de la BDD et les renvois sous forme de liste
@@ -27,19 +65,17 @@ public class DataBaseGetters {
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Article tmpArticle = new Article();
-					tmpArticle.setIdArticle(json_data.getInt("id_article"));
+					tmpArticle.setIdArticle(json_data.getInt(Requetes.DATABASE_ARTICLE_ID));
 					//TODO Récupérer toutes les rubriques avant de l'affecter 
-					tmpArticle.setAuteur(json_data.getString("auteur_article"));
-					tmpArticle.setTitreFr(json_data.getString("titreFR_article"));
-					tmpArticle.setTitreEn(json_data.getString("titreEN_article"));
-					tmpArticle.setContenuFr(json_data.getString("contenuFR_article"));
-					tmpArticle.setContenuEng(json_data.getString("contenuEN_article"));
-					tmpArticle.setCommentaireAutorise(json_data.getBoolean("autorisation_com"));
-					tmpArticle.setStatutArticle(json_data.getBoolean("statut_article"));
-					tmpArticle.setDateCreation(Tools.parseStringToDate(json_data.getString("date_article")));
-					tmpArticle.setUrlPhotoPrincipale(json_data.getString("url_photo_principale"));
-					tmpArticle.setVisibleHome(json_data.getBoolean("visible_home"));
-					tmpArticle.setMainArticle(json_data.getBoolean("main_article"));
+					tmpArticle.setAuteur(json_data.getString(Requetes.DATABASE_ARTICLE_AUTEUR));
+					tmpArticle.setTitreFr(json_data.getString(Requetes.DATABASE_ARTICLE_TITREFR));
+					tmpArticle.setTitreEn(json_data.getString(Requetes.DATABASE_ARTICLE_TITREEN));
+					tmpArticle.setContenuFr(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUFR));
+					tmpArticle.setContenuEng(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUEN));
+					tmpArticle.setCommentaireAutorise(json_data.getBoolean(Requetes.DATABASE_ARTICLE_AUTORISATIONCOM));
+					tmpArticle.setStatutArticle(json_data.getBoolean(Requetes.DATABASE_ARTICLE_STATUT));
+					tmpArticle.setDateCreation(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_ARTICLE_DATE)));
+					tmpArticle.setUrlPhotoPrincipale(json_data.getString(Requetes.DATABASE_ARTICLE_PHOTO));
 					
 					ret.add(tmpArticle);
 			}
@@ -50,6 +86,153 @@ public class DataBaseGetters {
 		return ret;
 	}
 
+	public static ArrayList<Commentaire> getCommentairesFromDB()
+	{
+		ArrayList<Commentaire> ret = new ArrayList<Commentaire>();
+		String querry = "SELECT * FROM COMMENTAIRE";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Commentaire tmpCommentaire = new Commentaire();
+					tmpCommentaire.setId(json_data.getInt(Requetes.DATABASE_COMMENTAIRE_ID));
+					//tmpCommentaire.set(json_data.getString(Requetes.DATABASE_COMMENTAIRE_ARTICLE));
+					tmpCommentaire.setDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_COMMENTAIRE_DATE)));
+					tmpCommentaire.setAuteur(json_data.getString(Requetes.DATABASE_COMMENTAIRE_POSTEUR));
+					tmpCommentaire.setMail(json_data.getString(Requetes.DATABASE_COMMENTAIRE_MAIL));
+					tmpCommentaire.setMessage(json_data.getString(Requetes.DATABASE_COMMENTAIRE_MESSAGE));
+					
+					ret.add(tmpCommentaire);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+	
+	public static ArrayList<Course> getCoursesFromDB()
+	{
+		ArrayList<Course> ret = new ArrayList<Course>();
+		String querry = "SELECT * FROM COURSE";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Course tmpCourse = new Course();
+					tmpCourse.setId(json_data.getInt(Requetes.DATABASE_COURSE_ID));
+					//tmpCommentaire.set(json_data.getString(Requetes.DATABASE_COURSE_EQUIPE));
+					tmpCourse.setDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_COURSE_DATE)));
+					tmpCourse.setLieu(json_data.getString(Requetes.DATABASE_COURSE_LIEU));
+					tmpCourse.setImageURL(json_data.getString(Requetes.DATABASE_COURSE_IMG));
+					tmpCourse.setDescriptionFR(json_data.getString(Requetes.DATABASE_COURSE_DESCFR));
+					tmpCourse.setDescriptionEN(json_data.getString(Requetes.DATABASE_COURSE_DESCEN));
+					
+					ret.add(tmpCourse);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+	
+	public static ArrayList<Ecole> getEcoleFromDB()
+	{
+		ArrayList<Ecole> ret = new ArrayList<Ecole>();
+		String querry = "SELECT * FROM ECOLE";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Ecole tmpEcole = new Ecole();
+					tmpEcole.setId(json_data.getInt(Requetes.DATABASE_ECOLE_ID));
+					tmpEcole.setNom(json_data.getString(Requetes.DATABASE_ECOLE_NOM));
+					tmpEcole.setAdresse(json_data.getString(Requetes.DATABASE_ECOLE_ADRESSE));
+					tmpEcole.setPhotoURL(json_data.getString(Requetes.DATABASE_ECOLE_PHOTO));
+					tmpEcole.setDescriptionFR(json_data.getString(Requetes.DATABASE_COURSE_DESCFR));
+					tmpEcole.setDescriptionEN(json_data.getString(Requetes.DATABASE_COURSE_DESCEN));
+					
+					ret.add(tmpEcole);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+	
+	public static ArrayList<Equipe> getEquipeFromDB()
+	{
+		ArrayList<Equipe> ret = new ArrayList<Equipe>();
+		String querry = "SELECT * FROM EQUIPE";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Equipe tmpEquipe = new Equipe();
+					tmpEquipe.setId(json_data.getInt(Requetes.DATABASE_EQUIPE_ID));
+					tmpEquipe.setAnnee(json_data.getInt(Requetes.DATABASE_EQUIPE_ANNEE));
+					ret.add(tmpEquipe);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+	
+	public static ArrayList<Formation> getFormationFromDB()
+	{
+		ArrayList<Formation> ret = new ArrayList<Formation>();
+		String querry = "SELECT * FROM FORMATION";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Formation tmpFormation = new Formation();
+					tmpFormation.setId(json_data.getInt(Requetes.DATABASE_FORMATION_ID));
+					//tmpFormation.set(json_data.getString(Requetes.DATABASE_FORMATION_ECOLE));
+					tmpFormation.setTitreFR(json_data.getString(Requetes.DATABASE_FORMATION_TITREFR));
+					tmpFormation.setTitreEN(json_data.getString(Requetes.DATABASE_FORMATION_TITREEN));
+					tmpFormation.setLienWeb(json_data.getString(Requetes.DATABASE_FORMATION_LIEN));
+					tmpFormation.setDescriptionFR(json_data.getString(Requetes.DATABASE_FORMATION_DESCFR));
+					tmpFormation.setDescriptionEN(json_data.getString(Requetes.DATABASE_FORMATION_DESCEN));
+					
+					ret.add(tmpFormation);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+
+	public static ArrayList<LivreOr> getLivreOrFromDB()
+	{
+		ArrayList<LivreOr> ret = new ArrayList<LivreOr>();
+		String querry = "SELECT * FROM LIVREOR";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					LivreOr tmpLivreOr = new LivreOr();
+					tmpLivreOr.setId(json_data.getInt(Requetes.DATABASE_LIVREOR_ID));
+					tmpLivreOr.setAuteur(json_data.getString(Requetes.DATABASE_LIVREOR_POSTEUR));
+					tmpLivreOr.setMail(json_data.getString(Requetes.DATABASE_LIVREOR_MAIL));
+					tmpLivreOr.setDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_LIVREOR_DATE)));
+					tmpLivreOr.setMessage(json_data.getString(Requetes.DATABASE_LIVREOR_MESSAGE));
+					tmpLivreOr.setAccepted(Tools.parseIntToBoolean(json_data.getInt(Requetes.DATABASE_LIVREOR_ACCEPTED)));
+					
+					ret.add(tmpLivreOr);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+	
 	/**
 	 * Recupere tout les partenaires de la BDD et les renvois sous forme de liste
 	 * @return
@@ -63,14 +246,110 @@ public class DataBaseGetters {
 			for(int i=0;i<resultArray.length();i++){
 				JSONObject json_data = resultArray.getJSONObject(i);
 				Partenaire tmpPartenaire = new Partenaire();
-				tmpPartenaire.setId(json_data.getInt("id_partenaire"));
-				tmpPartenaire.setNom(json_data.getString("nom_partenaire"));
-				tmpPartenaire.setLogoURL(json_data.getString("logo_partenaire"));
-				tmpPartenaire.setWebsiteURL(json_data.getString("site_partenaire"));
-				tmpPartenaire.setDescriptionFR(json_data.getString("descFR_partenaire"));
-				tmpPartenaire.setDescriptionEN(json_data.getString("descEN_partenaire"));
+				tmpPartenaire.setId(json_data.getInt(Requetes.DATABASE_PARTENAIRE_ID));
+				tmpPartenaire.setNom(json_data.getString(Requetes.DATABASE_PARTENAIRE_NOM));
+				tmpPartenaire.setLogoURL(json_data.getString(Requetes.DATABASE_PARTENAIRE_LOGO));
+				tmpPartenaire.setWebsiteURL(json_data.getString(Requetes.DATABASE_PARTENAIRE_SITE));
+				tmpPartenaire.setDescriptionFR(json_data.getString(Requetes.DATABASE_PARTENAIRE_DESCFR));
+				tmpPartenaire.setDescriptionEN(json_data.getString(Requetes.DATABASE_PARTENAIRE_DESCEN));
 				
 				ret.add(tmpPartenaire);
+			}
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+
+	public static ArrayList<Participant> getParticipantsFromDB()
+	{
+		ArrayList<Participant> ret = new ArrayList<Participant>();
+		String querry = "SELECT * FROM PARTICIPANT";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+				JSONObject json_data = resultArray.getJSONObject(i);
+				Participant tmpParticipant = new Participant();
+				tmpParticipant.setId(json_data.getInt(Requetes.DATABASE_PARTICIPANT_ID));
+				tmpParticipant.setNom(json_data.getString(Requetes.DATABASE_PARTICIPANT_NOM));
+				tmpParticipant.setPrenom(json_data.getString(Requetes.DATABASE_PARTICIPANT_PRENOM));
+				tmpParticipant.setPhotoURL(json_data.getString(Requetes.DATABASE_PARTICIPANT_PHOTO));
+				tmpParticipant.setEmail(json_data.getString(Requetes.DATABASE_PARTICIPANT_MAIL));
+				tmpParticipant.setBioFR(json_data.getString(Requetes.DATABASE_PARTICIPANT_BIOFR));
+				tmpParticipant.setBioEN(json_data.getString(Requetes.DATABASE_PARTICIPANT_BIOEN));
+				tmpParticipant.setProf(Tools.parseIntToBoolean(json_data.getInt(Requetes.DATABASE_PARTICIPANT_ISPROF)));
+				
+				ret.add(tmpParticipant);
+			}
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+
+	public static ArrayList<Participation> getParticipationFromDB()
+	{
+		ArrayList<Participation> ret = new ArrayList<Participation>();
+		String querry = "SELECT * FROM PARTICIPATION";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Participation tmpParticipation = new Participation();
+					//tmpParticipation.setId(json_data.getInt(Requetes.DATABASE_PARTICIPATION_EQUIPE));
+					//tmpParticipation.setAnnee(json_data.getInt(Requetes.DATABASE_PARTICIPATION_PARTICIPANT));
+					tmpParticipation.setRole(json_data.getString(Requetes.DATABASE_PARTICIPATION_ROLE));
+					ret.add(tmpParticipation);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+
+	public static ArrayList<Photo> getPhotosFromDB()
+	{
+		ArrayList<Photo> ret = new ArrayList<Photo>();
+		String querry = "SELECT * FROM PHOTO";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+				JSONObject json_data = resultArray.getJSONObject(i);
+				Photo tmpPhoto = new Photo();
+				tmpPhoto.setId(json_data.getInt(Requetes.DATABASE_PHOTO_ID));
+				tmpPhoto.setTitreFR(json_data.getString(Requetes.DATABASE_PHOTO_TITREFR));
+				tmpPhoto.setTitreEN(json_data.getString(Requetes.DATABASE_PHOTO_TITREEN));
+				tmpPhoto.setPhotoURL(json_data.getString(Requetes.DATABASE_PHOTO_LIEN));
+				tmpPhoto.setPhotoDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_PHOTO_DATE)));
+				tmpPhoto.setDescriptionFR(json_data.getString(Requetes.DATABASE_PHOTO_DESCFR));
+				tmpPhoto.setDescriptionEN(json_data.getString(Requetes.DATABASE_PHOTO_DESCEN));
+				
+				ret.add(tmpPhoto);
+			}
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+
+	public static ArrayList<Rubrique> getRubriqueFromDB()
+	{
+		ArrayList<Rubrique> ret = new ArrayList<Rubrique>();
+		String querry = "SELECT * FROM RUBRIQUE";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+				JSONObject json_data = resultArray.getJSONObject(i);
+				Rubrique tmpRubrique = new Rubrique();
+				tmpRubrique.setId(json_data.getInt(Requetes.DATABASE_RUBRIQUE_ID));
+				//tmpRubrique.setMere(json_data.getInt(Requetes.DATABASE_RUBRIQUE_MERE));
+				tmpRubrique.setTitreFR(json_data.getString(Requetes.DATABASE_RUBRIQUE_TITREFR));
+				tmpRubrique.setTitreEN(json_data.getString(Requetes.DATABASE_RUBRIQUE_TITREEN));
+				tmpRubrique.setDescriptionFR(json_data.getString(Requetes.DATABASE_RUBRIQUE_DESCFR));
+				tmpRubrique.setDescriptionEN(json_data.getString(Requetes.DATABASE_RUBRIQUE_DESCEN));
+				
+				ret.add(tmpRubrique);
 			}
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());

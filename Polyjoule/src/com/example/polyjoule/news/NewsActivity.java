@@ -10,8 +10,10 @@ import android.widget.ListView;
 
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
+import com.example.polyjoule.interneDataBase.PolyjouleDBLoader;
+import com.example.polyjoule.interneDataBase.PolyjouleDBOpenHelper;
+import com.example.polyjoule.interneDataBase.PolyjouleDBRequetes;
 
-//github.com/Nigui/PolyGit.git
 
 public class NewsActivity extends ListActivity {
 	
@@ -26,7 +28,7 @@ public class NewsActivity extends ListActivity {
 		//ListView
 		
 		//Activer lorsqu'on est connecter au wifi de poly
-		listArticle = new ArrayList<Article>();
+		/*listArticle = new ArrayList<Article>();
 		Article art;
 		for (int i = 0; i < 50; i++) {	
 			art = new Article();
@@ -35,7 +37,7 @@ public class NewsActivity extends ListActivity {
 			art.setContenuFr("Corps de l'article");
 			listArticle.add(art);
 		}
-			/*	
+		*/
 		PolyjouleDBOpenHelper oh = new PolyjouleDBOpenHelper(this);
 		boolean loading = new PolyjouleDBLoader(oh).loadDB();
 		if( loading ) System.out.println("Chargement ok"); 
@@ -49,7 +51,7 @@ public class NewsActivity extends ListActivity {
 //		
 //		NewsListener articleListener = new NewsListener(this);
 		//setListAdapter(new NewsAdapter(this,listArticle));
-		*/
+		
 	}
 
 	/**

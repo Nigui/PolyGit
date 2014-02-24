@@ -6,20 +6,25 @@ public class Rubrique {
 
 	
 	private int id;
-	private String titre;
+	private String titreFR;
+	private String titreEN;
 	private String descriptionFR;
 	private String descriptionEN;
 	private ArrayList<Article> articles;
 	private ArrayList<Rubrique> sousRubriques;
 	private Rubrique mere;
 	
+	
+
 	//------ Constructeurs
-	public Rubrique(int id, String titre, String descriptionFR,
-			String descriptionEN, ArrayList<Article> articles,
-			ArrayList<Rubrique> sousRubriques, Rubrique mere) {
+	public Rubrique(int id, String titreFR, String titreEN,
+			String descriptionFR, String descriptionEN,
+			ArrayList<Article> articles, ArrayList<Rubrique> sousRubriques,
+			Rubrique mere) {
 		super();
 		this.id = id;
-		this.titre = titre;
+		this.titreFR = titreFR;
+		this.titreEN = titreEN;
 		this.descriptionFR = descriptionFR;
 		this.descriptionEN = descriptionEN;
 		this.articles = articles;
@@ -39,11 +44,17 @@ public class Rubrique {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTitre() {
-		return titre;
+	public String getTitreFR() {
+		return titreFR;
 	}
-	public void setTitre(String titre) {
-		this.titre = titre;
+	public void setTitreFR(String titreFR) {
+		this.titreFR = titreFR;
+	}
+	public String getTitreEN() {
+		return titreEN;
+	}
+	public void setTitreEN(String titreEN) {
+		this.titreEN = titreEN;
 	}
 	public String getDescriptionFR() {
 		return descriptionFR;
@@ -80,10 +91,10 @@ public class Rubrique {
 	
 	@Override
 	public String toString() {
-		return "Rubrique [id=" + id + ", titre=" + titre + ", descriptionFR="
-				+ descriptionFR + ", descriptionEN=" + descriptionEN
-				+ ", articles=" + articles + ", sousRubriques=" + sousRubriques
-				+ ", mere=" + mere + "]";
+		return "Rubrique [id=" + id + ", titreFR=" + titreFR + ", titreEN="
+				+ titreEN + ", descriptionFR=" + descriptionFR
+				+ ", descriptionEN=" + descriptionEN + ", articles=" + articles
+				+ ", sousRubriques=" + sousRubriques + ", mere=" + mere + "]";
 	}
 	
 	
