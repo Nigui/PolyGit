@@ -148,7 +148,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int slidingmenu_list_selector_background=0x7f020004;
     }
     public static final class id {
-<<<<<<< HEAD
         public static final int action_settings=0x7f040019;
         public static final int corps_article=0x7f04000e;
         public static final int fullscreen=0x7f040003;
@@ -190,45 +189,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int slidingmenu_sectionitem=0x7f03000a;
         public static final int slidingmenu_sectionview=0x7f03000b;
         public static final int slidingmenumain=0x7f03000c;
-=======
-        public static final int action_settings=0x7f040016;
-        public static final int corps_article=0x7f04000b;
-        public static final int fullscreen=0x7f040003;
-        public static final int imageButton1=0x7f040005;
-        public static final int imageButton2=0x7f040006;
-        public static final int image_article=0x7f04000a;
-        public static final int item=0x7f040008;
-        public static final int item_img=0x7f040007;
-        public static final int left=0x7f040000;
-        public static final int margin=0x7f040002;
-        public static final int news_text=0x7f04000e;
-        public static final int news_title=0x7f04000c;
-        public static final int partenaire_liste=0x7f04000f;
-        public static final int partenaire_liste_item_logo=0x7f040010;
-        public static final int right=0x7f040001;
-        public static final int selected_view=0x7f040004;
-        public static final int slidingmenu_section_title=0x7f040014;
-        public static final int slidingmenu_sectionitem_icon=0x7f040012;
-        public static final int slidingmenu_sectionitem_label=0x7f040013;
-        public static final int slidingmenu_view=0x7f040011;
-        public static final int slidingmenumain=0x7f040015;
-        public static final int textView1=0x7f04000d;
-        public static final int titre_article=0x7f040009;
-    }
-    public static final class layout {
-        public static final int activity_contact=0x7f030000;
-        public static final int activity_news=0x7f030001;
-        public static final int activity_news_details=0x7f030002;
-        public static final int menu_item=0x7f030003;
-        public static final int news_item=0x7f030004;
-        public static final int partenaire_liste=0x7f030005;
-        public static final int partenaire_liste_item=0x7f030006;
-        public static final int slidingmenu=0x7f030007;
-        public static final int slidingmenu_fragment=0x7f030008;
-        public static final int slidingmenu_sectionitem=0x7f030009;
-        public static final int slidingmenu_sectionview=0x7f03000a;
-        public static final int slidingmenumain=0x7f03000b;
->>>>>>> b5c5338fcabbf1edbfc11e9f86c12cf5e90ee58c
     }
     public static final class menu {
         public static final int news=0x7f090000;

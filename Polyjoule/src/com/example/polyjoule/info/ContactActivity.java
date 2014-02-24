@@ -1,16 +1,19 @@
 package com.example.polyjoule.info;
 
-import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.polyjoule.R;
-import android.os.Bundle;
 
-public class ContactActivity extends Activity{
+public class ContactActivity extends Fragment{
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_contact);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.activity_contact, container, false);
+        
+        return rootView;
 	}
 	
 	public void onResume() {
