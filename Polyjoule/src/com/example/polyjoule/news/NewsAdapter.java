@@ -30,7 +30,7 @@ public class NewsAdapter extends BaseAdapter {
 	 * @param newsActivity reference on newsActivity.
 	 * @param NewsList list of item to show on listView.
 	 */
-	public NewsAdapter(NewsActivity newsActivity, ArrayList<Article> articleList) {
+	public NewsAdapter(NewsFragment newsActivity, ArrayList<Article> articleList) {
 		this.articles = new ArrayList<Article>(articleList);
 		layoutInflater=newsActivity.getLayoutInflater();
 	}

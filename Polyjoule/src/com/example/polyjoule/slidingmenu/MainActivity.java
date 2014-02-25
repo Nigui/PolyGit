@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.polyjoule.R;
-import com.example.polyjoule.course.CourseActivity;
+import com.example.polyjoule.course.CourseFragment;
 
 public class MainActivity extends ActionBarActivity {
 	private DrawerLayout mDrawerLayout;
@@ -170,7 +170,7 @@ public class MainActivity extends ActionBarActivity {
 			fragment = new HomeFragment();
 			break;
 		case 2:
-			fragment = new CourseActivity();
+			fragment = new CourseFragment();
 			break;
 		case 3:
 			fragment = new PagesFragment();

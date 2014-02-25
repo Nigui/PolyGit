@@ -1,6 +1,4 @@
-package com.example.polyjoule.live;
-
-import com.example.polyjoule.R;
+package com.example.polyjoule.live.medias;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class LiveActivity extends Fragment{
+import com.example.polyjoule.R;
 
+public class MediasFragment extends Fragment{
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_live, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_medias, container, false);
         
         return rootView;
 	}

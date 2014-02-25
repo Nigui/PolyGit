@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.text.Html;
 
-public class NewsDetailActivity extends Activity {
+public class NewsDetailFragment extends Activity {
 	
 	private Article article;
 	private TextView titreArticle, corpsArticle;

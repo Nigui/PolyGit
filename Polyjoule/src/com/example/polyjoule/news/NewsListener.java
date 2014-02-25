@@ -7,12 +7,12 @@ public class NewsListener implements OnClickListener {
 	/**
 	 * Reference on the HomePageActivity.
 	 */
-	private NewsActivity newsActivity;
+	private NewsFragment newsActivity;
 	/**
 	 * Constructor of HomePageListener
 	 * @param activity reference on the HomePageActivity.
 	 */
-	public NewsListener(NewsActivity activity){
+	public NewsListener(NewsFragment activity){
 		newsActivity = activity;
 	}
 	
