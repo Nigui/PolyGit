@@ -2,10 +2,12 @@ package com.example.polyjoule.news;
 
 import java.util.ArrayList;
 
-import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.polyjoule.R;
@@ -13,15 +15,17 @@ import com.example.polyjoule.DBObjects.Article;
 
 //github.com/Nigui/PolyGit.git
 
-public class NewsFragment extends ListActivity {
+public class NewsFragment extends ListFragment {
 	
 	private Article currentArticle;
 	private ArrayList<Article> listArticle;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_news);
+	
+	
+	 @Override
+	 public void onCreate(Bundle savedInstanceState) {
+	  super.onCreate(savedInstanceState);
+	  
+	  //setContentView(R.layout.activity_news);
 
 		//ListView
 		
@@ -46,12 +50,18 @@ public class NewsFragment extends ListActivity {
 			System.out.println(article.toString()+"\n");
 		
 //		listArticle = DataBaseGetters.getArticlesFromDB();
-//		
-//		NewsListener articleListener = new NewsListener(this);
-		//setListAdapter(new NewsAdapter(this,listArticle));
-		*/
+*/	
+ 		NewsListener articleListener = new NewsListener(this);
+		setListAdapter(new NewsAdapter(this,listArticle));
+		
+	 }
+	 
+	 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.activity_news, container, false);
+	        
+	        return rootView;
 	}
-
+	
 	/**
 	 * Implemetation of onResume.
 	 */
@@ -65,15 +75,17 @@ public class NewsFragment extends ListActivity {
 	 * Listener of listview child. Save child as current city and read trail of
 	 * it. Launch MenuCityActivity.
 	 */
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onListItemClick(ListView l, View v, int position, long id) {
 		
 		//Article newsSelect = (Article) getListAdapter().getItem(position);
 		
 		//this.currentArticle = newsSelect;
-		
+
+		/*
 		Intent intent = new Intent(this, NewsDetailFragment.class);
 		intent.putExtra("Article", listArticle.get(position));
 
 		this.startActivity(intent);
+		*/
 	}
 }
