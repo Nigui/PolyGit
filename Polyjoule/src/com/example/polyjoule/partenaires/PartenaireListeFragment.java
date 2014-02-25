@@ -18,7 +18,7 @@ import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Partenaire;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;
 
-public class PartenaireListeActivity extends Activity implements OnItemClickListener{
+public class PartenaireListeFragment extends Activity implements OnItemClickListener{
 
 	private ArrayList<Partenaire> partenaireListe;
 	private static final String partenaireURL = "http://www.polyjoule.org/administration/ressources/data/Logos/";

@@ -13,7 +13,7 @@ import com.example.polyjoule.DBObjects.Article;
 
 //github.com/Nigui/PolyGit.git
 
-public class NewsActivity extends ListActivity {
+public class NewsFragment extends ListActivity {
 	
 	private Article currentArticle;
 	private ArrayList<Article> listArticle;
@@ -71,7 +71,7 @@ public class NewsActivity extends ListActivity {
 		
 		//this.currentArticle = newsSelect;
 		
-		Intent intent = new Intent(this, NewsDetailActivity.class);
+		Intent intent = new Intent(this, NewsDetailFragment.class);
 		intent.putExtra("Article", listArticle.get(position));
 
 		this.startActivity(intent);

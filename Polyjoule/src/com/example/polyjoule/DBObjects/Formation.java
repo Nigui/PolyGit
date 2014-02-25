@@ -3,17 +3,22 @@ package com.example.polyjoule.DBObjects;
 public class Formation {
 
 	private int id;
-	private String titre;
+	private Ecole ecole;
+	private String titreFR;
+	private String titreEN;
 	private String lienWeb;
 	private String descriptionFR;
 	private String descriptionEN;
 	
 	//------ Constructeurs
-	public Formation(int id, String titre, String lienWeb,
-			String descriptionFR, String descriptionEN) {
+	
+	public Formation(int id, Ecole ecole, String titreFR, String titreEN,
+			String lienWeb, String descriptionFR, String descriptionEN) {
 		super();
 		this.id = id;
-		this.titre = titre;
+		this.ecole = ecole;
+		this.titreFR = titreFR;
+		this.titreEN = titreEN;
 		this.lienWeb = lienWeb;
 		this.descriptionFR = descriptionFR;
 		this.descriptionEN = descriptionEN;
@@ -31,11 +36,23 @@ public class Formation {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTitre() {
-		return titre;
+	public Ecole getEcole() {
+		return ecole;
 	}
-	public void setTitre(String titre) {
-		this.titre = titre;
+	public void setEcole(Ecole ecole) {
+		this.ecole = ecole;
+	}
+	public String getTitreFR() {
+		return titreFR;
+	}
+	public void setTitreFR(String titreFR) {
+		this.titreFR = titreFR;
+	}
+	public String getTitreEN() {
+		return titreEN;
+	}
+	public void setTitreEN(String titreEN) {
+		this.titreEN = titreEN;
 	}
 	public String getLienWeb() {
 		return lienWeb;
@@ -59,9 +76,10 @@ public class Formation {
 	
 	@Override
 	public String toString() {
-		return "Formation [id=" + id + ", titre=" + titre + ", lienWeb="
-				+ lienWeb + ", descriptionFR=" + descriptionFR
-				+ ", descriptionEN=" + descriptionEN + "]";
+		return "Formation [id=" + id + ", ecole=" + ecole + ", titreFR="
+				+ titreFR + ", titreEN=" + titreEN + ", lienWeb=" + lienWeb
+				+ ", descriptionFR=" + descriptionFR + ", descriptionEN="
+				+ descriptionEN + "]";
 	}
 	
 	

@@ -1005,7 +1005,11 @@ containing a value of this type.
         public static final int ic_medias=0x7f02005e;
         public static final int ic_news=0x7f02005f;
         public static final int ic_race=0x7f020060;
+<<<<<<< HEAD
         public static final int ic_twitter=0x7f020061;
+=======
+        public static final int ic_tweeter=0x7f020061;
+>>>>>>> cf2b01e87061efb6c38b27a5efdfbaecc72629f6
         public static final int list_item_bg_normal=0x7f020062;
         public static final int list_item_bg_pressed=0x7f020063;
         public static final int list_selector=0x7f020064;
