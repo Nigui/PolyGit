@@ -36,7 +36,7 @@ public class PartenaireListeActivity extends Activity implements OnItemClickList
 		
 		rowItems = new ArrayList<PartenaireItem>();
 		for(int i=0;i<partenaireListe.size();i++){
-			PartenaireItem item = new PartenaireItem(partenaireURL.concat(partenaireListe.get(i).getLogoURL()));
+			PartenaireItem item = new PartenaireItem(partenaireURL.concat(partenaireListe.get(i).getLogoURL()),partenaireListe.get(i).getNom());
 			rowItems.add(item);
 		}
 		
@@ -51,7 +51,7 @@ public class PartenaireListeActivity extends Activity implements OnItemClickList
     public void onItemClick(AdapterView<?> parent, View view, int position,
             long id) {
         Toast toast = Toast.makeText(getApplicationContext(),
-            "Item " + (position + 1) + ": " + rowItems.get(position),
+            "Item " + (position + 1) + ": " + rowItems.get(position).getNom(),
             Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();

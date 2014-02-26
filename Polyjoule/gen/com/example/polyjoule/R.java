@@ -1005,7 +1005,7 @@ containing a value of this type.
         public static final int ic_medias=0x7f02005e;
         public static final int ic_news=0x7f02005f;
         public static final int ic_race=0x7f020060;
-        public static final int ic_tweeter=0x7f020061;
+        public static final int ic_twitter=0x7f020061;
         public static final int list_item_bg_normal=0x7f020062;
         public static final int list_item_bg_pressed=0x7f020063;
         public static final int list_selector=0x7f020064;
@@ -1239,18 +1239,11 @@ containing a value of this type.
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;
         public static final int TextAppearance_AppCompat_Base_SearchResult=0x7f0b006d;
         public static final int TextAppearance_AppCompat_Base_SearchResult_Subtitle=0x7f0b006f;
-        /**  Search View result styles 
-         */
         public static final int TextAppearance_AppCompat_Base_SearchResult_Title=0x7f0b006e;
         public static final int TextAppearance_AppCompat_Base_Widget_PopupMenu_Large=0x7f0b0069;
         public static final int TextAppearance_AppCompat_Base_Widget_PopupMenu_Small=0x7f0b006a;
         public static final int TextAppearance_AppCompat_Light_Base_SearchResult=0x7f0b0070;
         public static final int TextAppearance_AppCompat_Light_Base_SearchResult_Subtitle=0x7f0b0072;
-        /** 
-        TextAppearance.Holo.Light.SearchResult.* are private so we extend from the default
-        versions instead (which are exactly the same).
-    
-         */
         public static final int TextAppearance_AppCompat_Light_Base_SearchResult_Title=0x7f0b0071;
         public static final int TextAppearance_AppCompat_Light_Base_Widget_PopupMenu_Large=0x7f0b006b;
         public static final int TextAppearance_AppCompat_Light_Base_Widget_PopupMenu_Small=0x7f0b006c;
@@ -1309,23 +1302,16 @@ containing a value of this type.
         /**  Platform-independent theme providing an action bar in a dark-themed activity. 
          */
         public static final int Theme_AppCompat_Light_DarkActionBar=0x7f0b0079;
-        /**  Base platform-dependent theme  
-         */
         public static final int Theme_Base=0x7f0b007c;
         /**  Base platform-dependent theme providing an action bar in a dark-themed activity. 
- Base platform-dependent theme providing an action bar in a dark-themed activity. 
          */
         public static final int Theme_Base_AppCompat=0x7f0b007e;
         /**  Base platform-dependent theme providing an action bar in a light-themed activity. 
- Base platform-dependent theme providing an action bar in a light-themed activity. 
          */
         public static final int Theme_Base_AppCompat_Light=0x7f0b007f;
         /**  Base platform-dependent theme providing a dark action bar in a light-themed activity. 
- Base platform-dependent theme providing a dark action bar in a light-themed activity. 
          */
         public static final int Theme_Base_AppCompat_Light_DarkActionBar=0x7f0b0080;
-        /**  Base platform-dependent theme providing a light-themed activity. 
-         */
         public static final int Theme_Base_Light=0x7f0b007d;
         /**  Styles in here can be extended for customisation in your application. Each utilises
          one of the Base styles. If Holo themes are available on the current platform version
@@ -1347,28 +1333,18 @@ containing a value of this type.
         public static final int Widget_AppCompat_Base_ActionBar_TabBar=0x7f0b0045;
         public static final int Widget_AppCompat_Base_ActionBar_TabText=0x7f0b004b;
         public static final int Widget_AppCompat_Base_ActionBar_TabView=0x7f0b0048;
-        /**  Action Button Styles 
-         */
         public static final int Widget_AppCompat_Base_ActionButton=0x7f0b003f;
         public static final int Widget_AppCompat_Base_ActionButton_CloseMode=0x7f0b0041;
         public static final int Widget_AppCompat_Base_ActionButton_Overflow=0x7f0b0043;
         public static final int Widget_AppCompat_Base_ActionMode=0x7f0b004e;
         public static final int Widget_AppCompat_Base_ActivityChooserView=0x7f0b0075;
-        /**  AutoCompleteTextView styles (for SearchView) 
-         */
         public static final int Widget_AppCompat_Base_AutoCompleteTextView=0x7f0b0073;
         public static final int Widget_AppCompat_Base_DropDownItem_Spinner=0x7f0b005d;
-        /**  Popup Menu 
-         */
         public static final int Widget_AppCompat_Base_ListPopupWindow=0x7f0b0065;
-        /**  Spinner Widgets 
-         */
         public static final int Widget_AppCompat_Base_ListView_DropDown=0x7f0b005f;
         public static final int Widget_AppCompat_Base_ListView_Menu=0x7f0b0064;
         public static final int Widget_AppCompat_Base_PopupMenu=0x7f0b0067;
         public static final int Widget_AppCompat_Base_ProgressBar=0x7f0b005a;
-        /**  Progress Bar 
-         */
         public static final int Widget_AppCompat_Base_ProgressBar_Horizontal=0x7f0b0059;
         /**  Action Bar Spinner Widgets 
          */
