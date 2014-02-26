@@ -2,8 +2,8 @@ package com.example.polyjoule.news;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,11 +81,11 @@ public class NewsFragment extends ListFragment {
 		
 		//this.currentArticle = newsSelect;
 
-		/*
-		Intent intent = new Intent(this, NewsDetailFragment.class);
+		
+		Intent intent = new Intent(getActivity().getApplicationContext(), NewsDetailFragment.class);
 		intent.putExtra("Article", listArticle.get(position));
 
 		this.startActivity(intent);
-		*/
+		
 	}
 }
