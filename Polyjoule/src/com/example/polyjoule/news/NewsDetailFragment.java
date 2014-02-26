@@ -1,40 +1,51 @@
 package com.example.polyjoule.news;
 
-import java.util.ArrayList;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.text.Html;
-
-public class NewsDetailFragment extends Activity {
+public class NewsDetailFragment extends Fragment {
 	
+	private View rootView;
 	private Article article;
 	private TextView titreArticle, corpsArticle;
 	private ImageView imageArticle;
 	
-	 @Override
-	    public void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.activity_news_details);
-	        
-	        Bundle extras = getIntent().getExtras();
-			
-			this.article = (Article)extras.get("Article");	
-			initUI();
-	    }
+
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		rootView = inflater.inflate(R.layout.activity_news_details, container, false);
+		
+		Bundle bundle= getArguments(); 
+		article=(Article)bundle.getSerializable("article");
+		
+        initUI();
+        
+        int num = bundle.getInt("num");
+        System.out.println(num);
+        
+        return rootView;
+	}
+	
+	public void onResume() {
+		super.onResume();
+		
+	}
 	 
 	 private void initUI(){
-		 titreArticle =  (TextView)this.findViewById(R.id.titre_article);
-		 imageArticle =  (ImageView)this.findViewById(R.id.image_article);
-		 corpsArticle =  (TextView)this.findViewById(R.id.corps_article);
+		 titreArticle =  (TextView)rootView.findViewById(R.id.titre_article);
+		 imageArticle =  (ImageView)rootView.findViewById(R.id.image_article);
+		 corpsArticle =  (TextView)rootView.findViewById(R.id.corps_article);
 		 
-		 titreArticle.setText(article.getTitreFr());
-		 corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
+		titreArticle.setText(article.getTitreFr());
+		corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
 	 }
 
 }
