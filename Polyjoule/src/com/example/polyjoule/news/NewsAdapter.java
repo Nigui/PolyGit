@@ -2,6 +2,7 @@ package com.example.polyjoule.news;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +25,17 @@ public class NewsAdapter extends BaseAdapter {
 	 */
 	private LayoutInflater layoutInflater;
 	
+	NewsFragment context;
+	
 	
 	/**
 	 * Constructor of NewsAdapter. news member is initialize with NewsList.
 	 * @param newsActivity reference on newsActivity.
 	 * @param NewsList list of item to show on listView.
 	 */
-	public NewsAdapter(NewsActivity newsActivity, ArrayList<Article> articleList) {
+	public NewsAdapter(NewsFragment NewsFragment, ArrayList<Article> articleList) {
 		this.articles = new ArrayList<Article>(articleList);
-		layoutInflater=newsActivity.getLayoutInflater();
+		layoutInflater=NewsFragment.getLayoutInflater(null);
 	}
 
 	/**
@@ -67,6 +70,7 @@ public class NewsAdapter extends BaseAdapter {
 		ItemHolder itemHolder;
 		
 		if(convertView==null){
+			
 			convertView=layoutInflater.inflate(R.layout.news_item,parent,false);
 			
 			itemHolder= new ItemHolder();

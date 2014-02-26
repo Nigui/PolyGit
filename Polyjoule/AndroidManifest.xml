@@ -12,24 +12,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat" >
+        android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name="com.example.polyjoule.slidingmenu.MainActivity"
-            android:label="@string/app_name" >
-            
-        </activity>
-        <activity
-            android:name="com.example.polyjoule.news.NewsActivity"
-            android:label="@string/app_name" >
-            
-            
-        </activity>
-        <activity
-            android:name="com.example.polyjoule.news.NewsDetailActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.example.polyjoule.partenaires.PartenaireListeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,35 +23,49 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.polyjoule.info.ContactActivity"
+            android:name="com.example.polyjoule.news.NewsActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.polyjoule.info.EquipesActivity"
+            android:name="com.example.polyjoule.news.NewsFragment"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.polyjoule.live.LiveActivity"
+            android:name="com.example.polyjoule.news.NewsDetailFragment"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.polyjoule.live.medias.MediasActivity"
+            android:name="com.example.polyjoule.partenaires.PartenaireListeFragment"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.polyjoule.info.PartenaireActivity"
+            android:name="com.example.polyjoule.info.ContactFragment"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.polyjoule.course.CourseActivity"
+            android:name="com.example.polyjoule.info.EquipesFragment"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.polyjoule.livreDor.LivreDorActivity"
+            android:name="com.example.polyjoule.live.LiveFragment"
             android:label="@string/app_name" >
         </activity>
-    </application>
-    <application>
+        <activity
+            android:name="com.example.polyjoule.live.medias.MediasFragment"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.polyjoule.info.PartenaireFragment"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.polyjoule.course.CourseFragment"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.polyjoule.livreDor.LivreDorFragment"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

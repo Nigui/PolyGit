@@ -18,7 +18,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.polyjoule.R;
-import com.example.polyjoule.course.CourseActivity;
+import com.example.polyjoule.course.CourseFragment;
+import com.example.polyjoule.news.NewsFragment;
 
 public class MainActivity extends ActionBarActivity {
 	private DrawerLayout mDrawerLayout;
@@ -164,13 +165,13 @@ public class MainActivity extends ActionBarActivity {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
-			fragment = new CommunityFragment();
+			fragment = new NewsFragment();
 			break;
 		case 1:
 			fragment = new HomeFragment();
 			break;
 		case 2:
-			fragment = new CourseActivity();
+			fragment = new CourseFragment();
 			break;
 		case 3:
 			fragment = new PagesFragment();
