@@ -86,7 +86,7 @@ public class NewsAdapter extends BaseAdapter {
 		}
 
 		itemHolder.titleView.setText(articles.get(position).getTitreFr());
-		itemHolder.textView.setText(articles.get(position).getContenuFr());
+		itemHolder.textView.setText(articles.get(position).getAuteur());
 		
 		return convertView;
 	}	

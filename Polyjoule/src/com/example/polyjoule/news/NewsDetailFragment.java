@@ -28,13 +28,16 @@ public class NewsDetailFragment extends Activity {
 			initUI();
 	    }
 	 
+	 
+	 
 	 private void initUI(){
 		 titreArticle =  (TextView)this.findViewById(R.id.titre_article);
 		 imageArticle =  (ImageView)this.findViewById(R.id.image_article);
 		 corpsArticle =  (TextView)this.findViewById(R.id.corps_article);
 		 
 		 titreArticle.setText(article.getTitreFr());
-		 corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
+		 //corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
+		 corpsArticle.setText(article.getAuteur());
 	 }
 
 }
