@@ -36,11 +36,16 @@ public class NewsDetailFragment extends Fragment {
 		
 	}
 	 
+	 
+	 
 	 private void initUI(){
 		 titreArticle =  (TextView)rootView.findViewById(R.id.titre_article);
 		 imageArticle =  (ImageView)rootView.findViewById(R.id.image_article);
 		 corpsArticle =  (TextView)rootView.findViewById(R.id.corps_article);
 		 
+		 titreArticle.setText(article.getTitreFr());
+		 //corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
+		 corpsArticle.setText(article.getAuteur());
 		titreArticle.setText(article.getTitreFr());
 		corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
 	 }
