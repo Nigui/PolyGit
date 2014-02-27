@@ -19,12 +19,18 @@ import org.json.JSONObject;
 
 import com.example.polyjoule.DBObjects.Article;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
-public class DataBaseConnector {
+public class DataBaseConnector extends AsyncTask<String, String, JSONArray> {
 
 	private static final String phpFileURL = "http://polyjoule.org/site/PRESENTATION/Android/androidQuerries.php";
 		
+	@Override
+	protected JSONArray doInBackground(String... url) {
+		return executeQuerry(url[0]);
+	}
+	
 	/**
 	 * Effectue la connexion HTTP au fichier php present sur le serveur.
 	 * Initialise l'inputStream de la reponse (en JSON) a la requete envoyee en parametre
@@ -96,5 +102,7 @@ public class DataBaseConnector {
 		        return null;
 		}
 	}
+
+	
 	
 }

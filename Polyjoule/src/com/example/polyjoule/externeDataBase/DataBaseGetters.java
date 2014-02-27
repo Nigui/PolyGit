@@ -1,6 +1,7 @@
 package com.example.polyjoule.externeDataBase;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +33,16 @@ public class DataBaseGetters {
 		ArrayList<Album> ret = new ArrayList<Album>();
 		String querry = "SELECT * FROM ALBUM";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray;
+			try {
+				resultArray = new DataBaseConnector().execute(querry).get();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				return null;
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+				return null;
+			}
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Album tmpAlbum = new Album();
