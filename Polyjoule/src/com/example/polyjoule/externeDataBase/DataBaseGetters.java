@@ -366,4 +366,28 @@ public class DataBaseGetters {
 		}
 		return ret;
 	}
+	
+	public static ArrayList<Rubrique> getRubriqueFromDBWhithID(int id)
+	{
+		ArrayList<Rubrique> ret = new ArrayList<Rubrique>();
+		String querry = "SELECT * FROM RUBRIQUE WHERE id_rubrique ="+id;
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+				JSONObject json_data = resultArray.getJSONObject(i);
+				Rubrique tmpRubrique = new Rubrique();
+				tmpRubrique.setId(json_data.getInt(Requetes.DATABASE_RUBRIQUE_ID));
+				//tmpRubrique.setMere(json_data.getInt(Requetes.DATABASE_RUBRIQUE_MERE));
+				tmpRubrique.setTitreFR(json_data.getString(Requetes.DATABASE_RUBRIQUE_TITREFR));
+				tmpRubrique.setTitreEN(json_data.getString(Requetes.DATABASE_RUBRIQUE_TITREEN));
+				tmpRubrique.setDescriptionFR(json_data.getString(Requetes.DATABASE_RUBRIQUE_DESCFR));
+				tmpRubrique.setDescriptionEN(json_data.getString(Requetes.DATABASE_RUBRIQUE_DESCEN));
+				
+				ret.add(tmpRubrique);
+			}
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
 }
