@@ -2,8 +2,8 @@ package com.example.polyjoule.news;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,9 @@ import android.widget.ListView;
 
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
+import com.example.polyjoule.course.CourseFragment;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;
+import com.example.polyjoule.slidingmenu.MainActivity;
 
 //github.com/Nigui/PolyGit.git
 
@@ -79,15 +81,8 @@ public class NewsFragment extends ListFragment {
 	 */
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		
-		//Article newsSelect = (Article) getListAdapter().getItem(position);
+		((MainActivity)getActivity()).changeFragment(listArticle.get(position));
 		
-		//this.currentArticle = newsSelect;
-
-		
-		Intent intent = new Intent(getActivity().getApplicationContext(), NewsDetailFragment.class);
-		intent.putExtra("Article", listArticle.get(position));
-
-		this.startActivity(intent);
 		
 	}
 }
