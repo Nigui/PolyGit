@@ -20,7 +20,7 @@ import android.widget.ListView;
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.course.CourseFragment;
-import com.example.polyjoule.info.ContactFragment;
+import com.example.polyjoule.course.EduEcoFragment;
 import com.example.polyjoule.news.NewsDetailFragment;
 import com.example.polyjoule.news.NewsFragment;
 
@@ -183,7 +183,7 @@ public class MainActivity extends ActionBarActivity {
 			fragment = new FindPeopleFragment();
 			break;
 		case 5:
-			fragment = new ContactFragment();
+			fragment = new EduEcoFragment();
 			break;
 
 		default:
@@ -234,13 +234,12 @@ public class MainActivity extends ActionBarActivity {
 	/*
 	 * Méthode qui lance un fragment news avec article passé en paramètre
 	 */
-	public void changeFragment(Article article){
+	public void changeFragmentNews(Article article){
 		
 			Fragment fragment = new NewsDetailFragment();
 			
 			Bundle bundl = new Bundle();
 			bundl.putSerializable("article", article);
-			bundl.putInt("num", 3);
 			
 			fragment.setArguments(bundl);
 	

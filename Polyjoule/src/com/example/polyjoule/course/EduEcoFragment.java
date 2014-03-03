@@ -1,4 +1,6 @@
-package com.example.polyjoule.news;
+package com.example.polyjoule.course;
+
+import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,20 +13,20 @@ import android.widget.TextView;
 
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
+import com.example.polyjoule.DBObjects.Rubrique;
+import com.example.polyjoule.externeDataBase.DataBaseGetters;
 
-public class NewsDetailFragment extends Fragment {
-	
+public class EduEcoFragment extends Fragment{
 	private View rootView;
 	private Article article;
 	private TextView titreArticle, corpsArticle;
 	private ImageView imageArticle;
+	private ArrayList<Rubrique> listRubrique;
 	
-
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.article, container, false);
 		
-		Bundle bundle= getArguments(); 
-		article=(Article)bundle.getSerializable("article");
+		listRubrique = DataBaseGetters.getRubriqueFromDBWhithID(20);
 		
         initUI();
         
@@ -36,18 +38,14 @@ public class NewsDetailFragment extends Fragment {
 		
 	}
 	 
-	 
-	 
 	 private void initUI(){
 		 titreArticle =  (TextView)rootView.findViewById(R.id.titre_article);
 		 imageArticle =  (ImageView)rootView.findViewById(R.id.image_article);
 		 corpsArticle =  (TextView)rootView.findViewById(R.id.corps_article);
 		 
-		 titreArticle.setText(article.getTitreFr());
-		 //corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
-		 corpsArticle.setText(article.getAuteur());
-		titreArticle.setText(article.getTitreFr());
-		corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
+		titreArticle.setText(listRubrique.get(0).getTitreFR());
+		corpsArticle.setText(Html.fromHtml(listRubrique.get(0).getDescriptionFR()), TextView.BufferType.SPANNABLE);
+	 
 	 }
 
 }

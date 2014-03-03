@@ -66,7 +66,7 @@ public class NewsFragment extends ListFragment {
 	 */
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		
-		((MainActivity)getActivity()).changeFragment(listArticle.get(position));
+		((MainActivity)getActivity()).changeFragmentNews(listArticle.get(position));
 		
 		
 	}
