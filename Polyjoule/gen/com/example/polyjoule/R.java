@@ -1217,6 +1217,9 @@ containing a value of this type.
         public static final int img_item=0x7f0a0013;
         public static final int message=0x7f0a0016;
         public static final int objet=0x7f0a0015;
+        /**  URL Bdd 
+         */
+        public static final int photoURL=0x7f0a0018;
     }
     public static final class style {
         /** 

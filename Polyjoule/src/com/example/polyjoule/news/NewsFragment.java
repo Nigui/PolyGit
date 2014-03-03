@@ -16,8 +16,6 @@ import com.example.polyjoule.course.CourseFragment;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;
 import com.example.polyjoule.slidingmenu.MainActivity;
 
-//github.com/Nigui/PolyGit.git
-
 public class NewsFragment extends ListFragment {
 	
 	private Article currentArticle;
@@ -28,8 +26,6 @@ public class NewsFragment extends ListFragment {
 	 public void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
 	  
-	  //setContentView(R.layout.activity_news);
-
 		//ListView
 		
 		//Activer lorsqu'on est connecter au wifi de poly
@@ -42,17 +38,6 @@ public class NewsFragment extends ListFragment {
 			art.setContenuFr("Corps de l'article");
 			listArticle.add(art);
 		}*/
-			/*	
-		PolyjouleDBOpenHelper oh = new PolyjouleDBOpenHelper(this);
-		boolean loading = new PolyjouleDBLoader(oh).loadDB();
-		if( loading ) System.out.println("Chargement ok"); 
-		else System.out.println("echec Chargement");
-		
-		//====>C'est ici que tu r��cup��re la liste des articles
-		for( Article article : new PolyjouleDBRequetes(oh).getArticleInternalFromDB() )
-			System.out.println(article.toString()+"\n");
-		
-*/	
 		
 		listArticle = DataBaseGetters.getArticlesFromDB();
  		NewsListener articleListener = new NewsListener(this);
