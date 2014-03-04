@@ -40,5 +40,10 @@
     
     <!-- URL Bdd -->
     <string name="photoURL">http://www.polyjoule.org/administration/ressources/data/Logos/</string>
-
+    
+    <!-- Defaults strings -->
+    <string name="defaultImage">ici l\'image</string>
+    <string name="defaultTitre">Ici le titre</string>
+    <string name="defaultDate">ici la date</string>
+    <string name="defaultContenu">ici le contenu</string>
 </resources>

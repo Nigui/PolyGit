@@ -3,14 +3,17 @@ package com.example.polyjoule.news;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
+import com.example.polyjoule.utils.Tools;
 
 public class NewsAdapter extends BaseAdapter {
 
@@ -35,6 +38,7 @@ public class NewsAdapter extends BaseAdapter {
 	 */
 	public NewsAdapter(NewsFragment NewsFragment, ArrayList<Article> articleList) {
 		this.articles = new ArrayList<Article>(articleList);
+		this.articles.remove(0);
 		layoutInflater=NewsFragment.getLayoutInflater(null);
 	}
 
@@ -74,9 +78,12 @@ public class NewsAdapter extends BaseAdapter {
 			convertView=layoutInflater.inflate(R.layout.news_item,parent,false);
 			
 			itemHolder= new ItemHolder();
-			itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_title);
-			itemHolder.textView = (TextView)convertView.findViewById(R.id.news_text);
+			itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_list_image);
+			itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_title);
+			itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_list_date);
+			itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
 			itemHolder.titleBuilder= new StringBuilder();
+			itemHolder.dateBuilder=new StringBuilder();
 			itemHolder.textBuilder=new StringBuilder();
 			
 			convertView.setTag(itemHolder);
@@ -84,9 +91,12 @@ public class NewsAdapter extends BaseAdapter {
 		else{
 			itemHolder= (ItemHolder)convertView.getTag();
 		}
-
+		
 		itemHolder.titleView.setText(articles.get(position).getTitreFr());
-		itemHolder.textView.setText(articles.get(position).getAuteur());
+		//parse date en string
+		String date = Tools.transformToSimpleDate(articles.get(position).getDateCreation());
+		itemHolder.dateView.setText(date);
+		itemHolder.textView.setText(Html.fromHtml(articles.get(position).getContenuFr()));
 		
 		return convertView;
 	}	
@@ -95,20 +105,29 @@ public class NewsAdapter extends BaseAdapter {
 	 * Inner class use to save reference of News_item
 	 */
 	class ItemHolder{
+		
+
+		private ImageView imageView;
+		
 		/**
 		 * Reference on R.id.news_name
 		 */
 		private TextView titleView;
+
+		private TextView dateView;
 		
 		/**
 		 * Reference on R.id.News_version
 		 */
 		private TextView textView;
 		
+		
 		/**
 		 * Reference on  StringBuilder use to update titleView.
 		 */
 		private StringBuilder titleBuilder;
+		
+		private StringBuilder dateBuilder;
 		
 		/**
 		 * Reference on StringBuilder use to update textView.
