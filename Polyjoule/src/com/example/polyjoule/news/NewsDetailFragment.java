@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +17,11 @@ public class NewsDetailFragment extends Fragment {
 	
 	private View rootView;
 	private Article article;
-	private TextView titreArticle, corpsArticle;
-	private ImageView imageArticle;
+	private WebView webview;
 	
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.article, container, false);
+		rootView = inflater.inflate(R.layout.activity_news_details, container, false);
 		
 		Bundle bundle= getArguments(); 
 		article=(Article)bundle.getSerializable("article");
@@ -35,19 +35,10 @@ public class NewsDetailFragment extends Fragment {
 		super.onResume();
 		
 	}
-	 
-	 
-	 
 	 private void initUI(){
-		 titreArticle =  (TextView)rootView.findViewById(R.id.titre_article);
-		 imageArticle =  (ImageView)rootView.findViewById(R.id.image_article);
-		 corpsArticle =  (TextView)rootView.findViewById(R.id.corps_article);
-		 
-		 titreArticle.setText(article.getTitreFr());
-		 //corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
-		 corpsArticle.setText(article.getAuteur());
-		titreArticle.setText(article.getTitreFr());
-		corpsArticle.setText(Html.fromHtml(article.getContenuFr()), TextView.BufferType.SPANNABLE);
+		 webview =  (WebView)rootView.findViewById(R.id.article_detail);
+		 webview.getSettings().setJavaScriptEnabled(true);
+		 webview.loadDataWithBaseURL(null, article.getContenuFr(), "text/html", "utf-8", null);
 	 }
 
 }
