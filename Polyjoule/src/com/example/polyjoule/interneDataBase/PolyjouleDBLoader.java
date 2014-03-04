@@ -72,7 +72,7 @@ public class PolyjouleDBLoader {
 			ContentValues newValue = new ContentValues();
 			newValue.put(Requetes.DATABASE_ALBUM_ID,album.getId());
 			newValue.put(Requetes.DATABASE_ALBUM_NOM,album.getNom());
-			newValue.put(Requetes.DATABASE_ALBUM_DATE, Tools.parseDateToString(album.getDate()));
+			newValue.put(Requetes.DATABASE_ALBUM_DATE, Tools.parseCalendarToString(album.getDate()));
 			newValue.put(Requetes.DATABASE_ALBUM_DESCFR,album.getDescriptionFR());
 			newValue.put(Requetes.DATABASE_ALBUM_DESCEN, album.getDescriptionEN());
 
@@ -98,7 +98,7 @@ public class PolyjouleDBLoader {
 			newValue.put(Requetes.DATABASE_ARTICLE_CONTENUEN,artcl.getContenuEng());
 			newValue.put(Requetes.DATABASE_ARTICLE_AUTORISATIONCOM, Tools.parseBooleanToInt(artcl.isCommentaireAutorise()));
 			newValue.put(Requetes.DATABASE_ARTICLE_STATUT,Tools.parseBooleanToInt(artcl.isStatutArticle()));
-			newValue.put(Requetes.DATABASE_ARTICLE_DATE, Tools.parseDateToString(artcl.getDateCreation()));
+			newValue.put(Requetes.DATABASE_ARTICLE_DATE, Tools.parseCalendarToString(artcl.getDateCreation()));
 			newValue.put(Requetes.DATABASE_ARTICLE_PHOTO,artcl.getUrlPhotoPrincipale());
 
 			if( db.insert(Requetes.DATABASE_ARTICLE, null, newValue) == -1) throw new LoadingErrorException("erreur chargement article");
@@ -115,7 +115,7 @@ public class PolyjouleDBLoader {
 			ContentValues newValue = new ContentValues();
 			newValue.put(Requetes.DATABASE_COMMENTAIRE_ID,comm.getId());
 			newValue.put(Requetes.DATABASE_COMMENTAIRE_ARTICLE,comm.getArticle().getIdArticle());
-			newValue.put(Requetes.DATABASE_COMMENTAIRE_DATE, Tools.parseDateToString(comm.getDate()));
+			newValue.put(Requetes.DATABASE_COMMENTAIRE_DATE, Tools.parseCalendarToString(comm.getDate()));
 			newValue.put(Requetes.DATABASE_COMMENTAIRE_POSTEUR,comm.getAuteur());
 			newValue.put(Requetes.DATABASE_COMMENTAIRE_MAIL, comm.getMail());
 			newValue.put(Requetes.DATABASE_COMMENTAIRE_MESSAGE, comm.getMessage());
@@ -133,7 +133,7 @@ public class PolyjouleDBLoader {
 			ContentValues newValue = new ContentValues();
 			newValue.put(Requetes.DATABASE_COURSE_ID,course.getId());
 			newValue.put(Requetes.DATABASE_COURSE_EQUIPE,course.getEquipe().getId());
-			newValue.put(Requetes.DATABASE_COURSE_DATE, Tools.parseDateToString(course.getDate()));
+			newValue.put(Requetes.DATABASE_COURSE_DATE, Tools.parseCalendarToString(course.getDate()));
 			newValue.put(Requetes.DATABASE_COURSE_LIEU,course.getLieu());
 			newValue.put(Requetes.DATABASE_COURSE_IMG, course.getImageURL());
 			newValue.put(Requetes.DATABASE_COURSE_DESCFR, course.getDescriptionFR());
@@ -207,7 +207,7 @@ public class PolyjouleDBLoader {
 			newValue.put(Requetes.DATABASE_LIVREOR_ID,livre.getId());
 			newValue.put(Requetes.DATABASE_LIVREOR_POSTEUR,livre.getAuteur());
 			newValue.put(Requetes.DATABASE_LIVREOR_MAIL,livre.getMail());
-			newValue.put(Requetes.DATABASE_LIVREOR_DATE,Tools.parseDateToString(livre.getDate()));
+			newValue.put(Requetes.DATABASE_LIVREOR_DATE,Tools.parseCalendarToString(livre.getDate()));
 			newValue.put(Requetes.DATABASE_LIVREOR_MESSAGE,livre.getMessage());
 			newValue.put(Requetes.DATABASE_LIVREOR_ACCEPTED,livre.isAccepted());
 
@@ -271,7 +271,7 @@ public class PolyjouleDBLoader {
 			newValue.put(Requetes.DATABASE_PHOTO_TITREFR,photo.getTitreFR());
 			newValue.put(Requetes.DATABASE_PHOTO_TITREEN,photo.getTitreEN());
 			newValue.put(Requetes.DATABASE_PHOTO_LIEN,photo.getPhotoURL());
-			newValue.put(Requetes.DATABASE_PHOTO_DATE,Tools.parseDateToString(photo.getPhotoDate()));
+			newValue.put(Requetes.DATABASE_PHOTO_DATE,Tools.parseCalendarToString(photo.getPhotoDate()));
 			newValue.put(Requetes.DATABASE_PHOTO_DESCFR,photo.getDescriptionFR());
 			newValue.put(Requetes.DATABASE_PHOTO_DESCEN,photo.getDescriptionEN());
 

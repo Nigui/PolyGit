@@ -39,6 +39,8 @@ public class NewsFragment extends ListFragment {
 		
 		//Activer lorsqu'on est connecter au wifi de poly
 		listArticle = new ArrayList<Article>();
+		
+		
 		listArticle = DataBaseGetters.getArticlesFromDB();
 		
 		headerArticle = listArticle.get(0);
@@ -55,10 +57,10 @@ public class NewsFragment extends ListFragment {
 			this.headerTitleText = (TextView) rootView.findViewById(R.id.news_header_title);
 			this.headerTitleText.setText(headerArticle.getTitreFr());
 			this.headerDateText = (TextView) rootView.findViewById(R.id.news_header_date);
-			String date = Tools.transformToSimpleDate(headerArticle.getDateCreation());
+			String date = Tools.transformCalendarToSimpleString(headerArticle.getDateCreation());
 			this.headerDateText.setText(date);
 			this.headerContentText = (TextView) rootView.findViewById(R.id.news_header_content);
-			this.headerContentText.setText(Html.fromHtml(headerArticle.getContenuFr()));
+			this.headerContentText.setText(Html.fromHtml(headerArticle.getContenuFr()).toString().trim());
 			
 			
 	 		NewsListener articleListener = new NewsListener(this);

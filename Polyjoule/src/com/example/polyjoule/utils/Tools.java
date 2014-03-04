@@ -1,15 +1,11 @@
 package com.example.polyjoule.utils;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class Tools {
 
-	public static Date parseStringToDate(String date){
-		Date ret = new Date();
+	public static Calendar parseStringToCalendar(String date){
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeZone(TimeZone.getTimeZone("GMT+1"));
 		
@@ -33,23 +29,23 @@ public class Tools {
 		minute = Integer.parseInt(hourArray[1].trim());
 		second = Integer.parseInt(hourArray[2].trim());
 		
-		cal.set(Calendar.HOUR, hour);
+		cal.set(Calendar.HOUR_OF_DAY, hour);
 		cal.set(Calendar.MINUTE, minute);
 		cal.set(Calendar.SECOND, second);
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.MONTH, month);
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		
-		return cal.getTime();
+		System.out.println(cal.getTime().toString());
+		
+		
+		return cal;
 	}
 
 	
-	public static String parseDateToString(Date date){
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeZone(TimeZone.getTimeZone("GMT+1"));
-		cal.setTime(date);
+	public static String parseCalendarToString(Calendar date){
 		
-		return cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.DAY_OF_MONTH)+"-"+cal.get(Calendar.MONTH)+" "+cal.get(Calendar.HOUR)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
+		return date.get(Calendar.YEAR)+"-"+date.get(Calendar.DAY_OF_MONTH)+"-"+date.get(Calendar.MONTH)+" "+date.get(Calendar.HOUR_OF_DAY)+":"+date.get(Calendar.MINUTE)+":"+date.get(Calendar.SECOND);
 	}
 
 	public static int parseBooleanToInt(boolean b){
@@ -60,17 +56,14 @@ public class Tools {
 		return i == 0 ? false : true;
 	}
 	
-	public static String transformToSimpleDate(Date date){
+	public static String transformCalendarToSimpleString(Calendar date){
+		
 		String ret = "le ";
-		Calendar cal = Calendar.getInstance();
-
-		cal.setTimeZone(TimeZone.getTimeZone("GMT+1"));
-		cal.setTime(date);
 		
-		ret += cal.get(Calendar.DAY_OF_MONTH);
+		ret += date.get(Calendar.DAY_OF_MONTH);
 		
 		
-		switch( cal.get(Calendar.MONTH) )
+		switch( date.get(Calendar.MONTH) )
 		{
 			case 1 : ret+= " Janvier ";break;
 			case 2 : ret+= " Février ";break;
@@ -86,11 +79,12 @@ public class Tools {
 			case 12 : ret+= " Décembre ";break;
 			default : ret+= " ";break;
 		}
-		ret+= cal.get(Calendar.YEAR);
+		ret+= date.get(Calendar.YEAR);
 		
-		ret+=" à "+cal.get(Calendar.HOUR)+":"+cal.get(Calendar.MINUTE);
+		ret+=" à "+date.get(Calendar.HOUR_OF_DAY)+":"+date.get(Calendar.MINUTE);
 		
 		
 		return ret;
 	}
+
 }

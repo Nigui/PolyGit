@@ -1,5 +1,6 @@
 package com.example.polyjoule.DBObjects;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Photo {
@@ -9,13 +10,14 @@ public class Photo {
 	private String titreFR;
 	private String titreEN;
 	private String photoURL;
-	private Date photoDate;
+	private Calendar photoDate;
 	private String descriptionFR;
 	private String descriptionEN;
 	
+
 	//------ Constructeurs
 	public Photo(int id, Album album, String titreFR, String titreEN,
-			String photoURL, Date photoDate, String descriptionFR,
+			String photoURL, Calendar photoDate, String descriptionFR,
 			String descriptionEN) {
 		super();
 		this.id = id;
@@ -63,10 +65,10 @@ public class Photo {
 	public void setPhotoURL(String photoURL) {
 		this.photoURL = photoURL;
 	}
-	public Date getPhotoDate() {
+	public Calendar getPhotoDate() {
 		return photoDate;
 	}
-	public void setPhotoDate(Date photoDate) {
+	public void setPhotoDate(Calendar photoDate) {
 		this.photoDate = photoDate;
 	}
 	public String getDescriptionFR() {

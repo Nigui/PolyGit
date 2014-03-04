@@ -68,7 +68,7 @@ public class PolyjouleDBRequetes {
 				Album a = new Album();
 				a.setId(this.cursor.getInt(id));
 				a.setNom(this.cursor.getString(nom));
-				a.setDate(Tools.parseStringToDate(this.cursor.getString(date)));
+				a.setDate(Tools.parseStringToCalendar(this.cursor.getString(date)));
 				a.setDescriptionFR(this.cursor.getString(descFR));
 				a.setDescriptionEN(this.cursor.getString(descEN));
 				
@@ -120,7 +120,7 @@ public class PolyjouleDBRequetes {
 				a.setContenuEng(this.cursor.getString(contenuEN));
 				a.setCommentaireAutorise(Tools.parseIntToBoolean(this.cursor.getInt(autoriseCom)));
 				a.setStatutArticle(Tools.parseIntToBoolean(this.cursor.getInt(statut)));
-				a.setDateCreation(Tools.parseStringToDate(this.cursor.getString(date)));
+				a.setDateCreation(Tools.parseStringToCalendar(this.cursor.getString(date)));
 				a.setUrlPhotoPrincipale(this.cursor.getString(photo));
 				
 				ret.add(a);
@@ -154,7 +154,7 @@ public class PolyjouleDBRequetes {
 				Commentaire a = new Commentaire();
 				a.setId(this.cursor.getInt(id));
 				//a.setNom(this.cursor.getString(art));
-				a.setDate(Tools.parseStringToDate(this.cursor.getString(date)));
+				a.setDate(Tools.parseStringToCalendar(this.cursor.getString(date)));
 				a.setAuteur(this.cursor.getString(posteur));
 				a.setMail(this.cursor.getString(mail));
 				a.setMessage(this.cursor.getString(message));
@@ -192,7 +192,7 @@ public class PolyjouleDBRequetes {
 				Course a = new Course();
 				a.setId(this.cursor.getInt(id));
 				//a.setEquipe(this.cursor.getString(eq));
-				a.setDate(Tools.parseStringToDate(this.cursor.getString(date)));
+				a.setDate(Tools.parseStringToCalendar(this.cursor.getString(date)));
 				a.setLieu(this.cursor.getString(lieu));
 				a.setImageURL(this.cursor.getString(img));
 				a.setDescriptionFR(this.cursor.getString(descFR));
@@ -329,7 +329,7 @@ public class PolyjouleDBRequetes {
 				a.setId(this.cursor.getInt(id));
 				a.setAuteur(this.cursor.getString(post));
 				a.setMail(this.cursor.getString(mail));
-				a.setDate(Tools.parseStringToDate(this.cursor.getString(date)));
+				a.setDate(Tools.parseStringToCalendar(this.cursor.getString(date)));
 				a.setMessage(this.cursor.getString(mess));
 				a.setAccepted(Tools.parseIntToBoolean(this.cursor.getInt(acc)));
 				
@@ -451,7 +451,7 @@ public class PolyjouleDBRequetes {
 				a.setTitreFR(this.cursor.getString(titreFR));
 				a.setTitreEN(this.cursor.getString(titreEN));
 				a.setPhotoURL(this.cursor.getString(lien));
-				a.setPhotoDate(Tools.parseStringToDate(this.cursor.getString(date)));
+				a.setPhotoDate(Tools.parseStringToCalendar(this.cursor.getString(date)));
 				a.setDescriptionFR(this.cursor.getString(descFR));
 				a.setDescriptionEN(this.cursor.getString(descEN));
 				

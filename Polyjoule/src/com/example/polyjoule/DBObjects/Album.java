@@ -1,26 +1,28 @@
 package com.example.polyjoule.DBObjects;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Album {
 
 	private int id;
 	private String nom;
-	private Date date;
+	private Calendar date;
 	private String descriptionFR;
 	private String descriptionEN;
 	private ArrayList<Photo> listePhotos;
 	
 	//------ Constructeurs
-	public Album(int id, String nom, Date date, String descriptionFR,
-			String descriptionEN) {
+	public Album(int id, String nom, Calendar date, String descriptionFR,
+			String descriptionEN, ArrayList<Photo> listePhotos) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.date = date;
 		this.descriptionFR = descriptionFR;
 		this.descriptionEN = descriptionEN;
+		this.listePhotos = listePhotos;
 	}
 	public Album() {
 		super();
@@ -40,11 +42,17 @@ public class Album {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
+	}
+	public ArrayList<Photo> getListePhotos() {
+		return listePhotos;
+	}
+	public void setListePhotos(ArrayList<Photo> listePhotos) {
+		this.listePhotos = listePhotos;
 	}
 	public String getDescriptionFR() {
 		return descriptionFR;

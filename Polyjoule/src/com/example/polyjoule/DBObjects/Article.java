@@ -1,6 +1,7 @@
 package com.example.polyjoule.DBObjects;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Article implements Serializable{
@@ -13,20 +14,21 @@ public class Article implements Serializable{
 	private String contenuEng;
 	private boolean commentaireAutorise;
 	private boolean statutArticle;
-	private Date dateCreation;
+	private Calendar dateCreation;
 	private String urlPhotoPrincipale;
 	private boolean visibleHome;
 	private boolean mainArticle;
 	private ArrayList<Partenaire> partenaires;
 	private ArrayList<Commentaire> commentaires;
 	private Rubrique rubrique;
-	
+
 	//------ Constructeurs
 	public Article(int idArticle, String auteur, String titreFr,
 			String titreEn, String contenuFr, String contenuEng,
 			boolean commentaireAutorise, boolean statutArticle,
-			Date dateCreation, String urlPhotoPrincipale, boolean visibleHome,
-			boolean mainArticle, ArrayList<Partenaire> partenaires,
+			Calendar dateCreation, String urlPhotoPrincipale,
+			boolean visibleHome, boolean mainArticle,
+			ArrayList<Partenaire> partenaires,
 			ArrayList<Commentaire> commentaires, Rubrique rubrique) {
 		super();
 		this.idArticle = idArticle;
@@ -131,17 +133,14 @@ public class Article implements Serializable{
 		this.statutArticle = statutArticle;
 	}
 
-
-	public Date getDateCreation() {
+	public Calendar getDateCreation() {
 		return dateCreation;
 	}
-
-
-	public void setDateCreation(Date dateCreation) {
+	
+	public void setDateCreation(Calendar dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-
-
+	
 	public String getUrlPhotoPrincipale() {
 		return urlPhotoPrincipale;
 	}

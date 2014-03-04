@@ -1,6 +1,8 @@
 package com.example.polyjoule.externeDataBase;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
@@ -49,7 +51,7 @@ public class DataBaseGetters {
 					
 					tmpAlbum.setId(json_data.getInt(Requetes.DATABASE_ALBUM_ID));
 					tmpAlbum.setNom(json_data.getString(Requetes.DATABASE_ALBUM_NOM));
-					tmpAlbum.setDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_ALBUM_DATE)));
+					tmpAlbum.setDate(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_ALBUM_DATE)));
 					tmpAlbum.setDescriptionFR(json_data.getString(Requetes.DATABASE_ALBUM_DESCFR));
 					tmpAlbum.setDescriptionEN(json_data.getString(Requetes.DATABASE_ALBUM_DESCEN));
 					
@@ -84,11 +86,22 @@ public class DataBaseGetters {
 					tmpArticle.setContenuEng(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUEN));
 					tmpArticle.setCommentaireAutorise(json_data.getBoolean(Requetes.DATABASE_ARTICLE_AUTORISATIONCOM));
 					tmpArticle.setStatutArticle(json_data.getBoolean(Requetes.DATABASE_ARTICLE_STATUT));
-					tmpArticle.setDateCreation(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_ARTICLE_DATE)));
+					tmpArticle.setDateCreation(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_ARTICLE_DATE)));
 					tmpArticle.setUrlPhotoPrincipale(json_data.getString(Requetes.DATABASE_ARTICLE_PHOTO));
 					
 					ret.add(tmpArticle);
 			}
+			/** trie le tableau d'articles **/
+			Collections.sort(ret, new Comparator<Article>() {
+				@Override
+				public int compare(Article lhs, Article rhs) {
+					
+					int ret = lhs.getDateCreation().compareTo(rhs.getDateCreation());
+					if( ret < 0 ) return 1;
+					else if( ret > 0 ) return -1;
+					return ret;
+				}
+		    });
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
@@ -107,7 +120,7 @@ public class DataBaseGetters {
 					Commentaire tmpCommentaire = new Commentaire();
 					tmpCommentaire.setId(json_data.getInt(Requetes.DATABASE_COMMENTAIRE_ID));
 					//tmpCommentaire.set(json_data.getString(Requetes.DATABASE_COMMENTAIRE_ARTICLE));
-					tmpCommentaire.setDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_COMMENTAIRE_DATE)));
+					tmpCommentaire.setDate(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_COMMENTAIRE_DATE)));
 					tmpCommentaire.setAuteur(json_data.getString(Requetes.DATABASE_COMMENTAIRE_POSTEUR));
 					tmpCommentaire.setMail(json_data.getString(Requetes.DATABASE_COMMENTAIRE_MAIL));
 					tmpCommentaire.setMessage(json_data.getString(Requetes.DATABASE_COMMENTAIRE_MESSAGE));
@@ -132,7 +145,7 @@ public class DataBaseGetters {
 					Course tmpCourse = new Course();
 					tmpCourse.setId(json_data.getInt(Requetes.DATABASE_COURSE_ID));
 					//tmpCommentaire.set(json_data.getString(Requetes.DATABASE_COURSE_EQUIPE));
-					tmpCourse.setDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_COURSE_DATE)));
+					tmpCourse.setDate(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_COURSE_DATE)));
 					tmpCourse.setLieu(json_data.getString(Requetes.DATABASE_COURSE_LIEU));
 					tmpCourse.setImageURL(json_data.getString(Requetes.DATABASE_COURSE_IMG));
 					tmpCourse.setDescriptionFR(json_data.getString(Requetes.DATABASE_COURSE_DESCFR));
@@ -230,7 +243,7 @@ public class DataBaseGetters {
 					tmpLivreOr.setId(json_data.getInt(Requetes.DATABASE_LIVREOR_ID));
 					tmpLivreOr.setAuteur(json_data.getString(Requetes.DATABASE_LIVREOR_POSTEUR));
 					tmpLivreOr.setMail(json_data.getString(Requetes.DATABASE_LIVREOR_MAIL));
-					tmpLivreOr.setDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_LIVREOR_DATE)));
+					tmpLivreOr.setDate(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_LIVREOR_DATE)));
 					tmpLivreOr.setMessage(json_data.getString(Requetes.DATABASE_LIVREOR_MESSAGE));
 					tmpLivreOr.setAccepted(Tools.parseIntToBoolean(json_data.getInt(Requetes.DATABASE_LIVREOR_ACCEPTED)));
 					
@@ -331,7 +344,7 @@ public class DataBaseGetters {
 				tmpPhoto.setTitreFR(json_data.getString(Requetes.DATABASE_PHOTO_TITREFR));
 				tmpPhoto.setTitreEN(json_data.getString(Requetes.DATABASE_PHOTO_TITREEN));
 				tmpPhoto.setPhotoURL(json_data.getString(Requetes.DATABASE_PHOTO_LIEN));
-				tmpPhoto.setPhotoDate(Tools.parseStringToDate(json_data.getString(Requetes.DATABASE_PHOTO_DATE)));
+				tmpPhoto.setPhotoDate(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_PHOTO_DATE)));
 				tmpPhoto.setDescriptionFR(json_data.getString(Requetes.DATABASE_PHOTO_DESCFR));
 				tmpPhoto.setDescriptionEN(json_data.getString(Requetes.DATABASE_PHOTO_DESCEN));
 				

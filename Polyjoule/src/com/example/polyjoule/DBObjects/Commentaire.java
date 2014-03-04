@@ -1,18 +1,19 @@
 package com.example.polyjoule.DBObjects;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Commentaire {
 
 	private int id;
-	private Date date;
+	private Calendar date;
 	private String auteur;
 	private String mail;
 	private String message;
 	private Article article;
 	
 	//------ Constructeurs
-	public Commentaire(int id, Date date, String auteur, String mail,
+	public Commentaire(int id, Calendar date, String auteur, String mail,
 			String message, Article article) {
 		super();
 		this.id = id;
@@ -32,10 +33,10 @@ public class Commentaire {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 	public String getAuteur() {

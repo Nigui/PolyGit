@@ -94,9 +94,10 @@ public class NewsAdapter extends BaseAdapter {
 		
 		itemHolder.titleView.setText(articles.get(position).getTitreFr());
 		//parse date en string
-		String date = Tools.transformToSimpleDate(articles.get(position).getDateCreation());
+		String date = Tools.transformCalendarToSimpleString(articles.get(position).getDateCreation());
 		itemHolder.dateView.setText(date);
-		itemHolder.textView.setText(Html.fromHtml(articles.get(position).getContenuFr()));
+		
+		itemHolder.textView.setText(Html.fromHtml(articles.get(position).getContenuFr()).toString().trim());
 		
 		return convertView;
 	}	

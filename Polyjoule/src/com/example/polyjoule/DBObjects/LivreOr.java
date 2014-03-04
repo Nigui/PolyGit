@@ -1,5 +1,6 @@
 package com.example.polyjoule.DBObjects;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class LivreOr {
@@ -7,13 +8,13 @@ public class LivreOr {
 	private int id;
 	private String auteur;
 	private String mail;
-	private Date date;
+	private Calendar date;
 	private String message;
 	private boolean accepted;
 	
 	
 	//------ Constructeurs
-	public LivreOr(int id, String auteur, String mail, Date date,
+	public LivreOr(int id, String auteur, String mail, Calendar date,
 			String message, boolean accepted) {
 		super();
 		this.id = id;
@@ -47,10 +48,10 @@ public class LivreOr {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 	public String getMessage() {

@@ -1,23 +1,24 @@
 package com.example.polyjoule.DBObjects;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Course {
 
 	private int id;
 	private Equipe equipe;
-	private Date date;
+	private Calendar date;
 	private String lieu;
 	private String imageURL;
 	private String descriptionFR;
 	private String descriptionEN;
 	
 	//------ Constructeurs
-	public Course(int id, Equipe id_equipe, Date date, String lieu,
+	public Course(int id, Equipe equipe, Calendar date, String lieu,
 			String imageURL, String descriptionFR, String descriptionEN) {
 		super();
 		this.id = id;
-		this.equipe = id_equipe;
+		this.equipe = equipe;
 		this.date = date;
 		this.lieu = lieu;
 		this.imageURL = imageURL;
@@ -43,10 +44,10 @@ public class Course {
 	public void setEquipe(Equipe equipe) {
 		this.equipe = equipe;
 	}
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 	public String getLieu() {
