@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.polyjoule.R;
+import com.polyjoule.application.R;
 import com.example.polyjoule.DBObjects.Article;
 
 public class NewsDetailFragment extends Fragment {

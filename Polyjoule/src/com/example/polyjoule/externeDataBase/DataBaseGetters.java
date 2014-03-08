@@ -66,12 +66,19 @@ public class DataBaseGetters {
 
 	/**
 	 * Recupere tout les articles de la BDD et les renvois sous forme de liste
+	 * nb, nombre d'objet à récupérer, -1 == all
 	 * @return
 	 */
-	public static ArrayList<Article> getArticlesFromDB()
+	public static ArrayList<Article> getArticlesFromDB(int nb)
 	{
 		ArrayList<Article> ret = new ArrayList<Article>();
-		String querry = "SELECT * FROM ARTICLE";
+		String querry = "SELECT * FROM ARTICLE ORDER BY "+Requetes.DATABASE_ARTICLE_DATE+" DESC ";
+		String nbObjects = "LIMIT ";
+		if( nb == -1 ) nbObjects = "";
+		else nbObjects += String.valueOf(nb);
+		
+		querry += nbObjects;
+		
 		try{ 
 			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
 			for(int i=0;i<resultArray.length();i++){
@@ -91,17 +98,6 @@ public class DataBaseGetters {
 					
 					ret.add(tmpArticle);
 			}
-			/** trie le tableau d'articles **/
-			Collections.sort(ret, new Comparator<Article>() {
-				@Override
-				public int compare(Article lhs, Article rhs) {
-					
-					int ret = lhs.getDateCreation().compareTo(rhs.getDateCreation());
-					if( ret < 0 ) return 1;
-					else if( ret > 0 ) return -1;
-					return ret;
-				}
-		    });
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());

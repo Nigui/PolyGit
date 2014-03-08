@@ -21,6 +21,8 @@ public class Article implements Serializable{
 	private ArrayList<Partenaire> partenaires;
 	private ArrayList<Commentaire> commentaires;
 	private Rubrique rubrique;
+	
+	private final String imageBDDUrl = "http://www.polyjoule.org/administration/ressources/data/Photo/";
 
 	//------ Constructeurs
 	public Article(int idArticle, String auteur, String titreFr,
@@ -147,7 +149,7 @@ public class Article implements Serializable{
 
 
 	public void setUrlPhotoPrincipale(String urlPhotoPrincipale) {
-		this.urlPhotoPrincipale = urlPhotoPrincipale;
+		this.urlPhotoPrincipale = this.imageBDDUrl+urlPhotoPrincipale;
 	}
 
 

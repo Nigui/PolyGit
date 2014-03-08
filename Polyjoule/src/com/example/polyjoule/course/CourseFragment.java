@@ -1,6 +1,6 @@
 package com.example.polyjoule.course;
 
-import com.example.polyjoule.R;
+import com.polyjoule.application.R;
 
 import android.app.Activity;
 import android.os.Bundle;

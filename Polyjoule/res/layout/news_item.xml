@@ -10,8 +10,7 @@
         android:layout_width="@dimen/ItemImageWidth"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:contentDescription="@string/defaultImage"
-        android:src="@drawable/item_image" />
+        android:contentDescription="@string/defaultImage"/>
    
 	<LinearLayout
 	        android:layout_width="match_parent"

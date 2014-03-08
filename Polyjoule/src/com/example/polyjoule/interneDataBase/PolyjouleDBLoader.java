@@ -39,7 +39,7 @@ public class PolyjouleDBLoader {
 	public boolean loadDB(){
 		
 		try{
-			loadDBArticles();
+			loadDBArticles(-1);
 			loadDBAlbums();
 			loadDBCommentaires();
 			loadDBCourses();
@@ -80,10 +80,10 @@ public class PolyjouleDBLoader {
 		}
 	}
 	
-	private void loadDBArticles() throws LoadingErrorException{
+	private void loadDBArticles(int nb) throws LoadingErrorException{
 		
 		//Recupere la liste des articles depuis la base sur internet
-		ArrayList<Article> listeArticle = DataBaseGetters.getArticlesFromDB();
+		ArrayList<Article> listeArticle = DataBaseGetters.getArticlesFromDB(nb);
 		
 		//Importe chaques lignes dans la base interne
 		for(Article artcl : listeArticle ){

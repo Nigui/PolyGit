@@ -17,12 +17,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.course.CourseFragment;
 import com.example.polyjoule.course.EduEcoFragment;
 import com.example.polyjoule.news.NewsDetailFragment;
 import com.example.polyjoule.news.NewsFragment;
+import com.polyjoule.application.R;
 
 public class MainActivity extends ActionBarActivity {
 	private DrawerLayout mDrawerLayout;
@@ -232,7 +232,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	/*
-	 * Méthode qui lance un fragment news avec article passé en paramètre
+	 * M��thode qui lance un fragment news avec article pass�� en param��tre
 	 */
 	public void changeFragmentNews(Article article){
 		

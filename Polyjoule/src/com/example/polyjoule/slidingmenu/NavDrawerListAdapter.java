@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.polyjoule.R;
+import com.polyjoule.application.R;
 
 public class NavDrawerListAdapter extends BaseAdapter {
 	

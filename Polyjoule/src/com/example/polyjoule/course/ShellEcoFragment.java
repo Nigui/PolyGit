@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.polyjoule.R;
+import com.polyjoule.application.R;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.DBObjects.Rubrique;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;

@@ -2,7 +2,6 @@ package com.example.polyjoule.news;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.polyjoule.R;
 import com.example.polyjoule.DBObjects.Article;
+import com.example.polyjoule.utils.ImageDownloaderTask;
 import com.example.polyjoule.utils.Tools;
+import com.polyjoule.application.R;
 
 public class NewsAdapter extends BaseAdapter {
 
@@ -72,6 +72,7 @@ public class NewsAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
 		ItemHolder itemHolder;
+		Article art = articles.get(position);
 		
 		if(convertView==null){
 			
@@ -92,12 +93,16 @@ public class NewsAdapter extends BaseAdapter {
 			itemHolder= (ItemHolder)convertView.getTag();
 		}
 		
-		itemHolder.titleView.setText(articles.get(position).getTitreFr());
+		itemHolder.titleView.setText(art.getTitreFr());
 		//parse date en string
-		String date = Tools.transformCalendarToSimpleString(articles.get(position).getDateCreation());
+		String date = Tools.transformCalendarToSimpleString(art.getDateCreation());
 		itemHolder.dateView.setText(date);
 		
-		itemHolder.textView.setText(Html.fromHtml(articles.get(position).getContenuFr()).toString().trim());
+		itemHolder.textView.setText(Html.fromHtml(art.getContenuFr()).toString().trim());
+		
+		if( itemHolder.imageView != null ){
+			new ImageDownloaderTask(itemHolder.imageView).execute(art.getUrlPhotoPrincipale());
+		}
 		
 		return convertView;
 	}	

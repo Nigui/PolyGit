@@ -12,10 +12,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.polyjoule.R;
+import com.polyjoule.application.R;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;
 import com.example.polyjoule.slidingmenu.MainActivity;
+import com.example.polyjoule.utils.ImageDownloaderTask;
 import com.example.polyjoule.utils.Tools;
 
 public class NewsFragment extends ListFragment {
@@ -41,7 +42,7 @@ public class NewsFragment extends ListFragment {
 		listArticle = new ArrayList<Article>();
 		
 		
-		listArticle = DataBaseGetters.getArticlesFromDB();
+		listArticle = DataBaseGetters.getArticlesFromDB(10);
 		
 		headerArticle = listArticle.get(0);
 		
@@ -62,6 +63,7 @@ public class NewsFragment extends ListFragment {
 			this.headerContentText = (TextView) rootView.findViewById(R.id.news_header_content);
 			this.headerContentText.setText(Html.fromHtml(headerArticle.getContenuFr()).toString().trim());
 			
+			new ImageDownloaderTask(this.headerImageView).execute(headerArticle.getUrlPhotoPrincipale());
 			
 	 		NewsListener articleListener = new NewsListener(this);
 			setListAdapter(new NewsAdapter(this,listArticle));

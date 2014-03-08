@@ -1,6 +1,6 @@
 package com.example.polyjoule.live;
 
-import com.example.polyjoule.R;
+import com.polyjoule.application.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
