@@ -12,16 +12,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.polyjoule.application.R;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;
 import com.example.polyjoule.slidingmenu.MainActivity;
-import com.example.polyjoule.utils.ImageDownloaderTask;
 import com.example.polyjoule.utils.Tools;
+import com.polyjoule.application.R;
+import com.xtremelabs.imageutils.ImageLoader;
+import com.xtremelabs.imageutils.ImageRequest;
 
 public class NewsFragment extends ListFragment {
 	
-	private Article currentArticle;
 	private ArrayList<Article> listArticle;
 	private Article headerArticle;
 	
@@ -31,6 +31,7 @@ public class NewsFragment extends ListFragment {
 	private TextView headerDateText;
 	private TextView headerContentText;
 	
+	private ImageLoader mImageLoader;
 	
 	 @Override
 	 public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class NewsFragment extends ListFragment {
 		//Activer lorsqu'on est connecter au wifi de poly
 		listArticle = new ArrayList<Article>();
 		
+		mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
 		
 		listArticle = DataBaseGetters.getArticlesFromDB(10);
 		
@@ -63,20 +65,31 @@ public class NewsFragment extends ListFragment {
 			this.headerContentText = (TextView) rootView.findViewById(R.id.news_header_content);
 			this.headerContentText.setText(Html.fromHtml(headerArticle.getContenuFr()).toString().trim());
 			
-			new ImageDownloaderTask(this.headerImageView).execute(headerArticle.getUrlPhotoPrincipale());
+			//new ImageDownloaderTask(this.headerImageView).execute(headerArticle.getUrlPhotoPrincipale());
+			ImageRequest request = new ImageRequest(headerArticle.getUrlPhotoPrincipale());
+			request.setImageView(this.headerImageView);
+			mImageLoader.loadImage(request);
 			
 	 		NewsListener articleListener = new NewsListener(this);
-			setListAdapter(new NewsAdapter(this,listArticle));
+			setListAdapter(new NewsAdapter(this,listArticle,mImageLoader));
 			
 	        return rootView;
 	}
 	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		mImageLoader.destroy();
+	}
+
 	/**
 	 * Implemetation of onResume.
 	 */
 	public void onResume() {
 		super.onResume();
-		setListAdapter(new NewsAdapter(this,listArticle));
+		setListAdapter(new NewsAdapter(this,listArticle,mImageLoader));
 		
 	}
 

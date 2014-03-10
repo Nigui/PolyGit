@@ -1,8 +1,22 @@
 package com.example.polyjoule.news;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.StrictMode;
+import android.os.StrictMode.ThreadPolicy;
 import android.text.Html;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +25,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.polyjoule.DBObjects.Article;
-import com.example.polyjoule.utils.ImageDownloaderTask;
 import com.example.polyjoule.utils.Tools;
 import com.polyjoule.application.R;
+import com.xtremelabs.imageutils.AdapterImagesAssistant;
+import com.xtremelabs.imageutils.AdapterImagesAssistant.PrecacheInformationProvider;
+import com.xtremelabs.imageutils.Dimensions;
+import com.xtremelabs.imageutils.ImageLoader;
+import com.xtremelabs.imageutils.ImageLoader.Options;
+import com.xtremelabs.imageutils.ImageLoaderListener;
+import com.xtremelabs.imageutils.ImageRequest;
+import com.xtremelabs.imageutils.ImageReturnedFrom;
+import com.xtremelabs.imageutils.PrecacheRequest;
 
 public class NewsAdapter extends BaseAdapter {
 
@@ -28,7 +50,16 @@ public class NewsAdapter extends BaseAdapter {
 	 */
 	private LayoutInflater layoutInflater;
 	
-	NewsFragment context;
+	private Context context;
+	
+	private ImageLoader imageloader;
+	private AdapterImagesAssistant mImagePrecacheAssistant;
+	
+	private final String IMAGE_URI;
+	private static final String IMAGE_FILE_NAME = "articleTmpImage.jpg";
+
+	private Dimensions mBounds;
+	private Options mOptions;
 	
 	
 	/**
@@ -36,10 +67,54 @@ public class NewsAdapter extends BaseAdapter {
 	 * @param newsActivity reference on newsActivity.
 	 * @param NewsList list of item to show on listView.
 	 */
-	public NewsAdapter(NewsFragment NewsFragment, ArrayList<Article> articleList) {
+	public NewsAdapter(NewsFragment newsFragment, ArrayList<Article> articleList,ImageLoader mloader) {
 		this.articles = new ArrayList<Article>(articleList);
 		this.articles.remove(0);
-		layoutInflater=NewsFragment.getLayoutInflater(null);
+		this.context = newsFragment.getActivity().getApplicationContext();
+		layoutInflater= LayoutInflater.from(context);
+		this.imageloader = mloader;
+		
+		IMAGE_URI = "file://" + context.getCacheDir() + File.separator + IMAGE_FILE_NAME;
+		
+		loadImageToFile();
+		
+		DisplayMetrics display = context.getResources().getDisplayMetrics();
+
+		Point size = new Point();
+		size.x = display.widthPixels;
+		size.y = display.heightPixels;
+		
+		mBounds = new Dimensions(size.x / 2, (int) ((size.x / 800f) * 200f));
+		mOptions = new Options();
+		mOptions.widthBounds = mBounds.width;
+		mOptions.heightBounds = mBounds.height;
+		
+		mImagePrecacheAssistant = new AdapterImagesAssistant(imageloader, new PrecacheInformationProvider() {
+			@Override
+			public int getCount() {
+				return NewsAdapter.this.getCount();
+			}
+
+			@Override
+			public List<String> getRequestsForDiskPrecache(int position) {
+				List<String> list = new ArrayList<String>();
+				// if (position % 2 == 0) {
+				list.add((String) getItem(position) + "1");
+				list.add((String) getItem(position) + "2");
+				return list;
+			}
+
+			@Override
+			public List<PrecacheRequest> getRequestsForMemoryPrecache(int position) {
+				List<PrecacheRequest> list = new ArrayList<PrecacheRequest>();
+				list.add(new PrecacheRequest((String) getItem(position) + "1", mOptions));
+				list.add(new PrecacheRequest((String) getItem(position) + "2", mOptions));
+				return list;
+			}
+		});
+		
+		mImagePrecacheAssistant.setMemCacheRange(5);
+		mImagePrecacheAssistant.setDiskCacheRange(10);
 	}
 
 	/**
@@ -47,7 +122,8 @@ public class NewsAdapter extends BaseAdapter {
 	 * @return size of news.
 	 */
 	public int getCount() {
-		return articles.size();
+		if( articles == null ) return 0;
+		else return articles.size();
 	}
 
 	/**
@@ -83,29 +159,63 @@ public class NewsAdapter extends BaseAdapter {
 			itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_title);
 			itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_list_date);
 			itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
-			itemHolder.titleBuilder= new StringBuilder();
-			itemHolder.dateBuilder=new StringBuilder();
-			itemHolder.textBuilder=new StringBuilder();
 			
 			convertView.setTag(itemHolder);
+			//setParams(itemHolder);
 		}
 		else{
 			itemHolder= (ItemHolder)convertView.getTag();
 		}
 		
+		/** Initialisation avec les données **/
+		/** titre **/
 		itemHolder.titleView.setText(art.getTitreFr());
-		//parse date en string
+		/** date **/
 		String date = Tools.transformCalendarToSimpleString(art.getDateCreation());
 		itemHolder.dateView.setText(date);
-		
+		/** contenu **/
 		itemHolder.textView.setText(Html.fromHtml(art.getContenuFr()).toString().trim());
+		/** image **/
+		Options o = new Options();
 		
-		if( itemHolder.imageView != null ){
-			new ImageDownloaderTask(itemHolder.imageView).execute(art.getUrlPhotoPrincipale());
-		}
+		ImageRequest request = new ImageRequest(itemHolder.imageView,art.getUrlPhotoPrincipale());
+		request.setImageLoaderListener(mListener);
+		request.setOptions(o);
+		mImagePrecacheAssistant.loadImage(request, position);
+		
+		/** fin initialisation **/
 		
 		return convertView;
 	}	
+	
+	private void loadImageToFile() {
+		StrictMode.setThreadPolicy(ThreadPolicy.LAX);
+		try {
+			URI uri = new URI(IMAGE_URI);
+			final File imageFile = new File(uri.getPath());
+			final FileOutputStream fos = new FileOutputStream(imageFile);
+			Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_twitter)).getBitmap();
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+		} catch (final FileNotFoundException e) {
+			throw new RuntimeException("Could not find kitteh.");
+		} catch (URISyntaxException e) {
+			throw new RuntimeException("Poorly named kitteh.");
+		}
+	}
+	
+	private void setParams(ItemHolder item) {
+		ViewGroup.LayoutParams params1 = item.imageView.getLayoutParams();
+
+
+		DisplayMetrics display = context.getResources().getDisplayMetrics();
+
+		Point size = new Point();
+		size.x = display.widthPixels;
+		size.y = display.heightPixels;
+
+		params1.width = size.x / 2;
+		params1.height = (int) ((size.x / 800f) * 200f);
+	}
 	
 	/**
 	 * Inner class use to save reference of News_item
@@ -126,19 +236,17 @@ public class NewsAdapter extends BaseAdapter {
 		 * Reference on R.id.News_version
 		 */
 		private TextView textView;
-		
-		
-		/**
-		 * Reference on  StringBuilder use to update titleView.
-		 */
-		private StringBuilder titleBuilder;
-		
-		private StringBuilder dateBuilder;
-		
-		/**
-		 * Reference on StringBuilder use to update textView.
-		 */
-		private StringBuilder textBuilder;
 	}
 
+	ImageLoaderListener mListener = new ImageLoaderListener() {
+		@Override
+		public void onImageLoadError(String error) {
+			Log.i("ImageLoader", "Image load failed! Message: " + error);
+		}
+
+		@Override
+		public void onImageAvailable(ImageView imageView, Bitmap bitmap, ImageReturnedFrom returnedFrom) {
+			imageView.setImageBitmap(bitmap);
+		}
+	};
 }
