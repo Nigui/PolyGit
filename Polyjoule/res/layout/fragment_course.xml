@@ -12,7 +12,7 @@
          android:layout_weight="0.3"
          android:paddingBottom="10dp"
          android:paddingTop="10dp"
-         android:src="@android:drawable/bottom_bar" />
+         android:src="@drawable/educeco" />
 
      <View
          android:layout_width="fill_parent"

@@ -20,6 +20,7 @@ import android.widget.ListView;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.course.CourseFragment;
 import com.example.polyjoule.course.EduEcoFragment;
+import com.example.polyjoule.course.ShellEcoFragment;
 import com.example.polyjoule.news.NewsDetailFragment;
 import com.example.polyjoule.news.NewsFragment;
 import com.polyjoule.application.R;
@@ -249,4 +250,20 @@ public class MainActivity extends ActionBarActivity {
 
 	}
 
+	public void changeFragmentCourse(int i){
+		
+		Fragment fragment = null;
+		
+		if(i == 1){
+			fragment = new EduEcoFragment();
+		}
+		else if(i == 2){
+			fragment = new ShellEcoFragment();
+		}
+		
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction()
+				.replace(R.id.frame_container, fragment).commit();
+
+}
 }
