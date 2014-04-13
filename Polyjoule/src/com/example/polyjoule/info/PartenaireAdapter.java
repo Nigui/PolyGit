@@ -1,4 +1,4 @@
-package com.example.polyjoule.news;
+package com.example.polyjoule.info;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,6 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
-import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,10 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.polyjoule.DBObjects.Article;
-import com.example.polyjoule.utils.Tools;
+import com.example.polyjoule.DBObjects.Partenaire;
 import com.polyjoule.application.R;
 import com.xtremelabs.imageutils.AdapterImagesAssistant;
 import com.xtremelabs.imageutils.AdapterImagesAssistant.PrecacheInformationProvider;
@@ -37,62 +34,62 @@ import com.xtremelabs.imageutils.ImageRequest;
 import com.xtremelabs.imageutils.ImageReturnedFrom;
 import com.xtremelabs.imageutils.PrecacheRequest;
 
-public class NewsAdapter extends BaseAdapter {
+public class PartenaireAdapter extends BaseAdapter {
 
-
+	
 	/**
 	 * List of news to shows.
 	 */
-	private ArrayList<Article> articles;
-
+	private ArrayList<Partenaire> articles;
+	
 	/**
 	 * Layout inflater of NewsActivity use to inflate News_item.
 	 */
 	private LayoutInflater layoutInflater;
-
+	
 	private Context context;
-
+	
 	private ImageLoader imageloader;
 	private AdapterImagesAssistant mImagePrecacheAssistant;
-
+	
 	private final String IMAGE_URI;
 	private static final String IMAGE_FILE_NAME = "articleTmpImage.jpg";
 
 	private Dimensions mBounds;
 	private Options mOptions;
-
-
+	
+	
 	/**
 	 * Constructor of NewsAdapter. news member is initialize with NewsList.
 	 * @param newsActivity reference on newsActivity.
 	 * @param NewsList list of item to show on listView.
 	 */
-	public NewsAdapter(NewsFragment newsFragment, ArrayList<Article> articleList,ImageLoader mloader) {
-		this.articles = new ArrayList<Article>(articleList);
-		this.articles.remove(0);
-		this.context = newsFragment.getActivity().getApplicationContext();
+	public PartenaireAdapter(PartenaireFragment partenaireFragment, ArrayList<Partenaire> articleList,ImageLoader mloader) {
+		
+		this.articles = articleList;
+		this.context = partenaireFragment.getActivity().getApplicationContext();
 		layoutInflater= LayoutInflater.from(context);
 		this.imageloader = mloader;
-
+		
 		IMAGE_URI = "file://" + context.getCacheDir() + File.separator + IMAGE_FILE_NAME;
-
+		
 		loadImageToFile();
-
+		
 		DisplayMetrics display = context.getResources().getDisplayMetrics();
 
 		Point size = new Point();
 		size.x = display.widthPixels;
 		size.y = display.heightPixels;
-
+		
 		mBounds = new Dimensions(size.x / 2, (int) ((size.x / 800f) * 200f));
 		mOptions = new Options();
 		mOptions.widthBounds = mBounds.width;
 		mOptions.heightBounds = mBounds.height;
-
+		
 		mImagePrecacheAssistant = new AdapterImagesAssistant(imageloader, new PrecacheInformationProvider() {
 			@Override
 			public int getCount() {
-				return NewsAdapter.this.getCount();
+				return PartenaireAdapter.this.getCount();
 			}
 
 			@Override
@@ -112,7 +109,7 @@ public class NewsAdapter extends BaseAdapter {
 				return list;
 			}
 		});
-
+		
 		mImagePrecacheAssistant.setMemCacheRange(5);
 		mImagePrecacheAssistant.setDiskCacheRange(10);
 	}
@@ -146,48 +143,39 @@ public class NewsAdapter extends BaseAdapter {
 	 * Method to fill listView.
 	 */
 	public View getView(int position, View convertView, ViewGroup parent) {
-
+		
 		ItemHolder itemHolder;
-		Article art = articles.get(position);
-
+		Partenaire art = articles.get(position);
+		
 		if(convertView==null){
-
-			convertView=layoutInflater.inflate(R.layout.news_item,parent,false);
-
+			
+			convertView=layoutInflater.inflate(R.layout.partenaire_item,parent,false);
+			
 			itemHolder= new ItemHolder();
-			itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_list_image);
-			itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_title);
-			itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_list_date);
-			itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
-
+			itemHolder.imageView = (ImageView)convertView.findViewById(R.id.partenaire_list_image);
+			
 			convertView.setTag(itemHolder);
-			//setParams(itemHolder);
 		}
 		else{
 			itemHolder= (ItemHolder)convertView.getTag();
 		}
-
+		
 		/** Initialisation avec les données **/
-		/** titre **/
-		itemHolder.titleView.setText(art.getTitreFr());
-		/** date **/
-		String date = Tools.transformCalendarToSimpleString(art.getDateCreation());
-		itemHolder.dateView.setText(date);
-		/** contenu **/
-		itemHolder.textView.setText(Html.fromHtml(art.getContenuFr()).toString().trim());
+
 		/** image **/
 		Options o = new Options();
-
-		ImageRequest request = new ImageRequest(itemHolder.imageView,art.getUrlPhotoPrincipale());
+		
+		//ImageRequest request = new ImageRequest(itemHolder.imageView,art.getUrlPhotoPrincipale());
+		ImageRequest request = new ImageRequest(itemHolder.imageView,"http://www.polyjoule.org/administration/ressources/data/Logos/"+art.getLogoURL());
 		request.setImageLoaderListener(mListener);
 		request.setOptions(o);
 		mImagePrecacheAssistant.loadImage(request, position);
-
+		
 		/** fin initialisation **/
-
+		
 		return convertView;
 	}	
-
+	
 	private void loadImageToFile() {
 		StrictMode.setThreadPolicy(ThreadPolicy.LAX);
 		try {
@@ -202,40 +190,13 @@ public class NewsAdapter extends BaseAdapter {
 			throw new RuntimeException("Poorly named kitteh.");
 		}
 	}
-
-	private void setParams(ItemHolder item) {
-		ViewGroup.LayoutParams params1 = item.imageView.getLayoutParams();
-
-
-		DisplayMetrics display = context.getResources().getDisplayMetrics();
-
-		Point size = new Point();
-		size.x = display.widthPixels;
-		size.y = display.heightPixels;
-
-		params1.width = size.x / 2;
-		params1.height = (int) ((size.x / 800f) * 200f);
-	}
-
+	
 	/**
 	 * Inner class use to save reference of News_item
 	 */
 	class ItemHolder{
 
-
 		private ImageView imageView;
-
-		/**
-		 * Reference on R.id.news_name
-		 */
-		private TextView titleView;
-
-		private TextView dateView;
-
-		/**
-		 * Reference on R.id.News_version
-		 */
-		private TextView textView;
 	}
 
 	ImageLoaderListener mListener = new ImageLoaderListener() {

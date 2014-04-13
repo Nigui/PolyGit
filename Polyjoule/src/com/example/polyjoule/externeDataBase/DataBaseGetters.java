@@ -1,8 +1,6 @@
 package com.example.polyjoule.externeDataBase;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
@@ -78,6 +76,37 @@ public class DataBaseGetters {
 		else nbObjects += String.valueOf(nb);
 		
 		querry += nbObjects;
+		
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Article tmpArticle = new Article();
+					tmpArticle.setIdArticle(json_data.getInt(Requetes.DATABASE_ARTICLE_ID));
+					//TODO Récupérer toutes les rubriques avant de l'affecter 
+					tmpArticle.setAuteur(json_data.getString(Requetes.DATABASE_ARTICLE_AUTEUR));
+					tmpArticle.setTitreFr(json_data.getString(Requetes.DATABASE_ARTICLE_TITREFR));
+					tmpArticle.setTitreEn(json_data.getString(Requetes.DATABASE_ARTICLE_TITREEN));
+					tmpArticle.setContenuFr(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUFR));
+					tmpArticle.setContenuEng(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUEN));
+					tmpArticle.setCommentaireAutorise(json_data.getBoolean(Requetes.DATABASE_ARTICLE_AUTORISATIONCOM));
+					tmpArticle.setStatutArticle(json_data.getBoolean(Requetes.DATABASE_ARTICLE_STATUT));
+					tmpArticle.setDateCreation(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_ARTICLE_DATE)));
+					tmpArticle.setUrlPhotoPrincipale(json_data.getString(Requetes.DATABASE_ARTICLE_PHOTO));
+					
+					ret.add(tmpArticle);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+	
+	public static ArrayList<Article> getArticlesFromDBWithID(int nb, int id)
+	{
+		ArrayList<Article> ret = new ArrayList<Article>();
+		String querry = "SELECT * FROM ARTICLE WHERE id_article ="+id ;
 		
 		try{ 
 			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
@@ -230,7 +259,7 @@ public class DataBaseGetters {
 	public static ArrayList<LivreOr> getLivreOrFromDB()
 	{
 		ArrayList<LivreOr> ret = new ArrayList<LivreOr>();
-		String querry = "SELECT * FROM LIVREOR";
+		String querry = "SELECT * FROM LIVRE_OR WHERE accept_post = 1";
 		try{ 
 			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
 			for(int i=0;i<resultArray.length();i++){
@@ -305,11 +334,58 @@ public class DataBaseGetters {
 		}
 		return ret;
 	}
+	
+	public static ArrayList<Participant> getParticipantsFromDBWithID(int id)
+	{
+		ArrayList<Participant> ret = new ArrayList<Participant>();
+		String querry = "SELECT * FROM PARTICIPANT WHERE id_participant = "+id;
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+				JSONObject json_data = resultArray.getJSONObject(i);
+				Participant tmpParticipant = new Participant();
+				tmpParticipant.setId(json_data.getInt(Requetes.DATABASE_PARTICIPANT_ID));
+				tmpParticipant.setNom(json_data.getString(Requetes.DATABASE_PARTICIPANT_NOM));
+				tmpParticipant.setPrenom(json_data.getString(Requetes.DATABASE_PARTICIPANT_PRENOM));
+				tmpParticipant.setPhotoURL(json_data.getString(Requetes.DATABASE_PARTICIPANT_PHOTO));
+				tmpParticipant.setEmail(json_data.getString(Requetes.DATABASE_PARTICIPANT_MAIL));
+				tmpParticipant.setBioFR(json_data.getString(Requetes.DATABASE_PARTICIPANT_BIOFR));
+				tmpParticipant.setBioEN(json_data.getString(Requetes.DATABASE_PARTICIPANT_BIOEN));
+				tmpParticipant.setProf(Tools.parseIntToBoolean(json_data.getInt(Requetes.DATABASE_PARTICIPANT_ISPROF)));
+				
+				ret.add(tmpParticipant);
+			}
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
 
 	public static ArrayList<Participation> getParticipationFromDB()
 	{
 		ArrayList<Participation> ret = new ArrayList<Participation>();
 		String querry = "SELECT * FROM PARTICIPATION";
+		try{ 
+			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Participation tmpParticipation = new Participation();
+					//tmpParticipation.setId(json_data.getInt(Requetes.DATABASE_PARTICIPATION_EQUIPE));
+					//tmpParticipation.setAnnee(json_data.getInt(Requetes.DATABASE_PARTICIPATION_PARTICIPANT));
+					tmpParticipation.setRole(json_data.getString(Requetes.DATABASE_PARTICIPATION_ROLE));
+					ret.add(tmpParticipation);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		}
+		return ret;
+	}
+	
+	public static ArrayList<Participation> getParticipationFromDBWithID(int id)
+	{
+		ArrayList<Participation> ret = new ArrayList<Participation>();
+		String querry = "SELECT * FROM PARTICIPATION WHERE id_participant = "+id;
 		try{ 
 			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
 			for(int i=0;i<resultArray.length();i++){

@@ -17,11 +17,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.course.CourseFragment;
-import com.example.polyjoule.course.EduEcoFragment;
-import com.example.polyjoule.course.ShellEcoFragment;
-import com.example.polyjoule.news.NewsDetailFragment;
+import com.example.polyjoule.info.InfoFragment;
+import com.example.polyjoule.info.PartenaireFragment;
+import com.example.polyjoule.livreDor.LivreDorFragment;
 import com.example.polyjoule.news.NewsFragment;
 import com.polyjoule.application.R;
 
@@ -75,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		// What's hot, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
-		
+
 
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -95,13 +94,13 @@ public class MainActivity extends ActionBarActivity {
 				R.drawable.ic_drawer, //nav menu toggle icon
 				R.string.app_name, // nav drawer open - description for accessibility
 				R.string.app_name // nav drawer close - description for accessibility
-		) {
+				) {
 			public void onDrawerClosed(View view) {
 				getSupportActionBar().setTitle(mTitle);
 				// calling onPrepareOptionsMenu() to show action bar icons
 				supportInvalidateOptionsMenu();
 			}
-			
+
 			public void onDrawerOpened(View drawerView) {
 				getSupportActionBar().setTitle(mDrawerTitle);
 				// calling onPrepareOptionsMenu() to hide action bar icons
@@ -120,7 +119,7 @@ public class MainActivity extends ActionBarActivity {
 	 * Slide menu item click listener
 	 * */
 	private class SlideMenuClickListener implements
-			ListView.OnItemClickListener {
+	ListView.OnItemClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
@@ -172,19 +171,19 @@ public class MainActivity extends ActionBarActivity {
 			fragment = new NewsFragment();
 			break;
 		case 1:
-			fragment = new HomeFragment();
+			fragment = new ConstructionFragment();
 			break;
 		case 2:
 			fragment = new CourseFragment();
 			break;
 		case 3:
-			fragment = new PagesFragment();
+			fragment = new ConstructionFragment();
 			break;
 		case 4:
-			fragment = new FindPeopleFragment();
+			fragment = new InfoFragment();
 			break;
 		case 5:
-			fragment = new EduEcoFragment();
+			fragment = new LivreDorFragment();
 			break;
 
 		default:
@@ -194,7 +193,7 @@ public class MainActivity extends ActionBarActivity {
 		if (fragment != null) {
 			FragmentManager fragmentManager = getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, fragment).commit();
+			.replace(R.id.frame_container, fragment).commit();
 
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);
@@ -231,39 +230,34 @@ public class MainActivity extends ActionBarActivity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-	
-	/*
-	 * M��thode qui lance un fragment news avec article pass�� en param��tre
-	 */
-	public void changeFragmentNews(Article article){
-		
-			Fragment fragment = new NewsDetailFragment();
-			
-			Bundle bundl = new Bundle();
-			bundl.putSerializable("article", article);
-			
-			fragment.setArguments(bundl);
-	
-			FragmentManager fragmentManager = getSupportFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, fragment).commit();
+
+
+	public void changeFragment(Fragment fragment){
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+	}
+
+	public void changeArticle(String nom, String contenu){
+
+		Fragment fragment = new ArticleFragment();
+		Bundle bundl = new Bundle();
+
+		bundl.putString("titre", nom);
+		bundl.putString("corps", contenu);
+		fragment.setArguments(bundl);
+
+
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
 
 	}
 
-	public void changeFragmentCourse(int i){
-		
-		Fragment fragment = null;
-		
-		if(i == 1){
-			fragment = new EduEcoFragment();
-		}
-		else if(i == 2){
-			fragment = new ShellEcoFragment();
-		}
-		
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.frame_container, fragment).commit();
+	public void changePartenaire(){
 
-}
+		Fragment fragment = new PartenaireFragment();
+
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+
+	}
 }

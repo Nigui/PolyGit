@@ -12,6 +12,8 @@
          android:layout_weight="0.3"
          android:paddingBottom="10dp"
          android:paddingTop="10dp"
+         android:divider="@drawable/divider_listview"
+        android:dividerHeight="3sp"
          android:src="@android:drawable/bottom_bar" />
 
      <View

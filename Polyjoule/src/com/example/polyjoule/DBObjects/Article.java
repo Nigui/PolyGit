@@ -2,10 +2,11 @@ package com.example.polyjoule.DBObjects;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Article implements Serializable{
 
+
+	private static final long serialVersionUID = 1L;
 	private int idArticle;
 	private String auteur;
 	private String titreFr;

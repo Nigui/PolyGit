@@ -130,6 +130,8 @@ public class PolyjouleDBRequetes {
 		return ret;
 	}
 	
+	
+	
 	public ArrayList<Commentaire> getCommentaireInternalFromDB(){
 		ArrayList<Commentaire> ret = new ArrayList<Commentaire>();
 		String[] result_columns = new String[]{

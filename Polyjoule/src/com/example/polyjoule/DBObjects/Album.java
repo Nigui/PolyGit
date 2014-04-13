@@ -2,7 +2,6 @@ package com.example.polyjoule.DBObjects;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Album {
 

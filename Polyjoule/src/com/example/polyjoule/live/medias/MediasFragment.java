@@ -11,7 +11,7 @@ import com.polyjoule.application.R;
 public class MediasFragment extends Fragment{
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_medias, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_construction, container, false);
         
         return rootView;
 	}

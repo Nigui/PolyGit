@@ -1,9 +1,14 @@
 package com.example.polyjoule.DBObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Partenaire {
+public class Partenaire implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nom;
 	private String logoURL;

@@ -15,9 +15,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.example.polyjoule.DBObjects.Article;
 
 import android.os.AsyncTask;
 import android.util.Log;

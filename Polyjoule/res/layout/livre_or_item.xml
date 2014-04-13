@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/ItemHeight"
+    android:padding="10dp"
+    android:orientation="horizontal">
+   
+	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_weight="0"
+	        android:orientation="vertical" >
+
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" >
+		    
+		    <TextView
+		        android:id="@+id/livre_or_title"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.7"
+		        android:text="@string/defaultTitre"
+		        android:textSize="25sp"
+		        android:textStyle="bold" />
+
+		    <TextView
+		        android:id="@+id/livre_or_date"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.3"
+		        android:text="@string/defaultDate"
+		        android:textSize="18sp" />
+
+		</LinearLayout>
+    
+		
+		    <TextView
+		        android:id="@+id/livre_or_content"
+		        android:text="@string/defaultContenu"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="13sp" />
+	    
+	</LinearLayout>
+</LinearLayout>
