@@ -58,7 +58,7 @@ public class InfoFragment extends Fragment{
 
 		text4.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				PersoClé perso = new PersoClé();
+				PersoCle perso = new PersoCle();
 				((MainActivity)getActivity()).changeFragment(perso);
 			}
 		});
