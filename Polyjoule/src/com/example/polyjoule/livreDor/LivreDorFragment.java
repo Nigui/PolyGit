@@ -21,7 +21,7 @@ public class LivreDorFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		listLivreOR = DataBaseGetters.getLivreOrFromDB();
+		listLivreOR = new DataBaseGetters(getActivity()).getLivreOrFromDB();
 
 	}
 

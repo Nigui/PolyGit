@@ -25,7 +25,7 @@ public class PartenaireFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		listPartenaire = DataBaseGetters.getPartenairesFromDB();;
+		listPartenaire = new DataBaseGetters(getActivity()).getPartenairesFromDB();;
 
 		mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
 

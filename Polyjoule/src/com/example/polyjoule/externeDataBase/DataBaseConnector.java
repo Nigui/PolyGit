@@ -16,10 +16,44 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class DataBaseConnector extends AsyncTask<String, String, JSONArray> {
+
+	ProgressDialog pd;
+	Context context;
+
+	public DataBaseConnector(Context c) {
+		super();
+		this.context = c;
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+		Log.v("DBConnector", "onPreExecute");
+		pd = new ProgressDialog(context);
+		pd.setTitle("Processing...");
+		pd.setMessage("Please wait.");
+		pd.setCancelable(false);
+		pd.setIndeterminate(true);
+		pd.show();
+		
+		
+	}
+
+
+	@Override
+	protected void onPostExecute(JSONArray result) {
+		super.onPostExecute(result);
+		Log.v("DBConnector", "onPostExecute");
+		if (pd!=null) {
+			pd.dismiss();
+		}
+	}
 
 	private static final String phpFileURL = "http://polyjoule.org/site/PRESENTATION/Android/androidQuerries.php";
 		
@@ -33,8 +67,9 @@ public class DataBaseConnector extends AsyncTask<String, String, JSONArray> {
 	 * Initialise l'inputStream de la reponse (en JSON) a la requete envoyee en parametre
 	 * @param querry
 	 */
-	public static JSONArray executeQuerry(String querry)
+	private JSONArray executeQuerry(String querry)
 	{
+		
 		JSONArray ret = null;
 		InputStream answerStream = null;
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -55,12 +90,13 @@ public class DataBaseConnector extends AsyncTask<String, String, JSONArray> {
 		        Log.e("DataBaseConnector", "Error in http connection "+e.toString());
 		}
 		return ret;
+		
 	}
 	
 	/**
 	 * Lit l'inputStream et convertit les elements de cette derniere en une String
 	 */
-	private static JSONArray convertStreamToString(InputStream stream){
+	private JSONArray convertStreamToString(InputStream stream){
 		JSONArray ret = null;
 		if( stream != null ){
 			String result = "";
@@ -90,7 +126,7 @@ public class DataBaseConnector extends AsyncTask<String, String, JSONArray> {
 	 * @param result
 	 * @return 
 	 */
-	private static JSONArray parseResultToJSONArray(String result){
+	private JSONArray parseResultToJSONArray(String result){
 		//parse json data
 		try{
 		        return new JSONArray(result);

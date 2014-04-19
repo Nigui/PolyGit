@@ -2,8 +2,10 @@ package com.example.polyjoule.slidingmenu;
 
 import java.util.ArrayList;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager.LayoutParams;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +53,7 @@ public class ArticleFragment extends Fragment{
 		 
 		 mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
 		
-		 // les définitions de type mime et de l'encodage
+		 // les d��finitions de type mime et de l'encodage
 	      final String mimeType = "text/html";
 	      final String encoding = "utf-8";
 	      
@@ -100,8 +102,7 @@ public class ArticleFragment extends Fragment{
 			     }
 	      }
 		
-		 
-		  
+	      
 	      for(int i = 0; i<ArrCorps.size() ; i++){
 	    	  web = new WebView(this.getActivity());
 	    	  web.loadData(ArrCorps.get(i), mimeType, encoding);

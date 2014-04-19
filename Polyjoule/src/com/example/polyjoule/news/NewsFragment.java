@@ -3,8 +3,11 @@ package com.example.polyjoule.news;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.text.Html;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,13 +47,36 @@ public class NewsFragment extends ListFragment {
 
 		mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
 
-		listArticle = DataBaseGetters.getArticlesFromDB(10);
+		listArticle = new DataBaseGetters(getActivity()).getArticlesFromDB(10);
+		System.out.println("nb articles : "+listArticle.size());
 
 		headerArticle = listArticle.get(0);
 
-
-
 	}
+	
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		System.out.println("START");
+		this.getView().setFocusableInTouchMode(true);
+		this.getView().requestFocus();
+		this.getView().setOnKeyListener(new View.OnKeyListener() {
+		        @Override
+		        public boolean onKey(View v, int keyCode, KeyEvent event) {
+		            Log.i("news", "keyCode: " + keyCode);
+		            if( keyCode == KeyEvent.KEYCODE_BACK ) {
+		                    Log.i("news", "onKey Back listener is working!!!");
+		                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		                return true;
+		            } else {
+		                return false;
+		            }
+		        }
+		    });
+	}
+
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.activity_news, container, false);

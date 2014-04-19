@@ -1,4 +1,4 @@
-package com.example.polyjoule.interneDataBase;
+package com.example.polyjoule.externeDataBase;
 
 public abstract class Requetes {
 

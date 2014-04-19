@@ -23,30 +23,30 @@ public class CourseFragment extends Fragment{
 
 	}
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_course, container, false);
 
 		/** Initialise l'interface, le header **/
 
-		ImageView image1= (ImageView) rootView.findViewById(R.id.imageView1);
-		ImageView image2= (ImageView) rootView.findViewById(R.id.imageView2);
-		ImageView image3= (ImageView) rootView.findViewById(R.id.imageView3);
+		ImageView educeco= (ImageView) rootView.findViewById(R.id.imageView1);
+		ImageView shelleco= (ImageView) rootView.findViewById(R.id.imageView2);
+		ImageView voitures= (ImageView) rootView.findViewById(R.id.imageView3);
 
-		image1.setOnClickListener(new View.OnClickListener() {
+		educeco.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				ArrayList<Rubrique> listRubrique = DataBaseGetters.getRubriqueFromDBWhithID(20);
+				ArrayList<Rubrique> listRubrique = new DataBaseGetters(container.getContext()).getRubriqueFromDBWhithID(20);
 				((MainActivity)getActivity()).changeArticle(listRubrique.get(0).getTitreFR(), listRubrique.get(0).getDescriptionFR());
 			}
 		});
 
-		image2.setOnClickListener(new View.OnClickListener() {
+		shelleco.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				ArrayList<Rubrique> listRubrique = DataBaseGetters.getRubriqueFromDBWhithID(2);
+				ArrayList<Rubrique> listRubrique = new DataBaseGetters(container.getContext()).getRubriqueFromDBWhithID(2);
 				((MainActivity)getActivity()).changeArticle(listRubrique.get(0).getTitreFR(), listRubrique.get(0).getDescriptionFR());
 			}
 		});
 
-		image3.setOnClickListener(new View.OnClickListener() {
+		voitures.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				Fragment fragment = new VoitureFragment();
 				((MainActivity)getActivity()).changeFragment(fragment);

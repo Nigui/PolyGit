@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.polyjoule.DBObjects.Album;
@@ -22,20 +23,26 @@ import com.example.polyjoule.DBObjects.Participant;
 import com.example.polyjoule.DBObjects.Participation;
 import com.example.polyjoule.DBObjects.Photo;
 import com.example.polyjoule.DBObjects.Rubrique;
-import com.example.polyjoule.interneDataBase.Requetes;
 import com.example.polyjoule.utils.Tools;
 
 public class DataBaseGetters {
 	
-	 /* Recupere tout les articles de la BDD et les renvois sous forme de liste*/
-	public static ArrayList<Album> getAlbumsFromDB()
+	Context context;
+	
+	 public DataBaseGetters(Context context) {
+		super();
+		this.context = context;
+	}
+
+	/* Recupere tout les articles de la BDD et les renvois sous forme de liste*/
+	public ArrayList<Album> getAlbumsFromDB()
 	{
 		ArrayList<Album> ret = new ArrayList<Album>();
 		String querry = "SELECT * FROM ALBUM";
 		try{ 
 			JSONArray resultArray;
 			try {
-				resultArray = new DataBaseConnector().execute(querry).get();
+				resultArray = new DataBaseConnector(context).execute(querry).get();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				return null;
@@ -67,7 +74,7 @@ public class DataBaseGetters {
 	 * nb, nombre d'objet à récupérer, -1 == all
 	 * @return
 	 */
-	public static ArrayList<Article> getArticlesFromDB(int nb)
+	public ArrayList<Article> getArticlesFromDB(int nb)
 	{
 		ArrayList<Article> ret = new ArrayList<Article>();
 		String querry = "SELECT * FROM ARTICLE ORDER BY "+Requetes.DATABASE_ARTICLE_DATE+" DESC ";
@@ -78,7 +85,7 @@ public class DataBaseGetters {
 		querry += nbObjects;
 		
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Article tmpArticle = new Article();
@@ -99,17 +106,23 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 	
-	public static ArrayList<Article> getArticlesFromDBWithID(int nb, int id)
+	public ArrayList<Article> getArticlesFromDBWithID(int nb, int id)
 	{
 		ArrayList<Article> ret = new ArrayList<Article>();
 		String querry = "SELECT * FROM ARTICLE WHERE id_article ="+id ;
 		
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Article tmpArticle = new Article();
@@ -130,16 +143,22 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 
-	public static ArrayList<Commentaire> getCommentairesFromDB()
+	public ArrayList<Commentaire> getCommentairesFromDB()
 	{
 		ArrayList<Commentaire> ret = new ArrayList<Commentaire>();
 		String querry = "SELECT * FROM COMMENTAIRE";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Commentaire tmpCommentaire = new Commentaire();
@@ -155,16 +174,22 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 	
-	public static ArrayList<Course> getCoursesFromDB()
+	public ArrayList<Course> getCoursesFromDB()
 	{
 		ArrayList<Course> ret = new ArrayList<Course>();
 		String querry = "SELECT * FROM COURSE";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Course tmpCourse = new Course();
@@ -181,16 +206,22 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 	
-	public static ArrayList<Ecole> getEcoleFromDB()
+	public ArrayList<Ecole> getEcoleFromDB()
 	{
 		ArrayList<Ecole> ret = new ArrayList<Ecole>();
 		String querry = "SELECT * FROM ECOLE";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Ecole tmpEcole = new Ecole();
@@ -206,16 +237,22 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 	
-	public static ArrayList<Equipe> getEquipeFromDB()
+	public ArrayList<Equipe> getEquipeFromDB()
 	{
 		ArrayList<Equipe> ret = new ArrayList<Equipe>();
 		String querry = "SELECT * FROM EQUIPE";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Equipe tmpEquipe = new Equipe();
@@ -226,16 +263,22 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 	
-	public static ArrayList<Formation> getFormationFromDB()
+	public ArrayList<Formation> getFormationFromDB()
 	{
 		ArrayList<Formation> ret = new ArrayList<Formation>();
 		String querry = "SELECT * FROM FORMATION";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Formation tmpFormation = new Formation();
@@ -252,16 +295,22 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 
-	public static ArrayList<LivreOr> getLivreOrFromDB()
+	public ArrayList<LivreOr> getLivreOrFromDB()
 	{
 		ArrayList<LivreOr> ret = new ArrayList<LivreOr>();
 		String querry = "SELECT * FROM LIVRE_OR WHERE accept_post = 1";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					LivreOr tmpLivreOr = new LivreOr();
@@ -277,6 +326,12 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
@@ -285,12 +340,12 @@ public class DataBaseGetters {
 	 * Recupere tout les partenaires de la BDD et les renvois sous forme de liste
 	 * @return
 	 */
-	public static ArrayList<Partenaire> getPartenairesFromDB()
+	public ArrayList<Partenaire> getPartenairesFromDB()
 	{
 		ArrayList<Partenaire> ret = new ArrayList<Partenaire>();
 		String querry = "SELECT * FROM PARTENAIRE";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 				JSONObject json_data = resultArray.getJSONObject(i);
 				Partenaire tmpPartenaire = new Partenaire();
@@ -305,16 +360,22 @@ public class DataBaseGetters {
 			}
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 
-	public static ArrayList<Participant> getParticipantsFromDB()
+	public ArrayList<Participant> getParticipantsFromDB()
 	{
 		ArrayList<Participant> ret = new ArrayList<Participant>();
 		String querry = "SELECT * FROM PARTICIPANT";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 				JSONObject json_data = resultArray.getJSONObject(i);
 				Participant tmpParticipant = new Participant();
@@ -331,16 +392,22 @@ public class DataBaseGetters {
 			}
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 	
-	public static ArrayList<Participant> getParticipantsFromDBWithID(int id)
+	public ArrayList<Participant> getParticipantsFromDBWithID(int id)
 	{
 		ArrayList<Participant> ret = new ArrayList<Participant>();
 		String querry = "SELECT * FROM PARTICIPANT WHERE id_participant = "+id;
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 				JSONObject json_data = resultArray.getJSONObject(i);
 				Participant tmpParticipant = new Participant();
@@ -357,16 +424,22 @@ public class DataBaseGetters {
 			}
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 
-	public static ArrayList<Participation> getParticipationFromDB()
+	public ArrayList<Participation> getParticipationFromDB()
 	{
 		ArrayList<Participation> ret = new ArrayList<Participation>();
 		String querry = "SELECT * FROM PARTICIPATION";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Participation tmpParticipation = new Participation();
@@ -378,16 +451,22 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 	
-	public static ArrayList<Participation> getParticipationFromDBWithID(int id)
+	public ArrayList<Participation> getParticipationFromDBWithID(int id)
 	{
 		ArrayList<Participation> ret = new ArrayList<Participation>();
 		String querry = "SELECT * FROM PARTICIPATION WHERE id_participant = "+id;
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Participation tmpParticipation = new Participation();
@@ -399,16 +478,22 @@ public class DataBaseGetters {
 			
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 
-	public static ArrayList<Photo> getPhotosFromDB()
+	public ArrayList<Photo> getPhotosFromDB()
 	{
 		ArrayList<Photo> ret = new ArrayList<Photo>();
 		String querry = "SELECT * FROM PHOTO";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 				JSONObject json_data = resultArray.getJSONObject(i);
 				Photo tmpPhoto = new Photo();
@@ -424,16 +509,22 @@ public class DataBaseGetters {
 			}
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 
-	public static ArrayList<Rubrique> getRubriqueFromDB()
+	public ArrayList<Rubrique> getRubriqueFromDB()
 	{
 		ArrayList<Rubrique> ret = new ArrayList<Rubrique>();
 		String querry = "SELECT * FROM RUBRIQUE";
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 				JSONObject json_data = resultArray.getJSONObject(i);
 				Rubrique tmpRubrique = new Rubrique();
@@ -448,16 +539,22 @@ public class DataBaseGetters {
 			}
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
 	
-	public static ArrayList<Rubrique> getRubriqueFromDBWhithID(int id)
+	public ArrayList<Rubrique> getRubriqueFromDBWhithID(int id)
 	{
 		ArrayList<Rubrique> ret = new ArrayList<Rubrique>();
 		String querry = "SELECT * FROM RUBRIQUE WHERE id_rubrique ="+id;
 		try{ 
-			JSONArray resultArray = DataBaseConnector.executeQuerry(querry);
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
 				JSONObject json_data = resultArray.getJSONObject(i);
 				Rubrique tmpRubrique = new Rubrique();
@@ -472,6 +569,12 @@ public class DataBaseGetters {
 			}
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
