@@ -13,6 +13,7 @@ public class Photo {
 	private String descriptionFR;
 	private String descriptionEN;
 	
+	private final String imageBDDUrl = "http://www.polyjoule.org/administration/ressources/data/Photo/";
 
 	//------ Constructeurs
 	public Photo(int id, Album album, String titreFR, String titreEN,
@@ -62,7 +63,7 @@ public class Photo {
 		return photoURL;
 	}
 	public void setPhotoURL(String photoURL) {
-		this.photoURL = photoURL;
+		this.photoURL = this.imageBDDUrl+photoURL;
 	}
 	public Calendar getPhotoDate() {
 		return photoDate;

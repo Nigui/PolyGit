@@ -53,7 +53,6 @@ public class NewsFragment extends ListFragment {
 		mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
 
 		listArticle = new DataBaseGetters(getActivity()).getArticlesFromDB(10);
-		System.out.println("nb articles : "+listArticle.size());
 
 		headerArticle = listArticle.get(0);
 
@@ -64,7 +63,6 @@ public class NewsFragment extends ListFragment {
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		System.out.println("START");
 		this.getView().setFocusableInTouchMode(true);
 		this.getView().requestFocus();
 		this.getView().setOnKeyListener(new OnKeyListener()

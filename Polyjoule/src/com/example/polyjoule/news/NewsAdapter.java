@@ -55,9 +55,7 @@ public class NewsAdapter extends BaseAdapter {
 	private ImageLoader imageloader;
 	private AdapterImagesAssistant mImagePrecacheAssistant;
 
-	private final String IMAGE_URI;
-	private static final String IMAGE_FILE_NAME = "articleTmpImage.jpg";
-
+	
 	private Dimensions mBounds;
 	private Options mOptions;
 
@@ -73,10 +71,6 @@ public class NewsAdapter extends BaseAdapter {
 		this.context = newsFragment.getActivity().getApplicationContext();
 		layoutInflater= LayoutInflater.from(context);
 		this.imageloader = mloader;
-
-		IMAGE_URI = "file://" + context.getCacheDir() + File.separator + IMAGE_FILE_NAME;
-
-		loadImageToFile();
 
 		DisplayMetrics display = context.getResources().getDisplayMetrics();
 
@@ -187,35 +181,6 @@ public class NewsAdapter extends BaseAdapter {
 
 		return convertView;
 	}	
-
-	private void loadImageToFile() {
-		StrictMode.setThreadPolicy(ThreadPolicy.LAX);
-		try {
-			URI uri = new URI(IMAGE_URI);
-			final File imageFile = new File(uri.getPath());
-			final FileOutputStream fos = new FileOutputStream(imageFile);
-			Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_twitter)).getBitmap();
-			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-		} catch (final FileNotFoundException e) {
-			throw new RuntimeException("Could not find kitteh.");
-		} catch (URISyntaxException e) {
-			throw new RuntimeException("Poorly named kitteh.");
-		}
-	}
-
-	private void setParams(ItemHolder item) {
-		ViewGroup.LayoutParams params1 = item.imageView.getLayoutParams();
-
-
-		DisplayMetrics display = context.getResources().getDisplayMetrics();
-
-		Point size = new Point();
-		size.x = display.widthPixels;
-		size.y = display.heightPixels;
-
-		params1.width = size.x / 2;
-		params1.height = (int) ((size.x / 800f) * 200f);
-	}
 
 	/**
 	 * Inner class use to save reference of News_item

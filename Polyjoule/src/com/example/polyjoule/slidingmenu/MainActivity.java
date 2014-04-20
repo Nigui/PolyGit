@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.example.polyjoule.course.CourseFragment;
 import com.example.polyjoule.info.InfoFragment;
 import com.example.polyjoule.info.PartenaireFragment;
+import com.example.polyjoule.live.medias.MediasFragment;
 import com.example.polyjoule.livreDor.LivreDorFragment;
 import com.example.polyjoule.livreDor.LivreDorItemFragment;
 import com.example.polyjoule.news.NewsFragment;
@@ -186,7 +187,7 @@ public class MainActivity extends ActionBarActivity {
 			fragment = new CourseFragment();
 			break;
 		case 3:
-			fragment = new ConstructionFragment();
+			fragment = new MediasFragment();
 			break;
 		case 4:
 			fragment = new InfoFragment();

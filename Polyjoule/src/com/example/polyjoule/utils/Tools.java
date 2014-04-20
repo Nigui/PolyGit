@@ -9,10 +9,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.net.http.AndroidHttpClient;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 
 public class Tools {
 
@@ -98,7 +102,6 @@ public class Tools {
 		return ret;
 	}
 
-	
 	static Bitmap downloadBitmap(String url) {
         final AndroidHttpClient client = AndroidHttpClient.newInstance("Android");
         final HttpGet getRequest = new HttpGet(url);
@@ -136,6 +139,26 @@ public class Tools {
             }
         }
         return null;
+    }
+	
+	/*
+     * getting screen width
+     */
+    public static int getScreenWidth(Context _context) {
+        int columnWidth;
+        WindowManager wm = (WindowManager) _context
+                .getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+ 
+        final Point point = new Point();
+        try {
+            display.getSize(point);
+        } catch (java.lang.NoSuchMethodError ignore) { // Older device
+            point.x = display.getWidth();
+            point.y = display.getHeight();
+        }
+        columnWidth = point.x;
+        return columnWidth;
     }
 	
 }
