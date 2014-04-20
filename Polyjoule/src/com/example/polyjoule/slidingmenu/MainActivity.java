@@ -22,6 +22,7 @@ import com.example.polyjoule.course.CourseFragment;
 import com.example.polyjoule.info.InfoFragment;
 import com.example.polyjoule.info.PartenaireFragment;
 import com.example.polyjoule.livreDor.LivreDorFragment;
+import com.example.polyjoule.livreDor.LivreDorItemFragment;
 import com.example.polyjoule.news.NewsFragment;
 import com.polyjoule.application.R;
 
@@ -262,5 +263,17 @@ public class MainActivity extends ActionBarActivity {
 		Fragment fragment = new PartenaireFragment();
 		changeFragment(fragment);
 
+	}
+	
+	public void changeLivreOrItem(String pseudo,String date,String corps){
+		Fragment fragment = new LivreDorItemFragment();
+		Bundle bundl = new Bundle();
+
+		bundl.putString("pseudo", pseudo);
+		bundl.putString("date", date);
+		bundl.putString("corps", corps);
+		fragment.setArguments(bundl);
+
+		changeFragment(fragment);
 	}
 }

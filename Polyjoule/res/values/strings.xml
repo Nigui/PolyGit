@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 	
-	    <string name="drawer_open">Slider Menu Opened</string>
+	<string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
 
     <!-- Nav Drawer Menu Items -->
@@ -38,12 +38,15 @@
     <string name="message">Votre message</string>
     <string name="envoie">Envoyer</string>
     
-    <!-- URL Bdd -->
+    <!-- URLs -->
     <string name="photoURL">http://www.polyjoule.org/administration/ressources/data/Logos/</string>
+    <string name="facebook">https://www.facebook.com/pages/Polyjoule/121213844627305?ref=ts</string>
+    <string name="twitter">https://twitter.com/Polyjoule</string>
     
     <!-- Defaults strings -->
     <string name="defaultImage">ici l\'image</string>
     <string name="defaultTitre">Ici le titre</string>
     <string name="defaultDate">ici la date</string>
     <string name="defaultContenu">ici le contenu</string>
+    <string name="contactemail">guin56@gmail.com</string>
 </resources>

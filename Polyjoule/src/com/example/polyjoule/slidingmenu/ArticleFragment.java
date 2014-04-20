@@ -62,7 +62,7 @@ public class ArticleFragment extends Fragment{
 		
 	}
 	 
-	 private void initUI(){
+	private void initUI(){
 		 titreArticle =  (TextView)rootView.findViewById(R.id.titre_article);
 		 corpsArt =  (LinearLayout)rootView.findViewById(R.id.corps_article);
 		 titreArticle.setText(titre);

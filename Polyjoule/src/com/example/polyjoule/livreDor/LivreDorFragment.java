@@ -3,6 +3,7 @@ package com.example.polyjoule.livreDor;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -15,6 +16,9 @@ import android.widget.ListView;
 
 import com.example.polyjoule.DBObjects.LivreOr;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;
+import com.example.polyjoule.slidingmenu.ArticleFragment;
+import com.example.polyjoule.slidingmenu.MainActivity;
+import com.example.polyjoule.utils.Tools;
 import com.polyjoule.application.R;
 
 public class LivreDorFragment extends ListFragment {
@@ -75,5 +79,7 @@ public class LivreDorFragment extends ListFragment {
 	 */
 	public void onListItemClick(ListView l, View v, int position, long id) {
 
+		LivreOr current = listLivreOR.get(position);
+		((MainActivity)getActivity()).changeLivreOrItem(current.getAuteur(), Tools.transformCalendarToSimpleString(current.getDate()), current.getMessage());
 	}
 }

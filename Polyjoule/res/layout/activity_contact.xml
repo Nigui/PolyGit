@@ -10,15 +10,15 @@
         android:layout_height="wrap_content"
         android:gravity="center" >
 
-        <ImageButton
-            android:id="@+id/imageButton1"
+        <ImageView
+            android:id="@+id/contactfacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
             android:src="@drawable/ic_facebook" />
 
-        <ImageButton
-            android:id="@+id/imageButton2"
+        <ImageView
+            android:id="@+id/contacttwitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
@@ -27,20 +27,19 @@
     </LinearLayout>
     
     <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email" />
-    <EditText
+        android:id="@+id/contactobjet"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/objet" />
     <EditText
+        android:id="@+id/contactmessage"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="top"
         android:hint="@string/message" />
     <Button
+        android:id="@+id/contactenvoie"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
