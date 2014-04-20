@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnKeyListener;
 import android.widget.ListView;
 
 import com.example.polyjoule.DBObjects.Partenaire;
@@ -37,6 +41,21 @@ public class PartenaireFragment extends ListFragment {
 		/** Initialise l'interface, le header **/	  
 
 		setListAdapter(new PartenaireAdapter(this,listPartenaire,mImageLoader));
+		
+		rootView.setOnKeyListener(new OnKeyListener()
+        {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event )
+            {
+                if( keyCode == KeyEvent.KEYCODE_BACK )
+                {
+                    Log.v("back","back");
+	                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        } );
 		return rootView;
 	}
 

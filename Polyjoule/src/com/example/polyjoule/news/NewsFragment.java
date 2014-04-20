@@ -2,6 +2,7 @@ package com.example.polyjoule.news;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
@@ -10,8 +11,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +33,7 @@ public class NewsFragment extends ListFragment {
 	private Article headerArticle;
 
 	/** GUI **/
+	LinearLayout headerLayout;
 	private ImageView headerImageView;
 	private TextView headerTitleText;
 	private TextView headerDateText;
@@ -62,19 +67,10 @@ public class NewsFragment extends ListFragment {
 		System.out.println("START");
 		this.getView().setFocusableInTouchMode(true);
 		this.getView().requestFocus();
-		this.getView().setOnKeyListener(new View.OnKeyListener() {
-		        @Override
-		        public boolean onKey(View v, int keyCode, KeyEvent event) {
-		            Log.i("news", "keyCode: " + keyCode);
-		            if( keyCode == KeyEvent.KEYCODE_BACK ) {
-		                    Log.i("news", "onKey Back listener is working!!!");
-		                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		                return true;
-		            } else {
-		                return false;
-		            }
-		        }
-		    });
+		this.getView().setOnKeyListener(new OnKeyListener()
+        {	@Override
+			public boolean onKey( View v, int keyCode, KeyEvent event ){if( keyCode == KeyEvent.KEYCODE_BACK ){}return true;}
+        } );
 	}
 
 
@@ -90,6 +86,14 @@ public class NewsFragment extends ListFragment {
 		this.headerDateText.setText(date);
 		this.headerContentText = (TextView) rootView.findViewById(R.id.news_header_content);
 		this.headerContentText.setText(Html.fromHtml(headerArticle.getContenuFr()).toString().trim());
+		
+		headerLayout = (LinearLayout) rootView.findViewById(R.id.newsheaderlayout);
+		headerLayout.setOnClickListener(new OnClickListener() {      
+		    @Override
+		    public void onClick(View v) {
+		    	((MainActivity)getActivity()).changeArticle(headerArticle.getTitreFr(), headerArticle.getContenuFr());
+		    }
+		   });
 
 		//new ImageDownloaderTask(this.headerImageView).execute(headerArticle.getUrlPhotoPrincipale());
 		ImageRequest request = new ImageRequest(headerArticle.getUrlPhotoPrincipale());

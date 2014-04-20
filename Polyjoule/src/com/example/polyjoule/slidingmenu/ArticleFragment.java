@@ -2,12 +2,14 @@ package com.example.polyjoule.slidingmenu;
 
 import java.util.ArrayList;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager.LayoutParams;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -38,6 +40,20 @@ public class ArticleFragment extends Fragment{
 		
         initUI();
         
+        rootView.setOnKeyListener(new OnKeyListener()
+        {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event )
+            {
+                if( keyCode == KeyEvent.KEYCODE_BACK )
+                {
+                    Log.v("back","back");
+	                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        } );
         return rootView;
 	}
 	
@@ -101,7 +117,6 @@ public class ArticleFragment extends Fragment{
 			    	 }
 			     }
 	      }
-		
 	      
 	      for(int i = 0; i<ArrCorps.size() ; i++){
 	    	  web = new WebView(this.getActivity());
@@ -117,5 +132,7 @@ public class ArticleFragment extends Fragment{
 	    	  }
 	      }
 	 }
+	 
+	 
 
 }

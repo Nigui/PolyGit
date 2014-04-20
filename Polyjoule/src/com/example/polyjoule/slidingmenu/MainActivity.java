@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -41,6 +42,8 @@ public class MainActivity extends ActionBarActivity {
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +114,8 @@ public class MainActivity extends ActionBarActivity {
 
 		if (savedInstanceState == null) {
 			// on first time display view for first nav item
+
+			mDrawerLayout.closeDrawer(mDrawerList);
 			displayView(0);
 		}
 	}
@@ -124,6 +129,8 @@ public class MainActivity extends ActionBarActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// display view for selected nav drawer item
+
+			mDrawerLayout.closeDrawer(mDrawerList);
 			displayView(position);
 		}
 	}
@@ -165,6 +172,7 @@ public class MainActivity extends ActionBarActivity {
 	 * */
 	private void displayView(int position) {
 		// update the main content by replacing fragments
+		
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
@@ -191,15 +199,12 @@ public class MainActivity extends ActionBarActivity {
 		}
 
 		if (fragment != null) {
-			FragmentManager fragmentManager = getSupportFragmentManager();
-			fragmentManager.beginTransaction()
-			.replace(R.id.frame_container, fragment).commit();
+			changeFragment(fragment);
 
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
-			setTitle(navMenuTitles[position]);
-			mDrawerLayout.closeDrawer(mDrawerList);
+			setTitle(navMenuTitles[position]); 
 		} else {
 			// error in creating fragment
 			Log.e("MainActivity", "Error in creating fragment");
@@ -234,7 +239,9 @@ public class MainActivity extends ActionBarActivity {
 
 	public void changeFragment(Fragment fragment){
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.frame_container, fragment);
+		fragmentTransaction.addToBackStack(null).commit();
 	}
 
 	public void changeArticle(String nom, String contenu){
@@ -246,18 +253,14 @@ public class MainActivity extends ActionBarActivity {
 		bundl.putString("corps", contenu);
 		fragment.setArguments(bundl);
 
-
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+		changeFragment(fragment);
 
 	}
 
 	public void changePartenaire(){
 
 		Fragment fragment = new PartenaireFragment();
-
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+		changeFragment(fragment);
 
 	}
 }

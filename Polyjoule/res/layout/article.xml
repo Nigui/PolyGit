@@ -7,17 +7,31 @@
         android:layout_width="fill_parent" 
         android:id="@+id/vScroll">
 
-      <LinearLayout android:layout_width="fill_parent"
-    		android:layout_height="fill_parent"
-    		android:orientation="vertical"
-    		android:id="@+id/corps_article">
+      <LinearLayout
+          android:id="@+id/corps_article"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:orientation="vertical" >
     		
             <TextView
                 android:id="@+id/titre_article"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
+                android:layout_gravity="top"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center_horizontal"
+                android:text="titre sur deux lignes maximum"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/headerdivider_color"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+            
+			<View
+			    android:layout_width="match_parent"
+			    android:layout_height="3dp"
+			    android:background="@color/headerdivider_color"
+			    android:layout_marginBottom="30dp"/>
         </LinearLayout>
     </ScrollView>
 

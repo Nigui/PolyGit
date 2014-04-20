@@ -77,7 +77,9 @@ public class DataBaseGetters {
 	public ArrayList<Article> getArticlesFromDB(int nb)
 	{
 		ArrayList<Article> ret = new ArrayList<Article>();
-		String querry = "SELECT * FROM ARTICLE ORDER BY "+Requetes.DATABASE_ARTICLE_DATE+" DESC ";
+		String querry = "SELECT * FROM ARTICLE "
+				+ "WHERE "+Requetes.DATABASE_ARTICLE_RUBRIQUE+" IN (7,8,9) "
+				+ "ORDER BY "+Requetes.DATABASE_ARTICLE_DATE+" DESC ";
 		String nbObjects = "LIMIT ";
 		if( nb == -1 ) nbObjects = "";
 		else nbObjects += String.valueOf(nb);
