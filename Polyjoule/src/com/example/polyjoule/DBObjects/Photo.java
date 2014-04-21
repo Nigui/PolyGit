@@ -4,60 +4,36 @@ import java.util.Calendar;
 
 public class Photo {
 
-	private int id;
-	private Album album;
+	private String album;
 	private String titreFR;
-	private String titreEN;
 	private String photoURL;
 	private Calendar photoDate;
 	private String descriptionFR;
-	private String descriptionEN;
 	
 	private final String imageBDDUrl = "http://www.polyjoule.org/administration/ressources/data/Photo/";
 
 	//------ Constructeurs
-	public Photo(int id, Album album, String titreFR, String titreEN,
-			String photoURL, Calendar photoDate, String descriptionFR,
-			String descriptionEN) {
+	
+	public Photo() {
 		super();
-		this.id = id;
+	}
+	public Photo(int id, String album, String titreFR, String photoURL,
+			Calendar photoDate, String descriptionFR) {
+		super();
 		this.album = album;
 		this.titreFR = titreFR;
-		this.titreEN = titreEN;
 		this.photoURL = photoURL;
 		this.photoDate = photoDate;
 		this.descriptionFR = descriptionFR;
-		this.descriptionEN = descriptionEN;
-	}
-	public Photo() {
-		super();
 	}
 	//################## Constructeurs
 	
 	//------GETTERS & SETTERS
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public Album getAlbum() {
-		return album;
-	}
-	public void setAlbum(Album album) {
-		this.album = album;
-	}
 	public String getTitreFR() {
 		return titreFR;
 	}
 	public void setTitreFR(String titreFR) {
 		this.titreFR = titreFR;
-	}
-	public String getTitreEN() {
-		return titreEN;
-	}
-	public void setTitreEN(String titreEN) {
-		this.titreEN = titreEN;
 	}
 	public String getPhotoURL() {
 		return photoURL;
@@ -77,20 +53,20 @@ public class Photo {
 	public void setDescriptionFR(String descriptionFR) {
 		this.descriptionFR = descriptionFR;
 	}
-	public String getDescriptionEN() {
-		return descriptionEN;
+	
+	public String getAlbum() {
+		return album;
 	}
-	public void setDescriptionEN(String descriptionEN) {
-		this.descriptionEN = descriptionEN;
+	public void setAlbum(String album) {
+		this.album = album;
 	}
 	//################## GETTERS & SETTERS
-	
 	@Override
 	public String toString() {
-		return "Photo [id=" + id + ", album=" + album + ", titreFR=" + titreFR
-				+ ", titreEN=" + titreEN + ", photoURL=" + photoURL
-				+ ", photoDate=" + photoDate + ", descriptionFR="
-				+ descriptionFR + ", descriptionEN=" + descriptionEN + "]";
+		return "Photo [album=" + album + ", titreFR=" + titreFR
+				+ ", photoURL=" + photoURL + ", photoDate=" + photoDate
+				+ ", descriptionFR=" + descriptionFR + ", imageBDDUrl="
+				+ imageBDDUrl + "]";
 	}
 	
 	

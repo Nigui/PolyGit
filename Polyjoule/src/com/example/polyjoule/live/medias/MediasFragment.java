@@ -38,10 +38,7 @@ public class MediasFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		ArrayList<Photo> listePhoto =  new DataBaseGetters(getActivity()).getPhotosFromDB();
-		Log.v("getPhotos", "nb photos : "+listePhoto.size());
-		for(Photo p : listePhoto)
-			imageURL.add(p.getPhotoURL());
+		imageURL =  new DataBaseGetters(getActivity()).getPhotosURLFromDB();
 		
         mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
 	}
@@ -67,7 +64,6 @@ public class MediasFragment extends Fragment{
             {
                 if( keyCode == KeyEvent.KEYCODE_BACK )
                 {
-                    Log.v("back","back");
 	                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     return true;
                 }

@@ -96,7 +96,7 @@ public abstract class Requetes {
 		public static final String DATABASE_PARTICIPATION_ROLE = "role_participation";
 		
 	public static final String DATABASE_PHOTO = "PHOTO";
-		public static final String DATABASE_PHOTO_ID = "id_album";
+		public static final String DATABASE_PHOTO_IDALBUM = "id_album";
 		public static final String DATABASE_PHOTO_TITREFR = "titreFR_photo";
 		public static final String DATABASE_PHOTO_TITREEN = "titreEN_photo";
 		public static final String DATABASE_PHOTO_LIEN = "lien_photo";
@@ -227,7 +227,7 @@ public abstract class Requetes {
 			
 	public static final String DATABASE_CREATE_PHOTO = 
 			"CREATE TABLE IF NOT EXISTS "+DATABASE_PHOTO+" ( "
-					+ DATABASE_PHOTO_ID+" INTEGER,"
+					+ DATABASE_PHOTO_IDALBUM+" INTEGER,"
 					+ DATABASE_PHOTO_TITREFR+" TEXT,"
 					+ DATABASE_PHOTO_TITREEN+" TEXT,"
 					+ DATABASE_PHOTO_LIEN+" TEXT,"

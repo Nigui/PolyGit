@@ -51,9 +51,6 @@ public class Tools {
 		cal.set(Calendar.MONTH, month);
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		
-		System.out.println(cal.getTime().toString());
-		
-		
 		return cal;
 	}
 

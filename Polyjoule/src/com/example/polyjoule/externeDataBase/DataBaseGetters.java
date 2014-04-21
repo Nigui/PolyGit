@@ -97,9 +97,6 @@ public class DataBaseGetters {
 					tmpArticle.setTitreFr(json_data.getString(Requetes.DATABASE_ARTICLE_TITREFR));
 					tmpArticle.setTitreEn(json_data.getString(Requetes.DATABASE_ARTICLE_TITREEN));
 					tmpArticle.setContenuFr(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUFR));
-					tmpArticle.setContenuEng(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUEN));
-					tmpArticle.setCommentaireAutorise(json_data.getBoolean(Requetes.DATABASE_ARTICLE_AUTORISATIONCOM));
-					tmpArticle.setStatutArticle(json_data.getBoolean(Requetes.DATABASE_ARTICLE_STATUT));
 					tmpArticle.setDateCreation(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_ARTICLE_DATE)));
 					tmpArticle.setUrlPhotoPrincipale(json_data.getString(Requetes.DATABASE_ARTICLE_PHOTO));
 					
@@ -490,6 +487,40 @@ public class DataBaseGetters {
 		return ret;
 	}
 
+	
+	@SuppressWarnings("finally")
+	public ArrayList<String> getPhotosURLFromDB(){
+		ArrayList<String> ret = new ArrayList<String>();
+		
+		String querry = "SELECT ALBUM.nom_album,PHOTO.lien_photo "
+						+ "FROM ALBUM,PHOTO "
+						+ "WHERE ALBUM.id_album = PHOTO.id_album "
+						+ "ORDER BY date_photo DESC";
+		try {
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
+			for(int i=0;i<resultArray.length();i++){
+				JSONObject json_data = resultArray.getJSONObject(i);
+				String album = json_data.getString("nom_album");
+				album = album.replaceAll(" ","%20");
+				String photo = json_data.getString("lien_photo");
+				String url = "http://www.polyjoule.org/administration/ressources/data/Photo/"+album+"/"+photo;
+				ret.add(url);
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			return ret;
+		}
+	}
+	
 	public ArrayList<Photo> getPhotosFromDB()
 	{
 		ArrayList<Photo> ret = new ArrayList<Photo>();
@@ -499,13 +530,10 @@ public class DataBaseGetters {
 			for(int i=0;i<resultArray.length();i++){
 				JSONObject json_data = resultArray.getJSONObject(i);
 				Photo tmpPhoto = new Photo();
-				tmpPhoto.setId(json_data.getInt(Requetes.DATABASE_PHOTO_ID));
 				tmpPhoto.setTitreFR(json_data.getString(Requetes.DATABASE_PHOTO_TITREFR));
-				tmpPhoto.setTitreEN(json_data.getString(Requetes.DATABASE_PHOTO_TITREEN));
 				tmpPhoto.setPhotoURL(json_data.getString(Requetes.DATABASE_PHOTO_LIEN));
 				tmpPhoto.setPhotoDate(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_PHOTO_DATE)));
 				tmpPhoto.setDescriptionFR(json_data.getString(Requetes.DATABASE_PHOTO_DESCFR));
-				tmpPhoto.setDescriptionEN(json_data.getString(Requetes.DATABASE_PHOTO_DESCEN));
 				
 				ret.add(tmpPhoto);
 			}

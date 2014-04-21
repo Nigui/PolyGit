@@ -6,8 +6,8 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Point;
-import android.util.DisplayMetrics;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +16,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.example.polyjoule.slidingmenu.MainActivity;
 import com.xtremelabs.imageutils.AdapterImagesAssistant;
 import com.xtremelabs.imageutils.AdapterImagesAssistant.PrecacheInformationProvider;
-import com.xtremelabs.imageutils.Dimensions;
 import com.xtremelabs.imageutils.ImageLoader;
 import com.xtremelabs.imageutils.ImageLoader.Options;
 import com.xtremelabs.imageutils.ImageLoaderListener;
@@ -30,17 +30,16 @@ public class MediaGridViewImageAdapter extends BaseAdapter {
 
 	private int imageWidth;
 	private Activity _activity;
-	private List<String> listImagesURL;
+	private ArrayList<String> listImagesURL;
 	
 	private AdapterImagesAssistant mImagePrecacheAssistant;
 	private ImageLoader imageloader;
-	//private Dimensions mBounds;
 	private Options mOptions;
 	private LayoutInflater layoutInflater;
 	private Context context;
 	
 
-	public MediaGridViewImageAdapter(int imageWidth, Activity _activity,List<String> listImagesURL,ImageLoader mloader) {
+	public MediaGridViewImageAdapter(int imageWidth, Activity _activity,ArrayList<String> listImagesURL,ImageLoader mloader) {
 		super();
 		this.imageWidth = imageWidth;
 		this._activity = _activity;
@@ -49,17 +48,6 @@ public class MediaGridViewImageAdapter extends BaseAdapter {
 		this.context = _activity.getApplicationContext();
 		layoutInflater = LayoutInflater.from(this.context);
 		this.imageloader = mloader;
-
-		DisplayMetrics display = context.getResources().getDisplayMetrics();
-
-		Point size = new Point();
-		size.x = display.widthPixels;
-		size.y = display.heightPixels;
-
-		//mBounds = new Dimensions(size.x / 2, (int) ((size.x / 800f) * 200f));
-		mOptions = new Options();
-		//mOptions.widthBounds = mBounds.width;
-		//mOptions.heightBounds = mBounds.height;
 		
 		mImagePrecacheAssistant = new AdapterImagesAssistant(imageloader, new PrecacheInformationProvider() {
 			@Override
@@ -79,8 +67,8 @@ public class MediaGridViewImageAdapter extends BaseAdapter {
 			@Override
 			public List<PrecacheRequest> getRequestsForMemoryPrecache(int position) {
 				List<PrecacheRequest> list = new ArrayList<PrecacheRequest>();
-				list.add(new PrecacheRequest((String) getItem(position) + "1", mOptions));
-				list.add(new PrecacheRequest((String) getItem(position) + "2", mOptions));
+				list.add(new PrecacheRequest((String) getItem(position) + "1", new Options()));
+				list.add(new PrecacheRequest((String) getItem(position) + "2", new Options()));
 				return list;
 			}
 		});
@@ -135,11 +123,13 @@ public class MediaGridViewImageAdapter extends BaseAdapter {
  
         @Override
         public void onClick(View v) {
-            // on selecting grid view image
+        	// on selecting grid view image
             // launch full screen activity
-            /*Intent i = new Intent(_activity, FullScreenViewActivity.class);
-            i.putExtra("position", _postion);
-            _activity.startActivity(i);*/
+        	Fragment frag = new MediasFullScreenFragment(listImagesURL);
+        	Bundle bundl = new Bundle();
+        	bundl.putInt("position", _postion);
+        	frag.setArguments(bundl);
+        	((MainActivity)_activity).changeFragment(frag);
         }
  
     }
