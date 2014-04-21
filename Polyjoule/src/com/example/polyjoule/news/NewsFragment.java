@@ -67,7 +67,12 @@ public class NewsFragment extends ListFragment {
 		this.getView().requestFocus();
 		this.getView().setOnKeyListener(new OnKeyListener()
         {	@Override
-			public boolean onKey( View v, int keyCode, KeyEvent event ){if( keyCode == KeyEvent.KEYCODE_BACK ){}return true;}
+			public boolean onKey( View v, int keyCode, KeyEvent event ){
+        		if( keyCode == KeyEvent.KEYCODE_BACK ){
+        			getActivity().finish();
+        		}
+        		return true;
+        	}
         } );
 	}
 

@@ -3,10 +3,14 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnKeyListener;
 
 import com.polyjoule.application.R;
 import com.xtremelabs.imageutils.ImageLoader;
@@ -32,11 +36,12 @@ public class MediasFullScreenFragment extends Fragment {
 		
 
         mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
+        
 		rootView = inflater.inflate(R.layout.medias_fullscreen_view, container, false);
 
 		viewPager = (ViewPager) rootView.findViewById(R.id.pager);
 
-		Bundle bd = new Bundle();
+		Bundle bd = getArguments();
 		int position = bd.getInt("position");
 
 		adapter = new MediasFullScreenAdapter(this.getActivity(),imagesURL,mImageLoader);
@@ -45,6 +50,20 @@ public class MediasFullScreenFragment extends Fragment {
 
 		// displaying selected image first
 		viewPager.setCurrentItem(position);
+		rootView.setOnKeyListener(new OnKeyListener()
+        {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event )
+            {
+                if( keyCode == KeyEvent.KEYCODE_BACK )
+                {
+                    Log.v("back","back");
+	                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        } );
 		return rootView;
 	}
 }

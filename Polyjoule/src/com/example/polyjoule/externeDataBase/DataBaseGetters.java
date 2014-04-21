@@ -92,10 +92,8 @@ public class DataBaseGetters {
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Article tmpArticle = new Article();
 					tmpArticle.setIdArticle(json_data.getInt(Requetes.DATABASE_ARTICLE_ID));
-					//TODO Récupérer toutes les rubriques avant de l'affecter 
 					tmpArticle.setAuteur(json_data.getString(Requetes.DATABASE_ARTICLE_AUTEUR));
 					tmpArticle.setTitreFr(json_data.getString(Requetes.DATABASE_ARTICLE_TITREFR));
-					tmpArticle.setTitreEn(json_data.getString(Requetes.DATABASE_ARTICLE_TITREEN));
 					tmpArticle.setContenuFr(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUFR));
 					tmpArticle.setDateCreation(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_ARTICLE_DATE)));
 					tmpArticle.setUrlPhotoPrincipale(json_data.getString(Requetes.DATABASE_ARTICLE_PHOTO));
@@ -126,14 +124,9 @@ public class DataBaseGetters {
 					JSONObject json_data = resultArray.getJSONObject(i);
 					Article tmpArticle = new Article();
 					tmpArticle.setIdArticle(json_data.getInt(Requetes.DATABASE_ARTICLE_ID));
-					//TODO Récupérer toutes les rubriques avant de l'affecter 
 					tmpArticle.setAuteur(json_data.getString(Requetes.DATABASE_ARTICLE_AUTEUR));
 					tmpArticle.setTitreFr(json_data.getString(Requetes.DATABASE_ARTICLE_TITREFR));
-					tmpArticle.setTitreEn(json_data.getString(Requetes.DATABASE_ARTICLE_TITREEN));
 					tmpArticle.setContenuFr(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUFR));
-					tmpArticle.setContenuEng(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUEN));
-					tmpArticle.setCommentaireAutorise(json_data.getBoolean(Requetes.DATABASE_ARTICLE_AUTORISATIONCOM));
-					tmpArticle.setStatutArticle(json_data.getBoolean(Requetes.DATABASE_ARTICLE_STATUT));
 					tmpArticle.setDateCreation(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_ARTICLE_DATE)));
 					tmpArticle.setUrlPhotoPrincipale(json_data.getString(Requetes.DATABASE_ARTICLE_PHOTO));
 					
