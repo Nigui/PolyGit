@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
     
      <LinearLayout
          android:id="@+id/livreordetail_layout"
-         android:layout_width="wrap_content"
+         android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:orientation="horizontal" >
+         android:orientation="vertical" >
    		
            <TextView
                android:id="@+id/livreor_pseudo"
-               android:layout_width="wrap_content"
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_gravity="top"
                android:layout_marginBottom="15dp"
                android:layout_marginTop="10dp"
-               android:layout_marginLeft="20dp"
                android:gravity="center_horizontal"
                android:text="pseudo"
                android:textAppearance="?android:attr/textAppearanceLarge"
@@ -32,7 +31,6 @@
                android:layout_gravity="top"
                android:layout_marginBottom="15dp"
                android:layout_marginTop="10dp"
-               android:layout_marginLeft="15dp"
                android:gravity="center_horizontal"
                android:text="date"
                android:textAppearance="?android:attr/textAppearanceLarge"

@@ -1,6 +1,7 @@
 package com.example.polyjoule.live.medias;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,8 +17,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.polyjoule.application.R;
+import com.xtremelabs.imageutils.AdapterImagesAssistant;
 import com.xtremelabs.imageutils.ImageLoader;
 import com.xtremelabs.imageutils.ImageRequest;
+import com.xtremelabs.imageutils.PrecacheRequest;
+import com.xtremelabs.imageutils.AdapterImagesAssistant.PrecacheInformationProvider;
+import com.xtremelabs.imageutils.ImageLoader.Options;
 
 public class MediasFullScreenAdapter extends PagerAdapter {
  
@@ -27,12 +32,44 @@ public class MediasFullScreenAdapter extends PagerAdapter {
     
     private ImageLoader mImageLoader;
 	private ImageRequest request;
+	private AdapterImagesAssistant mImagePrecacheAssistant;
+	private LayoutInflater layoutInflater;
  
     // constructor
     public MediasFullScreenAdapter(Activity activity,ArrayList<String> imagePaths,ImageLoader imageLoader) {
         this._activity = activity;
         this._imagePaths = imagePaths;
+        
+
+		layoutInflater = LayoutInflater.from(activity.getApplicationContext());
         this.mImageLoader = imageLoader;
+        
+        mImagePrecacheAssistant = new AdapterImagesAssistant(this.mImageLoader, new PrecacheInformationProvider() {
+			@Override
+			public int getCount() {
+				return getCount();
+			}
+
+			@Override
+			public List<String> getRequestsForDiskPrecache(int position) {
+				List<String> list = new ArrayList<String>();
+				// if (position % 2 == 0) {
+				list.add((String) _imagePaths.get(position) + "1");
+				list.add((String) _imagePaths.get(position) + "2");
+				return list;
+			}
+
+			@Override
+			public List<PrecacheRequest> getRequestsForMemoryPrecache(int position) {
+				List<PrecacheRequest> list = new ArrayList<PrecacheRequest>();
+				list.add(new PrecacheRequest((String) _imagePaths.get(position) + "1", new Options()));
+				list.add(new PrecacheRequest((String) _imagePaths.get(position) + "2", new Options()));
+				return list;
+			}
+		});
+    
+        mImagePrecacheAssistant.setMemCacheRange(5);
+		mImagePrecacheAssistant.setDiskCacheRange(10);
     }
  
     @Override
@@ -54,6 +91,7 @@ public class MediasFullScreenAdapter extends PagerAdapter {
   
         imgDisplay = (ImageView) viewLayout.findViewById(R.id.imgDisplay);
          
+        
         request = new ImageRequest(_imagePaths.get(position));
 		request.setImageView(imgDisplay);
 		mImageLoader.loadImage(request);

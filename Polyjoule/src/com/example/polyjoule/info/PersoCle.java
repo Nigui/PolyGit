@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager.LayoutParams;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.polyjoule.DBObjects.Participant;
@@ -33,6 +33,8 @@ public class PersoCle extends Fragment{
 	private TextView nom2;
 	private WebView desciption1;
 	private WebView desciption2;
+	private LinearLayout perso1Layout;
+	private LinearLayout perso2Layout;
 	
 	private ArrayList<Participant> perso1;
 	private ArrayList<Participation> perso1Role;
@@ -63,6 +65,9 @@ public class PersoCle extends Fragment{
 		nom2= (TextView) rootView.findViewById(R.id.nom2);
 		desciption1= (WebView) rootView.findViewById(R.id.description1);
 		desciption2= (WebView) rootView.findViewById(R.id.description2);
+		perso1Layout = (LinearLayout) rootView.findViewById(R.id.persocle_description1_layout);
+		perso2Layout = (LinearLayout) rootView.findViewById(R.id.persocle_description2_layout);
+		
 		
 		//Images
 		request = new ImageRequest("http://www.polyjoule.org/administration/ressources/data/Participants/"+perso1.get(0).getPhotoURL());
@@ -80,7 +85,43 @@ public class PersoCle extends Fragment{
 		nom2.setText(perso2.get(0).getNom());
 		desciption1.loadData(perso1.get(0).getBioFR(), mimeType, encoding);
 		desciption2.loadData(perso2.get(0).getBioFR(), mimeType, encoding);
+		desciption1.setVisibility(View.GONE);
+		desciption2.setVisibility(View.GONE);
+		
+		
+        perso1Layout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if( desciption1.getVisibility() == View.VISIBLE ){
+					perso2Layout.setVisibility(View.VISIBLE);
+					desciption1.setVisibility(View.GONE);
+				}
+				else{
+					perso2Layout.setVisibility(View.GONE);
+					desciption1.setVisibility(View.VISIBLE);
+				}
+				desciption1.reload();
+			}
+		});
         
+        perso2Layout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if( desciption2.getVisibility() == View.VISIBLE ){
+					perso1Layout.setVisibility(View.VISIBLE);
+					desciption2.setVisibility(View.GONE);
+				}
+				else{
+					perso1Layout.setVisibility(View.GONE);
+					desciption2.setVisibility(View.VISIBLE);
+				}
+				desciption2.reload();
+			}
+		});
+		
+		
 		rootView.setOnKeyListener(new OnKeyListener()
         {
             @Override
