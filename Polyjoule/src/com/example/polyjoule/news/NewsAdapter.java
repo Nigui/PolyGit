@@ -142,23 +142,39 @@ public class NewsAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		ItemHolder itemHolder;
+		itemHolder= new ItemHolder();
 		Article art = articles.get(position);
-
-		if(convertView==null){
-
-			convertView=layoutInflater.inflate(R.layout.news_item,parent,false);
-
-			itemHolder= new ItemHolder();
-			itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_list_image);
-			itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_title);
-			itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_list_date);
-			itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
-
-			convertView.setTag(itemHolder);
-			//setParams(itemHolder);
+		if(position != 1){
+			if(convertView==null){
+	
+				convertView=layoutInflater.inflate(R.layout.news_item,parent,false);
+				itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_list_image);
+				itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_title);
+				itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_list_date);
+				itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
+	
+				convertView.setTag(itemHolder);
+				//setParams(itemHolder);
+			}
+			else{
+				itemHolder= (ItemHolder)convertView.getTag();
+			}
 		}
 		else{
-			itemHolder= (ItemHolder)convertView.getTag();
+			if(convertView==null){
+				
+				convertView=layoutInflater.inflate(R.layout.news_item,parent,false);
+				itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_list_image);
+				itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_date);
+				itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_list_title);
+				itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
+	
+				convertView.setTag(itemHolder);
+				//setParams(itemHolder);
+			}
+			else{
+				itemHolder= (ItemHolder)convertView.getTag();
+			}
 		}
 
 		/** Initialisation avec les données **/
