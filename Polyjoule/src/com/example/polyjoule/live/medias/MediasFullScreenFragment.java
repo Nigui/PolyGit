@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnKeyListener;
+import android.view.ViewGroup;
 
 import com.polyjoule.application.R;
 import com.xtremelabs.imageutils.ImageLoader;
@@ -33,14 +33,13 @@ public class MediasFullScreenFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-
-        mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
         
 		rootView = inflater.inflate(R.layout.medias_fullscreen_view, container, false);
 
 		viewPager = (ViewPager) rootView.findViewById(R.id.pager);
 
+        mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
+        
 		Bundle bd = getArguments();
 		int position = bd.getInt("position");
 
@@ -50,6 +49,7 @@ public class MediasFullScreenFragment extends Fragment {
 
 		// displaying selected image first
 		viewPager.setCurrentItem(position);
+
 		rootView.setOnKeyListener(new OnKeyListener()
         {
             @Override
@@ -65,5 +65,11 @@ public class MediasFullScreenFragment extends Fragment {
             }
         } );
 		return rootView;
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mImageLoader.destroy();
 	}
 }

@@ -7,22 +7,26 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.polyjoule.application.R;
 import com.xtremelabs.imageutils.AdapterImagesAssistant;
-import com.xtremelabs.imageutils.ImageLoader;
-import com.xtremelabs.imageutils.ImageRequest;
-import com.xtremelabs.imageutils.PrecacheRequest;
 import com.xtremelabs.imageutils.AdapterImagesAssistant.PrecacheInformationProvider;
+import com.xtremelabs.imageutils.Dimensions;
+import com.xtremelabs.imageutils.ImageLoader;
 import com.xtremelabs.imageutils.ImageLoader.Options;
+import com.xtremelabs.imageutils.ImageLoaderListener;
+import com.xtremelabs.imageutils.ImageRequest;
+import com.xtremelabs.imageutils.ImageReturnedFrom;
+import com.xtremelabs.imageutils.PrecacheRequest;
 
 public class MediasFullScreenAdapter extends PagerAdapter {
  
@@ -34,6 +38,8 @@ public class MediasFullScreenAdapter extends PagerAdapter {
 	private ImageRequest request;
 	private AdapterImagesAssistant mImagePrecacheAssistant;
 	private LayoutInflater layoutInflater;
+	private final Dimensions mBounds;
+	private final Options mOptions;
  
     // constructor
     public MediasFullScreenAdapter(Activity activity,ArrayList<String> imagePaths,ImageLoader imageLoader) {
@@ -43,6 +49,18 @@ public class MediasFullScreenAdapter extends PagerAdapter {
 
 		layoutInflater = LayoutInflater.from(activity.getApplicationContext());
         this.mImageLoader = imageLoader;
+
+        Point size = new Point();
+        try {
+        	activity.getWindowManager().getDefaultDisplay().getSize(size);
+        } catch (java.lang.NoSuchMethodError ignore) { // Older device
+        	size.x = activity.getWindowManager().getDefaultDisplay().getWidth();
+        	size.y = activity.getWindowManager().getDefaultDisplay().getHeight();
+        }
+		mBounds = new Dimensions(size.x / 2, (int) ((size.x / 800f) * 200f));
+		mOptions = new Options();
+		mOptions.widthBounds = mBounds.width;
+		mOptions.heightBounds = mBounds.height;
         
         mImagePrecacheAssistant = new AdapterImagesAssistant(this.mImageLoader, new PrecacheInformationProvider() {
 			@Override
@@ -53,7 +71,6 @@ public class MediasFullScreenAdapter extends PagerAdapter {
 			@Override
 			public List<String> getRequestsForDiskPrecache(int position) {
 				List<String> list = new ArrayList<String>();
-				// if (position % 2 == 0) {
 				list.add((String) _imagePaths.get(position) + "1");
 				list.add((String) _imagePaths.get(position) + "2");
 				return list;
@@ -62,8 +79,8 @@ public class MediasFullScreenAdapter extends PagerAdapter {
 			@Override
 			public List<PrecacheRequest> getRequestsForMemoryPrecache(int position) {
 				List<PrecacheRequest> list = new ArrayList<PrecacheRequest>();
-				list.add(new PrecacheRequest((String) _imagePaths.get(position) + "1", new Options()));
-				list.add(new PrecacheRequest((String) _imagePaths.get(position) + "2", new Options()));
+				list.add(new PrecacheRequest((String) _imagePaths.get(position) + "1", mOptions));
+				list.add(new PrecacheRequest((String) _imagePaths.get(position) + "2", mOptions));
 				return list;
 			}
 		});
@@ -90,14 +107,14 @@ public class MediasFullScreenAdapter extends PagerAdapter {
         View viewLayout = inflater.inflate(R.layout.medias_fullscreen_image, container, false);
   
         imgDisplay = (ImageView) viewLayout.findViewById(R.id.imgDisplay);
-         
         
-        request = new ImageRequest(_imagePaths.get(position));
-		request.setImageView(imgDisplay);
-		mImageLoader.loadImage(request);
-         
+        Options o = new Options();
         
-  
+        request = new ImageRequest(imgDisplay,_imagePaths.get(position));
+		request.setImageLoaderListener(mListener);
+		request.setOptions(o);
+		mImagePrecacheAssistant.loadImage(request,position);
+		
         ((ViewPager) container).addView(viewLayout);
   
         return viewLayout;
@@ -108,4 +125,16 @@ public class MediasFullScreenAdapter extends PagerAdapter {
         ((ViewPager) container).removeView((RelativeLayout) object);
   
     }
+    
+    ImageLoaderListener mListener = new ImageLoaderListener() {
+		@Override
+		public void onImageLoadError(String error) {
+			Log.i("ImageLoader", "Image load failed! Message: " + error);
+		}
+
+		@Override
+		public void onImageAvailable(ImageView imageView, Bitmap bitmap, ImageReturnedFrom returnedFrom) {
+			imageView.setImageBitmap(bitmap);
+		}
+	};
 }

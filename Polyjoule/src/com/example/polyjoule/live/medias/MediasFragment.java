@@ -76,7 +76,6 @@ public class MediasFragment extends Fragment{
 	public void onResume() {
 		super.onResume();
 		adapter = new MediaGridViewImageAdapter(columnWidth, this.getActivity(),imageURL,mImageLoader);
-        
         // setting grid view adapter
         gridView.setAdapter(adapter);
 		
@@ -85,7 +84,6 @@ public class MediasFragment extends Fragment{
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-
 		mImageLoader.destroy();
 	}
 

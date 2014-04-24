@@ -129,6 +129,7 @@ public class MediaGridViewImageAdapter extends BaseAdapter {
         	Bundle bundl = new Bundle();
         	bundl.putInt("position", _postion);
         	frag.setArguments(bundl);
+        	imageloader.clearMemCache();
         	((MainActivity)_activity).changeFragment(frag);
         }
  
