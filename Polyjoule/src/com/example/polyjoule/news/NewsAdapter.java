@@ -1,19 +1,11 @@
 package com.example.polyjoule.news;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.StrictMode;
-import android.os.StrictMode.ThreadPolicy;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -44,6 +36,7 @@ public class NewsAdapter extends BaseAdapter {
 	 * List of news to shows.
 	 */
 	private ArrayList<Article> articles;
+	private Article header;
 
 	/**
 	 * Layout inflater of NewsActivity use to inflate News_item.
@@ -66,8 +59,8 @@ public class NewsAdapter extends BaseAdapter {
 	 * @param NewsList list of item to show on listView.
 	 */
 	public NewsAdapter(NewsFragment newsFragment, ArrayList<Article> articleList,ImageLoader mloader) {
+		this.header = articleList.get(0);
 		this.articles = new ArrayList<Article>(articleList);
-		this.articles.remove(0);
 		this.context = newsFragment.getActivity().getApplicationContext();
 		layoutInflater= LayoutInflater.from(context);
 		this.imageloader = mloader;
@@ -144,9 +137,18 @@ public class NewsAdapter extends BaseAdapter {
 		ItemHolder itemHolder;
 		itemHolder= new ItemHolder();
 		Article art = articles.get(position);
-		if(position != 1){
-			if(convertView==null){
+		
+		if(articles.get(position).equals(header)){
 	
+				convertView=layoutInflater.inflate(R.layout.item_header,parent,false);
+				itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_header_image);
+				itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_header_title);
+				itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_header_date);
+				itemHolder.textView = (TextView)convertView.findViewById(R.id.news_header_content);
+		
+				convertView.setTag(itemHolder);
+		}
+		else{	
 				convertView=layoutInflater.inflate(R.layout.news_item,parent,false);
 				itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_list_image);
 				itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_title);
@@ -154,27 +156,6 @@ public class NewsAdapter extends BaseAdapter {
 				itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
 	
 				convertView.setTag(itemHolder);
-				//setParams(itemHolder);
-			}
-			else{
-				itemHolder= (ItemHolder)convertView.getTag();
-			}
-		}
-		else{
-			if(convertView==null){
-				
-				convertView=layoutInflater.inflate(R.layout.news_item,parent,false);
-				itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_list_image);
-				itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_date);
-				itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_list_title);
-				itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
-	
-				convertView.setTag(itemHolder);
-				//setParams(itemHolder);
-			}
-			else{
-				itemHolder= (ItemHolder)convertView.getTag();
-			}
 		}
 
 		/** Initialisation avec les données **/
