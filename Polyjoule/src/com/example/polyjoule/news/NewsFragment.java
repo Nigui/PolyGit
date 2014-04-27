@@ -2,16 +2,11 @@ package com.example.polyjoule.news;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
-import android.text.Html;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,22 +17,15 @@ import android.widget.TextView;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;
 import com.example.polyjoule.slidingmenu.MainActivity;
-import com.example.polyjoule.utils.Tools;
 import com.polyjoule.application.R;
 import com.xtremelabs.imageutils.ImageLoader;
-import com.xtremelabs.imageutils.ImageRequest;
 
 public class NewsFragment extends ListFragment {
 
 	private ArrayList<Article> listArticle;
-	private Article headerArticle;
 
 	/** GUI **/
 	LinearLayout headerLayout;
-	private ImageView headerImageView;
-	private TextView headerTitleText;
-	private TextView headerDateText;
-	private TextView headerContentText;
 
 	private ImageLoader mImageLoader;
 
@@ -53,8 +41,6 @@ public class NewsFragment extends ListFragment {
 		mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
 
 		listArticle = new DataBaseGetters(getActivity()).getArticlesFromDB(10);
-
-		headerArticle = listArticle.get(0);
 
 	}
 	
@@ -81,27 +67,6 @@ public class NewsFragment extends ListFragment {
 		View rootView = inflater.inflate(R.layout.activity_news, container, false);
 
 		/** Initialise l'interface, le header **/
-		this.headerImageView = (ImageView) rootView.findViewById(R.id.news_header_image);
-		this.headerTitleText = (TextView) rootView.findViewById(R.id.news_header_title);
-		this.headerTitleText.setText(headerArticle.getTitreFr());
-		this.headerDateText = (TextView) rootView.findViewById(R.id.news_header_date);
-		String date = Tools.transformCalendarToSimpleString(headerArticle.getDateCreation());
-		this.headerDateText.setText(date);
-		this.headerContentText = (TextView) rootView.findViewById(R.id.news_header_content);
-		this.headerContentText.setText(Html.fromHtml(headerArticle.getContenuFr()).toString().trim());
-		
-		headerLayout = (LinearLayout) rootView.findViewById(R.id.newsheaderlayout);
-		headerLayout.setOnClickListener(new OnClickListener() {      
-		    @Override
-		    public void onClick(View v) {
-		    	((MainActivity)getActivity()).changeArticle(headerArticle.getTitreFr(), headerArticle.getContenuFr());
-		    }
-		   });
-
-		//new ImageDownloaderTask(this.headerImageView).execute(headerArticle.getUrlPhotoPrincipale());
-		ImageRequest request = new ImageRequest(headerArticle.getUrlPhotoPrincipale());
-		request.setImageView(this.headerImageView);
-		mImageLoader.loadImage(request);
 
 		setListAdapter(new NewsAdapter(this,listArticle,mImageLoader));
 
@@ -131,7 +96,7 @@ public class NewsFragment extends ListFragment {
 	 */
 	public void onListItemClick(ListView l, View v, int position, long id) {
 
-		((MainActivity)getActivity()).changeArticle(listArticle.get(position+1).getTitreFr(), listArticle.get(position+1).getContenuFr());
+		((MainActivity)getActivity()).changeArticle(listArticle.get(position).getTitreFr(), listArticle.get(position+1).getContenuFr());
 
 
 	}
