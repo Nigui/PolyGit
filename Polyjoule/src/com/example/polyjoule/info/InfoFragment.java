@@ -49,8 +49,7 @@ public class InfoFragment extends Fragment{
 
 		text2.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				ArrayList<Article> listRubrique = new DataBaseGetters(container.getContext()).getArticlesFromDBWithID(-1, 60);
-				((MainActivity)getActivity()).changeArticle(listRubrique.get(0).getTitreFr(), listRubrique.get(0).getContenuFr());
+				((MainActivity)getActivity()).changeFragment(new EquipesFragment());
 			}
 		});
 		text3.setOnClickListener(new View.OnClickListener() {

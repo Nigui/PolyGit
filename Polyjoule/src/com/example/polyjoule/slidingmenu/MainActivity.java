@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.example.polyjoule.course.CourseFragment;
 import com.example.polyjoule.info.InfoFragment;
 import com.example.polyjoule.info.PartenaireFragment;
+import com.example.polyjoule.info.TrombiFragment;
 import com.example.polyjoule.live.medias.MediasFragment;
 import com.example.polyjoule.livreDor.LivreDorFragment;
 import com.example.polyjoule.livreDor.LivreDorItemFragment;

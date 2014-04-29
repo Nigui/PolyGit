@@ -18,6 +18,7 @@ import com.example.polyjoule.DBObjects.Ecole;
 import com.example.polyjoule.DBObjects.Equipe;
 import com.example.polyjoule.DBObjects.Formation;
 import com.example.polyjoule.DBObjects.LivreOr;
+import com.example.polyjoule.DBObjects.Membre;
 import com.example.polyjoule.DBObjects.Partenaire;
 import com.example.polyjoule.DBObjects.Participant;
 import com.example.polyjoule.DBObjects.Participation;
@@ -593,12 +594,41 @@ public class DataBaseGetters {
 		} catch (JSONException e) {
 			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ret;
 	}
+
+	public ArrayList<Membre> getTrombiFromDB(int idAnnee){
+		ArrayList<Membre> ret = new ArrayList<Membre>();
+		String querry = "SELECT "+Requetes.DATABASE_PARTICIPANT_NOM+","+Requetes.DATABASE_PARTICIPANT_PRENOM+","+Requetes.DATABASE_PARTICIPANT_PHOTO+","+Requetes.DATABASE_PARTICIPANT_MAIL+","+Requetes.DATABASE_PARTICIPANT_BIOFR+","+Requetes.DATABASE_PARTICIPATION_ROLE
+						+ " FROM PARTICIPANT,PARTICIPATION "
+						+ " WHERE PARTICIPATION."+Requetes.DATABASE_PARTICIPATION_EQUIPE+"="+idAnnee
+						+ " AND PARTICIPANT."+Requetes.DATABASE_PARTICIPANT_ID+"=PARTICIPATION."+Requetes.DATABASE_PARTICIPATION_PARTICIPANT;
+		try{ 
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Membre tmpMembre= new Membre();
+					tmpMembre.setNom(json_data.getString(Requetes.DATABASE_PARTICIPANT_NOM));
+					tmpMembre.setPrenom(json_data.getString(Requetes.DATABASE_PARTICIPANT_PRENOM));
+					tmpMembre.setPhotoPath(json_data.getString(Requetes.DATABASE_PARTICIPANT_PHOTO));
+					tmpMembre.setMail(json_data.getString(Requetes.DATABASE_PARTICIPANT_MAIL));
+					tmpMembre.setBioFR(json_data.getString(Requetes.DATABASE_PARTICIPANT_BIOFR));
+					tmpMembre.setRole(json_data.getString(Requetes.DATABASE_PARTICIPATION_ROLE));
+					ret.add(tmpMembre);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+
 }
