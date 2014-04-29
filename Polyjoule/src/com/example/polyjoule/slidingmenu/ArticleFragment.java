@@ -73,8 +73,66 @@ public class ArticleFragment extends Fragment{
 	      final String mimeType = "text/html";
 	      final String encoding = "utf-8";
 	      
+		   //------video
+		  int depart = 0;
+		  String lienVideo = "";
+		  int debut_lien = 0, fin_lien = 0, fin=0;
+		  
+		  
+		    for(int i = 0; i<corps.length();i++){
+		  	 if(corps.charAt(i) == '<'){
+		  		 if(corps.charAt(i+1) == 'i'){
+		  			 if(corps.charAt(i+2) == 'f'){
+		  				 if(corps.charAt(i+3) == 'r'){
+		  					 if(corps.charAt(i+4) == 'a'){
+		  						 if(corps.charAt(i+5) == 'm'){
+		  							 if(corps.charAt(i+6) == 'e'){
+				  					 depart = i;
+				  					 while(corps.charAt(i) != '<' || 
+				  							 corps.charAt(i+1) != '/' || 
+				  							 corps.charAt(i+2) != 'i' ||  
+				  							 corps.charAt(i+3) != 'f' ||  
+				  							 corps.charAt(i+4) != 'r' ||  
+				  							 corps.charAt(i+5) != 'a' || 
+				  							 corps.charAt(i+6) != 'm' || 
+				  							 corps.charAt(i+7) != 'e' || 
+				  							 corps.charAt(i+8) != '>'){
+				  						 		i++;
+						  						 if(corps.charAt(i) == 's' &&
+						  						     corps.charAt(i+1) == 'r' &&
+						  							 corps.charAt(i+2) == 'c' &&
+						  							 corps.charAt(i+3) == '=' ){
+						  							 
+						  							 	i = i+5;//1er lettre après "
+						  							 	debut_lien = i;
+						  							 	
+						  							 	while(corps.charAt(i) != '"'){
+						  							 		i++;
+						  							 	}
+						  							 	
+						  							 	fin_lien = i;//Dernière lettre avant le "
+						  							 	lienVideo = corps.substring(debut_lien, fin_lien);
+						  						 }
+				  					 		}
+				  					 	fin = i+9;
+		  							 }
+		  						 }
+		  					 } 
+		  				 }
+		  			 }
+		  		 }
+		  	 }
+		   }
+		    
+		    if(depart != 0 && fin !=0){
+		    	String video = "<a href=\""+lienVideo+"\">Lien video</a>";
+		    	corps = corps.replace(corps.substring(depart, fin), video);
+		    }
+		   
 	      
-	      int depart = 0, imgAjout = 0;
+	      //------IMAGES
+	     depart = 0; 
+	     int imgAjout = 0;
 	      
 	     ArrayList<String> ArrCorps, img;
 	     ArrCorps = new ArrayList<String>();
@@ -132,7 +190,4 @@ public class ArticleFragment extends Fragment{
 	    	  }
 	      }
 	 }
-	 
-	 
-
 }
