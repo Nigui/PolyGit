@@ -11,9 +11,9 @@
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item>News</item>
-        <item>Live</item>
         <item>Course</item>
         <item>Médias</item>
+        <item>Partenaires</item>
         <item>Infos</item>
         <item>Livres d\'or</item>
     </string-array>
@@ -22,9 +22,9 @@
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_news</item>
-        <item>@drawable/ic_live</item>
         <item>@drawable/ic_race</item>
         <item>@drawable/ic_medias</item>
+        <item>@drawable/ic_partner</item>
         <item>@drawable/ic_infos</item>
         <item>@drawable/ic_gold</item>
     </array>
@@ -48,5 +48,5 @@
     <string name="defaultTitre">Ici le titre</string>
     <string name="defaultDate">ici la date</string>
     <string name="defaultContenu">ici le contenu</string>
-    <string name="contactemail">guin56@gmail.com</string>
+    <string name="contactemail">polyjoule@univ-nantes.fr</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.polyjoule.slidingmenu;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -125,7 +127,7 @@ public class ArticleFragment extends Fragment{
 		   }
 		    
 		    if(depart != 0 && fin !=0){
-		    	String video = "<a href=\""+lienVideo+"\">Lien video</a>";
+		    	String video = "<a href=\""+lienVideo+"\">Lien video</a></br></br>";
 		    	corps = corps.replace(corps.substring(depart, fin), video);
 		    }
 		   
@@ -176,12 +178,24 @@ public class ArticleFragment extends Fragment{
 			     }
 	      }
 	      
+
+	      
+	      
 	      for(int i = 0; i<ArrCorps.size() ; i++){
 	    	  web = new WebView(this.getActivity());
-	    	  web.loadData(ArrCorps.get(i), mimeType, encoding);
+	    	  web.loadData( URLEncoder.encode(ArrCorps.get(i)).replaceAll("\\+"," "), "text/html", "utf-8" );
+	    	 // web.loadData(ArrCorps.get(i), mimeType, encoding);
 	    	  corpsArt.addView(web);
 	    	  if(img.size() - imgAjout != 0){
 	    		  imageView =  new ImageView(this.getActivity());
+	    		  imageView.setPadding(0, 0, 0, 0);
+	    		  imageView.setScaleType(ScaleType.FIT_START);
+	    		  imageView.setAdjustViewBounds(true);
+	    		  LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+	    		  lp.setMargins(0, 0, 0, 0);
+	    		 
+	    		  imageView.setLayoutParams(lp);
+	    		  
 	    		  request = new ImageRequest(img.get(imgAjout));
 	    		  request.setImageView(imageView);
 	    		  mImageLoader.loadImage(request);

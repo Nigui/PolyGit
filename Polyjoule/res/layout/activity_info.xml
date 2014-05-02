@@ -4,22 +4,7 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
-   
- 	<TextView
- 	    android:id="@+id/partenaire"
- 	    android:layout_width="fill_parent"
- 	    android:layout_height="fill_parent"
- 	    android:layout_gravity="clip_vertical|clip_horizontal"
- 	    android:layout_weight="0.5"
- 	    android:gravity="center"
- 	    android:text="Partenaires"
- 	    android:textAppearance="?android:attr/textAppearanceLarge" />
     
-     <View
-         android:layout_width="fill_parent"
-         android:layout_height="1px"
-         android:background="#FF909090" />
-
 	<TextView
  	    android:id="@+id/equipe"
  	    android:layout_width="fill_parent"
@@ -28,21 +13,6 @@
  	    android:layout_weight="0.5"
  	    android:gravity="center"
  	    android:text="Equipes"
- 	    android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-     <View
-         android:layout_width="fill_parent"
-         android:layout_height="1px"
-         android:background="#FF909090" />
-     
-     <TextView
- 	    android:id="@+id/historique"
- 	    android:layout_width="fill_parent"
- 	    android:layout_height="fill_parent"
- 	    android:layout_gravity="clip_vertical|clip_horizontal"
- 	    android:layout_weight="0.5"
- 	    android:gravity="center"
- 	    android:text="Historique"
  	    android:textAppearance="?android:attr/textAppearanceLarge" />
     
      <View

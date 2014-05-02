@@ -9,7 +9,7 @@
     <dimen name="ItemMarginTB">10dp</dimen>
     <dimen name="ItemMarginLR">5dp</dimen>
     
-    <dimen name="ItemImageWidth">200dp </dimen>
+    <dimen name="ItemImageWidth">100dp </dimen>
     <dimen name="HeaderNewsListHeight">315dp </dimen>
 
 </resources>

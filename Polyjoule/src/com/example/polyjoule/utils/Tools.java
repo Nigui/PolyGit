@@ -21,6 +21,7 @@ import android.view.WindowManager;
 public class Tools {
 
 	public static Calendar parseStringToCalendar(String date){
+		
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeZone(TimeZone.getTimeZone("GMT+1"));
 		
@@ -35,7 +36,7 @@ public class Tools {
 		String dateHourArray[] = date.split(" ");
 		String dateArray[] = dateHourArray[0].trim().split("-");
 		String hourArray[] = dateHourArray[1].trim().split(":");
-		
+
 		year = Integer.parseInt(dateArray[0].trim());
 		month = Integer.parseInt(dateArray[1].trim());
 		day = Integer.parseInt(dateArray[2].trim());
@@ -48,7 +49,7 @@ public class Tools {
 		cal.set(Calendar.MINUTE, minute);
 		cal.set(Calendar.SECOND, second);
 		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.MONTH, month-1);
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		
 		return cal;
@@ -77,23 +78,30 @@ public class Tools {
 		
 		switch( date.get(Calendar.MONTH) )
 		{
-			case 1 : ret+= " Janvier ";break;
-			case 2 : ret+= " Février ";break;
-			case 3 : ret+= " Mars ";break;
-			case 4 : ret+= " Avril ";break;
-			case 5 : ret+= " Mai ";break;
-			case 6 : ret+= " Juin ";break;
-			case 7 : ret+= " Juillet ";break;
-			case 8 : ret+= " Aout ";break;
-			case 9 : ret+= " Septembre ";break;
-			case 10 : ret+= " Octobre ";break;
-			case 11 : ret+= " Novembre ";break;
-			case 12 : ret+= " Décembre ";break;
+			case Calendar.JANUARY : ret+= " Janvier ";break;
+			case Calendar.FEBRUARY : ret+= " Février ";break;
+			case Calendar.MARCH : ret+= " Mars ";break;
+			case Calendar.APRIL : ret+= " Avril ";break;
+			case Calendar.MAY : ret+= " Mai ";break;
+			case Calendar.JUNE : ret+= " Juin ";break;
+			case Calendar.JULY : ret+= " Juillet ";break;
+			case Calendar.AUGUST : ret+= " Aout ";break;
+			case Calendar.SEPTEMBER : ret+= " Septembre ";break;
+			case Calendar.OCTOBER : ret+= " Octobre ";break;
+			case Calendar.NOVEMBER : ret+= " Novembre ";break;
+			case Calendar.DECEMBER : ret+= " Décembre ";break;
 			default : ret+= " ";break;
 		}
 		ret+= date.get(Calendar.YEAR);
 		
-		ret+=" à "+date.get(Calendar.HOUR_OF_DAY)+":"+date.get(Calendar.MINUTE);
+		ret+=" à ";
+		int calendarHour = date.get(Calendar.HOUR_OF_DAY);
+		if( calendarHour<10 ) ret += "0";
+		ret += calendarHour+":";
+		
+		int calendarMin = date.get(Calendar.MINUTE);
+		if( calendarMin <10 ) ret+= "0";
+		ret+= calendarMin;
 		
 		
 		return ret;
