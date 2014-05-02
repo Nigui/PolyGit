@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.example.polyjoule.DBObjects.Article;
 import com.example.polyjoule.externeDataBase.DataBaseGetters;
 import com.example.polyjoule.slidingmenu.MainActivity;
+import com.example.polyjoule.utils.Tools;
 import com.polyjoule.application.R;
 import com.xtremelabs.imageutils.ImageLoader;
 
@@ -31,15 +32,10 @@ public class NewsFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//ListView
-
-		//Activer lorsqu'on est connecter au wifi de poly
-		listArticle = new ArrayList<Article>();
-
 		mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
 
 		listArticle = new DataBaseGetters(getActivity()).getArticlesFromDB(10);
-
+		
 	}
 	
 
@@ -94,7 +90,8 @@ public class NewsFragment extends ListFragment {
 	 */
 	public void onListItemClick(ListView l, View v, int position, long id) {
 
-		((MainActivity)getActivity()).changeArticle(listArticle.get(position).getTitreFr(), listArticle.get(position+1).getContenuFr());
+		System.out.println("article web : "+position);
+		((MainActivity)getActivity()).changeArticle(listArticle.get(position).getTitreFr(), listArticle.get(position).getContenuFr());
 
 
 	}

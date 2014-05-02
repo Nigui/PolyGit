@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:orientation="vertical" >
+	
+	<LinearLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:id="@+id/membre_layout"
+	    android:orientation="horizontal" >
+	    
+	    <ImageView
+	        android:id="@+id/membre_photo"
+	        android:layout_width="100dp"
+	        android:layout_height="100dp"
+	        android:src="@drawable/contact"
+	        android:layout_gravity="center_vertical"/>
+	    
+	    <LinearLayout 
+	        xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingLeft="10dp"
+		    android:orientation="vertical"
+		    android:layout_gravity="center_vertical" >
+	    
+	        <TextView 
+	            android:id="@+id/membre_nom"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textStyle="bold"
+	            android:textSize="18dp"
+	            android:text="Jean DUPONT"/>
+	        
+	        <TextView 
+	            android:id="@+id/membre_fonction"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="15dp"
+	            android:text="president"/>
+	        
+	        <TextView 
+	            android:id="@+id/membre_mail"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="10dp"
+	            android:text="jean.dupont@gmail.com"/>
+	        
+	        <ImageView 
+	            android:id="@+id/membre_more"
+	            android:layout_width="15dp"
+	            android:layout_height="15dp"
+	            android:layout_margin="10dp"
+	            android:src="@drawable/arrow_down"
+	            android:layout_gravity="right"/>
+	    
+		</LinearLayout>
+	</LinearLayout>
+
+	<WebView
+	        android:id="@+id/membre_description"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"/>
+	
+	
+</LinearLayout>

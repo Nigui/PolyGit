@@ -22,7 +22,8 @@ public class Article implements Serializable{
 	private ArrayList<Partenaire> partenaires;
 	private ArrayList<Commentaire> commentaires;
 	private Rubrique rubrique;
-	
+	private String simpleDateFormat;
+
 	private final String imageBDDUrl = "http://www.polyjoule.org/administration/ressources/data/Photo/";
 
 	//------ Constructeurs
@@ -187,6 +188,12 @@ public class Article implements Serializable{
 	}
 	public void setRubrique(Rubrique rubrique) {
 		this.rubrique = rubrique;
+	}	
+	public String getSimpleDateFormat() {
+		return simpleDateFormat;
+	}
+	public void setSimpleDateFormat(String simpleDateFormat) {
+		this.simpleDateFormat = simpleDateFormat;
 	}
 	//################## GETTERS & SETTERS
 	

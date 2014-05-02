@@ -39,6 +39,7 @@ public class MediasFullScreenFragment extends Fragment {
 		viewPager = (ViewPager) rootView.findViewById(R.id.pager);
 
         mImageLoader = ImageLoader.buildImageLoaderForSupportFragment(this);
+        mImageLoader.clearMemCache();
         
 		Bundle bd = getArguments();
 		int position = bd.getInt("position");

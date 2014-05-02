@@ -60,7 +60,7 @@ public class NewsAdapter extends BaseAdapter {
 	 */
 	public NewsAdapter(NewsFragment newsFragment, ArrayList<Article> articleList,ImageLoader mloader) {
 		this.header = articleList.get(0);
-		this.articles = new ArrayList<Article>(articleList);
+		this.articles = articleList;
 		this.context = newsFragment.getActivity().getApplicationContext();
 		layoutInflater= LayoutInflater.from(context);
 		this.imageloader = mloader;
@@ -144,7 +144,6 @@ public class NewsAdapter extends BaseAdapter {
 				itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_header_image);
 				itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_header_title);
 				itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_header_date);
-				itemHolder.textView = (TextView)convertView.findViewById(R.id.news_header_content);
 		
 				convertView.setTag(itemHolder);
 		}
@@ -153,7 +152,6 @@ public class NewsAdapter extends BaseAdapter {
 				itemHolder.imageView = (ImageView)convertView.findViewById(R.id.news_list_image);
 				itemHolder.titleView= (TextView)convertView.findViewById(R.id.news_list_title);
 				itemHolder.dateView = (TextView)convertView.findViewById(R.id.news_list_date);
-				itemHolder.textView = (TextView)convertView.findViewById(R.id.news_list_content);
 	
 				convertView.setTag(itemHolder);
 		}
@@ -162,10 +160,7 @@ public class NewsAdapter extends BaseAdapter {
 		/** titre **/
 		itemHolder.titleView.setText(art.getTitreFr());
 		/** date **/
-		String date = Tools.transformCalendarToSimpleString(art.getDateCreation());
-		itemHolder.dateView.setText(date);
-		/** contenu **/
-		itemHolder.textView.setText(Html.fromHtml(art.getContenuFr()).toString().trim());
+		itemHolder.dateView.setText(art.getSimpleDateFormat());
 		/** image **/
 		Options o = new Options();
 
@@ -193,11 +188,6 @@ public class NewsAdapter extends BaseAdapter {
 		private TextView titleView;
 
 		private TextView dateView;
-
-		/**
-		 * Reference on R.id.News_version
-		 */
-		private TextView textView;
 	}
 
 	ImageLoaderListener mListener = new ImageLoaderListener() {

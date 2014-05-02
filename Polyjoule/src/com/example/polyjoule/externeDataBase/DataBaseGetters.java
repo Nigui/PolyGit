@@ -1,6 +1,7 @@
 package com.example.polyjoule.externeDataBase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
@@ -98,6 +99,7 @@ public class DataBaseGetters {
 					tmpArticle.setContenuFr(json_data.getString(Requetes.DATABASE_ARTICLE_CONTENUFR));
 					tmpArticle.setDateCreation(Tools.parseStringToCalendar(json_data.getString(Requetes.DATABASE_ARTICLE_DATE)));
 					tmpArticle.setUrlPhotoPrincipale(json_data.getString(Requetes.DATABASE_ARTICLE_PHOTO));
+					tmpArticle.setSimpleDateFormat(Tools.transformCalendarToSimpleString(tmpArticle.getDateCreation()));
 					
 					ret.add(tmpArticle);
 			}
@@ -226,32 +228,6 @@ public class DataBaseGetters {
 					tmpEcole.setDescriptionEN(json_data.getString(Requetes.DATABASE_COURSE_DESCEN));
 					
 					ret.add(tmpEcole);
-			}
-			
-		} catch (JSONException e) {
-			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ret;
-	}
-	
-	public ArrayList<Equipe> getEquipeFromDB()
-	{
-		ArrayList<Equipe> ret = new ArrayList<Equipe>();
-		String querry = "SELECT * FROM EQUIPE";
-		try{ 
-			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
-			for(int i=0;i<resultArray.length();i++){
-					JSONObject json_data = resultArray.getJSONObject(i);
-					Equipe tmpEquipe = new Equipe();
-					tmpEquipe.setId(json_data.getInt(Requetes.DATABASE_EQUIPE_ID));
-					tmpEquipe.setAnnee(json_data.getInt(Requetes.DATABASE_EQUIPE_ANNEE));
-					ret.add(tmpEquipe);
 			}
 			
 		} catch (JSONException e) {
@@ -601,12 +577,36 @@ public class DataBaseGetters {
 		return ret;
 	}
 
+	public HashMap<Integer,Integer> getEquipesFromDB(){
+		HashMap<Integer,Integer> ret = new HashMap<Integer,Integer>();
+		String querry = "SELECT "+Requetes.DATABASE_EQUIPE_ID+","+Requetes.DATABASE_EQUIPE_ANNEE
+						+" FROM EQUIPE";
+		try{ 
+			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
+			for(int i=0;i<resultArray.length();i++){
+					JSONObject json_data = resultArray.getJSONObject(i);
+					Integer id = new Integer(json_data.getInt(Requetes.DATABASE_EQUIPE_ID));
+					Integer annee = new Integer(json_data.getInt(Requetes.DATABASE_EQUIPE_ANNEE));
+					ret.put(id,annee);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("DataBaseGetters", "Error reading JSON Object "+e.toString());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
 	public ArrayList<Membre> getTrombiFromDB(int idAnnee){
 		ArrayList<Membre> ret = new ArrayList<Membre>();
 		String querry = "SELECT "+Requetes.DATABASE_PARTICIPANT_NOM+","+Requetes.DATABASE_PARTICIPANT_PRENOM+","+Requetes.DATABASE_PARTICIPANT_PHOTO+","+Requetes.DATABASE_PARTICIPANT_MAIL+","+Requetes.DATABASE_PARTICIPANT_BIOFR+","+Requetes.DATABASE_PARTICIPATION_ROLE
 						+ " FROM PARTICIPANT,PARTICIPATION "
 						+ " WHERE PARTICIPATION."+Requetes.DATABASE_PARTICIPATION_EQUIPE+"="+idAnnee
-						+ " AND PARTICIPANT."+Requetes.DATABASE_PARTICIPANT_ID+"=PARTICIPATION."+Requetes.DATABASE_PARTICIPATION_PARTICIPANT;
+						+ " AND PARTICIPANT."+Requetes.DATABASE_PARTICIPANT_ID+"=PARTICIPATION."+Requetes.DATABASE_PARTICIPATION_PARTICIPANT
+						+ " AND PARTICIPANT."+Requetes.DATABASE_PARTICIPANT_ISPROF+"=0";
 		try{ 
 			JSONArray resultArray = new DataBaseConnector(context).execute(querry).get();
 			for(int i=0;i<resultArray.length();i++){
